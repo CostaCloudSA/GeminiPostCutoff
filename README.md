@@ -95,14 +95,9 @@ git clone https://github.com/CostaCloudSA/GeminiPostCutoff.git ~/.gemini/config/
 
 ---
 
-## 🔒 Governance & Maintenance Notice
+## 💬 Reporting Feedback
 
-This repository is maintained **exclusively by CostaCloudSA** (`@CostaCloudSA`). 
-
-* **Public & Read-Only**: Freely accessible to the global engineering community for architectural reference, design assistance, and local AI agent installation.
-* **Sole Maintainer**: To preserve verified architectural integrity and consistent standards, external pull requests are not accepted.
-* **Continuous Quality Assurance**: Repository health, links, and operational standards are automatically verified on every commit via GitHub Actions CI.
-* **Reporting Feedback**: If you spot an erratum or wish to suggest a recent Google Cloud article or benchmark for ingestion, please [open a GitHub Issue](https://github.com/CostaCloudSA/GeminiPostCutoff/issues).
+If you spot an erratum or wish to suggest a recent Google Cloud article or benchmark for ingestion, please [open a GitHub Issue](https://github.com/CostaCloudSA/GeminiPostCutoff/issues).
 
 ---
 
