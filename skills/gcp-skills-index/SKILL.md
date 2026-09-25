@@ -40,24 +40,9 @@ This catalog indexes **20 specialized, production-grade operational runbooks** c
 
 ---
 
-## ⚡ Native Link Ingestion Workflow (No Google Docs Required)
+## 💡 How to Use These Skills in Agent Workflows
 
-To add new articles, blog posts, or repositories to your knowledge base at any time:
-1. **Paste the URL in chat** (e.g. `https://cloud.google.com/blog/...`).
-2. Antigravity will automatically:
-   - Fetch the page content and extract publication date `[MM.YY]`, author, and architectural insights.
-   - Categorize the resource into the exact skill reference vault.
-   - Insert it in strict descending chronological order in `references/articles.md`.
-   - Update the corresponding `SKILL.md` runbook if new CLI flags or best practices are introduced.
-
----
-
-## 📜 Ingestion Rules & Quality Standards
-
-Whenever future articles, release notes, or repositories are added:
-1. **Title & Tag Syntax**: Standardize strictly as `- [[MM.YY Blogpost]: Title](https://...)`, `- [[MM.YY Article]: Title](https://...)`, `- [Codelab: Title](https://...)`, or `- [Repo Name: Description](https://...)`.
-2. **Strict Chronological Ordering**: Sort mathematically by key $\text{Key} = (2000 + \text{YY}) \times 100 + \text{MM}$ in descending order (`[09.26]` before `[08.26]` before `[07.26]`).
-3. **Operational Runbook Enrichment**: Update `SKILL.md` with new features under `## ⏱️ Chronological Evolution`, and add blueprints or anti-patterns when actionable.
-4. **Automated Verification**: Run `node scripts/audit_skills.js` to guarantee 0 errors.
-
-👉 Detailed Specification: [Ingestion Protocol & Quality Guidelines](INGESTION_PROTOCOL.md)
+- **Automatic Domain Activation**: The AI assistant automatically detects domain-specific keywords (e.g. `adk`, `gateway-api`, `bigquery-cost`, `kill-switch`) and activates the corresponding runbook.
+- **Cross-Domain Architecture**: When architecting multi-service systems (e.g., ADK agent on Cloud Run with BigQuery AI and Model Armor), combine blueprints across [`gcp-adk-agents`](../gcp-adk-agents/SKILL.md), [`gcp-cloud-run`](../gcp-cloud-run/SKILL.md), [`gcp-bigquery-ai`](../gcp-bigquery-ai/SKILL.md), and [`gcp-security-compliance`](../gcp-security-compliance/SKILL.md).
+- **Authoritative Blueprints**: Always prioritize the production blueprints and avoid the critical anti-patterns detailed in each specialized skill over generic pre-2025 suggestions.
+- **Maintainer Specifications**: For repository maintainer standards, quotas, and ingestion protocols, refer to [SKILL_STANDARD.md](SKILL_STANDARD.md) and [INGESTION_PROTOCOL.md](INGESTION_PROTOCOL.md).
