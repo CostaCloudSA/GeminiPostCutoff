@@ -24,14 +24,28 @@ Every domain skill functions as an interactive, expert-level architectural runbo
 
 ---
 
-## 💡 Designing with GeminiPostCutoff
+## 💡 Designing Beyond the Knowledge Cutoff
 
-When paired with **Google Antigravity** or **Gemini CLI**, the skills automatically inject domain-specific architectural expertise into your design sessions:
+Foundation models—including the Gemini family—have fixed training cutoff dates. In the rapidly advancing Google Cloud ecosystem, relying solely on pre-cutoff model memory may not provide the most up to date architectural advice.
 
-* **Autonomous Multi-Agent Systems**: Inquiring about *"hosting an ADK agent with persistent memory"* pulls blueprints from `gcp-adk-agents` and `gcp-cloud-run`, generating non-throttled Cloud Run configurations with Vertex AI Memory Bank integration.
-* **High-Performance Inference Clusters**: Inquiring about *"vLLM multi-cluster deployment on GKE"* activates `gcp-gke-inference` and `gcp-gke-platform`, producing Gateway API configurations with body-based model routing and TPU scheduling.
-* **FinOps & Automated Cost Governance**: Asking *"how to prevent runaway AI spending in BigQuery"* draws upon `gcp-bigquery-cost` and `gcp-finops-killswitch`, recommending automated Cloud Monitoring kill switches and slot allocation thresholds.
-* **Zero-Trust Security & Model Defense**: Planning external workload access activates `gcp-security-compliance`, guiding the configuration of Workload Identity Federation (WIF) and Google Model Armor inspection pipelines.
+**GeminiPostCutoff** acts as a live **delta architecture injection layer**. When paired with **Google Antigravity**, **Gemini CLI**, or agentic IDEs, it dynamically bridges this cutoff gap, updating the model's reasoning with 2025–2026 Google Cloud engineering realities.
+
+### Interactive Post-Cutoff Design Scenarios
+
+When you ask architectural questions, the assistant automatically pulls post-cutoff runbooks into its reasoning context:
+
+* *"How should I host an autonomous customer support agent?"*  
+  👉 **Without post-cutoff skills**: Gemini defaults to custom Python webhook servers and external Redis for session state.  
+  👉 **With GeminiPostCutoff**: The assistant activates [`gcp-adk-agents`](skills/gcp-adk-agents/SKILL.md) and [`gcp-cloud-run`](skills/gcp-cloud-run/SKILL.md), producing a containerless, non-throttled Cloud Run service wired directly into Vertex AI Memory Bank and A2A multi-agent routing.
+
+* *"How do we serve open-weights models across multiple GKE clusters?"*  
+  👉 **Without post-cutoff skills**: Gemini suggests basic Kubernetes horizontal pod autoscalers behind standard Ingress.  
+  👉 **With GeminiPostCutoff**: The assistant activates [`gcp-gke-inference`](skills/gcp-gke-inference/SKILL.md), generating a complete Gateway API manifest with body-based path matching, vLLM continuous batching, and TPU v6e scheduling.
+
+* *"How do we lock down AI agent tool execution and eliminate static keys?"*  
+  👉 **Without post-cutoff skills**: Gemini generates downloadable service account keys and basic IAM roles.  
+  👉 **With GeminiPostCutoff**: The assistant activates [`gcp-security-compliance`](skills/gcp-security-compliance/SKILL.md), implementing Google Model Armor pre/post LLM inspection and Workload Identity Federation (WIF).
+
 
 ---
 
