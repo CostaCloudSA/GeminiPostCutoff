@@ -1,0 +1,10 @@
+{
+  "name": "gemini-post-cutoff",
+  "version": "1.0.0",
+  "description": "Curated collection of 20 Google Cloud Platform & AI Agent production skills spanning 2025-2026 delta architecture updates.",
+  "author": {
+    "name": "CostaCloudSA"
+  },
+  "repository": "https://github.com/CostaCloudSA/GeminiPostCutoff",
+  "license": "Apache-2.0"
+}

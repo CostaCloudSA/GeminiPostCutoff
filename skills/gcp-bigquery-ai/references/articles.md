@@ -1,0 +1,45 @@
+# gcp-bigquery-ai Reference Knowledge Base & Link Vault
+
+This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-bigquery-ai`.
+
+Total indexed resources: **33**
+
+### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[09.26 Blogpost]: TriLink: A BigQuery AI powered Enterprise Analytics Solution](https://www.kaggle.com/competitions/bigquery-ai-hackathon/writeups/trilink-architecting-the-ai-native-digital-service)
+- [[08.26 Blogpost]: How to Build an Adaptive Feedback Loop for AI Agents in BigQuery](https://medium.com/google-cloud/how-to-build-an-adaptive-feedback-loop-for-ai-agents-in-bigquery-89bf68cb8772)
+- [[07.26 Blogpost]: Conversational analytics in BigQuery brings trusted agentic reasoning to everyone](https://cloud.google.com/blog/products/data-analytics/conversational-analytics-in-bigquery-now-ga/)
+- [[06.26 Blogpost]: A2A ecosystem: BigQuery Data Engineering Agent](https://medium.com/google-cloud/a2a-ecosystem-bigquery-data-engineering-agent-725aaac88a63)
+- [[06.26 Blogpost]: You Probably Don't Need a Vector Database - If Your Data Already Lives in BigQuery](https://medium.com/@ahmed-tammam/you-probably-dont-need-a-vector-database-if-your-data-already-lives-in-bigquery-95d1d3071200)
+- [[06.26 Blogpost]: Introducing the Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/)
+- [[06.26 Blogpost]: Managing BigQuery with Google ADK, MCP, Cloud Run, Streamlit, and OIDC Authentication](https://medium.com/google-developer-experts/managing-bigquery-with-google-adk-mcp-cloud-run-streamlit-and-oidc-authentication-a1ee6515977b)
+- [[05.26 Blogpost]: Securing AI agents with MCP Authorization](https://medium.com/google-cloud/securing-ai-agents-with-mcp-authorization-5cd8a552c45b)
+- [[04.26 Blogpost]: Introducing BigQuery Graph: Unlock hidden relationships in your data](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-graph/)
+- [[04.26 Blogpost]: MCP Toolbox v1.0: The Open-Source Framework for Secure Agentic Data Access](https://medium.com/google-cloud/mcp-toolbox-v1-0-the-open-source-framework-for-secure-agentic-data-access-3c2199546ba8)
+- [[04.26 Blogpost]: Building a Scalable RAG Backend with Cloud Run Jobs and AlloyDB](https://medium.com/google-cloud/building-a-scalable-rag-backend-with-cloud-run-jobs-and-alloydb-6ead93ca4aec)
+- [[04.26 Blogpost]: Mapping a smarter future with BigQuery and Google Earth AI models and datasets](https://cloud.google.com/blog/products/data-analytics/google-earth-ai-models-and-datasets-in-bigquery)
+- [[04.26 Blogpost]: Your Databases Finally Speak Human](https://medium.com/google-cloud/your-databases-finally-speak-human-856b1de4f97c)
+- [[04.26 Blogpost]: 50+ fully managed MCP servers now available for Google Cloud services](https://cloud.google.com/blog/products/ai-machine-learning/google-managed-mcp-servers-are-available-for-everyone/)
+- [[04.26 Blogpost]: Real-time Intelligent Triage Engine with BigQuery Continuous Queries](https://medium.com/google-cloud/real-time-intelligent-triage-engine-with-bigquery-continuous-queries-2fa5178a7c1b)
+- [[02.26 Blogpost]: Getting Started with the BigQuery Remote MCP Server](https://medium.com/google-cloud/getting-started-with-the-bigquery-remote-mcp-server-2471653f351c)
+- [[02.26 Blogpost]: Simplify your AI workflow with autonomous embedding generation in BigQuery](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-autonomous-embedding-generation/)
+- [[01.26 Blogpost]: BigQuery's Managed Inference for Open Models: Your Warehouse is Now an AI Engine](https://medium.com/google-cloud/bigquerys-managed-inference-for-open-models-your-warehouse-is-now-an-ai-engine-d83fbb6eccd1)
+- [[01.26 Blogpost]: Build data analytics agents faster with BigQuery's fully managed, remote MCP server](https://cloud.google.com/blog/products/data-analytics/using-the-fully-managed-remote-bigquery-mcp-server-to-build-data-ai-agents/)
+- [[01.26 Blogpost]: Building a Reliable AI Analytics Agent with BigQuery, a Semantic Layer, and Google ADK](https://blog.stackademic.com/building-a-reliable-ai-analytics-agent-with-bigquery-a-semantic-layer-and-google-adk-9cd6cfbef218)
+- [[01.26 Blogpost]: Introducing Conversational Analytics in BigQuery](https://cloud.google.com/blog/products/data-analytics/introducing-conversational-analytics-in-bigquery/)
+
+### 📅 2025 Releases & Deep Dives (Chronological)
+- [[11.25 Blogpost]: BigQuery AI: The convergence of data and AI is here](https://cloud.google.com/blog/products/data-analytics/gathering-advanced-data-agent-and-ml-tools-under-bigquery-ai/)
+- [[11.25 Blogpost]: From interaction to insight: Announcing BigQuery Agent Analytics for the Google ADK](https://cloud.google.com/blog/products/data-analytics/bigquery-agent-analytics-for-google-adk/)
+- [[11.25 Codelab]: AI-Assisted Data Science with BigQuery](https://codelabs.developers.google.com/codelabs/bigquery-data-science-notebooks)
+- [[10.25 Blogpost]: Effortless AI in BigQuery: Meet the New Managed AI Functions](https://cloud.google.com/blog/products/data-analytics/new-managed-ai-functions-in-bigquery/)
+- [[09.25 Blogpost]: ADK Agents for BigQuery Series Part 1](https://medium.com/google-cloud/adk-agents-for-bigquery-series-40de8cf4e3ca)
+- [[09.25 Blogpost]: Converse with your data and generate forecasts using BigQuery's new MCP and ADK tools](https://cloud.google.com/blog/products/data-analytics/ai-based-forecasting-and-analytics-in-bigquery-via-mcp-and-adk)
+- [[08.25 Blogpost]: Unifying Your Data Landscape with MCP Toolbox](https://medium.com/google-cloud/one-toolbox-many-sources-unifying-your-data-landscape-with-mcp-toolbox-c28f570eb8e4)
+- [[07.25 Blogpost]: BigQuery meets ADK & MCP](https://cloud.google.com/blog/products/ai-machine-learning/bigquery-meets-google-adk-and-mcp/)
+- [[07.25 Blogpost]: BigQuery Multimodal Analytics](https://medium.com/google-cloud/this-is-multimodal-analytics-8ad4b1070341)
+- [[06.25 Codelab]: Build a Multi-agent App with MCP Toolbox for AlloyDB & ADK](https://codelabs.developers.google.com/multi-agent-app-toolbox-adk)
+- [[05.25 Blogpost]: Building a Conversational Agent on BigQuery Data](https://medium.com/google-cloud/building-a-conversational-agent-on-bigquery-data-using-googles-agent-development-kit-and-mcp-0fd78b38a53e)
+- [[02.25 Blogpost]: Build an Agentic Workflow for your BigQuery data using LangGraph and Gemini](https://medium.com/google-cloud/build-an-agentic-workflow-for-your-bigquery-data-using-langgraph-and-gemini-947d0a951a45)
+- [[02.25 Blogpost]: Detecting Similar SQL Queries with Vertex AI and Vector Search](https://medium.com/google-cloud/detecting-similar-sql-queries-with-vertex-ai-and-vector-search-5356928074b0)
+- [[02.25 Blogpost]: How to use gen AI for better data schema handling, data quality, and data generation](https://cloud.google.com/blog/products/data-analytics/how-gemini-in-bigquery-helps-with-data-engineering-tasks/)
+

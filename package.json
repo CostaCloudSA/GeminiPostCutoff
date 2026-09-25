@@ -1,0 +1,25 @@
+{
+  "name": "gemini-post-cutoff",
+  "version": "1.0.0",
+  "description": "Curated collection of 20 Google Cloud Platform & AI Agent production skills spanning 2025-2026 delta architecture updates.",
+  "scripts": {
+    "test": "node scripts/audit_skills.js && node scripts/lint_internal_links.js && node scripts/audit_skill_rules.js",
+    "audit:dates": "node scripts/audit_skills.js",
+    "audit:links": "node scripts/lint_internal_links.js",
+    "audit:rules": "node scripts/audit_skill_rules.js"
+  },
+  "keywords": [
+    "antigravity",
+    "gemini",
+    "gemini-cli",
+    "skills",
+    "google-cloud",
+    "gcp",
+    "adk",
+    "bigquery",
+    "gke",
+    "cloud-run"
+  ],
+  "author": "CostaCloudSA",
+  "license": "Apache-2.0"
+}

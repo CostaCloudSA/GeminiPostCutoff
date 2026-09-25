@@ -1,0 +1,31 @@
+name: GeminiPostCutoff Automated Knowledge & Skills Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  audit-skills:
+    name: Validate Skills, Links & Standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 1. Audit Mathematical Descending Date Sorting & External Syntax
+        run: node scripts/audit_skills.js
+
+      - name: 2. Verify Relative Internal Markdown Links
+        run: node scripts/lint_internal_links.js
+
+      - name: 3. Verify SKILL_STANDARD.md Quotas & Anti-Pattern Compliance
+        run: node scripts/audit_skill_rules.js
