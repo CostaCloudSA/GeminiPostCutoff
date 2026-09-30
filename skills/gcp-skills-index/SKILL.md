@@ -13,6 +13,21 @@ This catalog indexes **20 specialized, production-grade operational runbooks** c
 
 ---
 
+## 🧭 Model Knowledge Cutoffs & Triage Matrix
+
+When operating within Google Antigravity or Gemini CLI, models must align their document inspection with their training knowledge cutoff:
+
+| Model in Antigravity | Official Cutoff | Degradation Threshold | Primary Triage Priority | Target Vault Tier |
+| :--- | :---: | :---: | :--- | :---: |
+| **Gemini 3.1 Pro** | **01.25** (Jan 2025) | 01.25 | **Full Delta Injection**: 20+ months post-cutoff. Needs all 2025 & 2026 updates. | **Tier 1A + Tier 1B** (`>= 02.25`) |
+| **Gemini 3.6 Flash** | **03.26** (Mar 2026) | Jan 2025 – Mar 2026 | **Frontier Delta**: 6+ months post-cutoff (GEAP, Gemma 4 12B, BigQuery Graph GA). | **Tier 1A** (`>= 04.26`) |
+| **Gemini 3.7 Flash** | **03.26** (Mar 2026) | Jan 2025 – Mar 2026 | **Frontier Delta**: Focus on Q2-Q3 2026 GA releases. | **Tier 1A** (`>= 04.26`) |
+| **Gemini 3.8 Flash** | **03.26** (Mar 2026) | Jan 2025 – Mar 2026 | **Frontier Delta**: Apply latest blueprints and anti-patterns. | **Tier 1A** (`>= 04.26`) |
+
+*For complete machine-readable cutoff schemas, see [`config/model_cutoffs.json`](../../config/model_cutoffs.json).*
+
+---
+
 ## 🧭 Master Navigation & Skill Routing Directory
 
 | Skill Name | Domain Scope & Core Capabilities | Primary Keywords & Triggers |
@@ -37,6 +52,20 @@ This catalog indexes **20 specialized, production-grade operational runbooks** c
 | [`gcp-android-xr`](../gcp-android-xr/SKILL.md) | Android XR SDK, Jetpack XR Compose spatial UI, spatial audio, and panel immersion. | `android-xr`, `jetpack-xr`, `spatial-computing`, `xr` |
 | [`gcp-frontier-emerging`](../gcp-frontier-emerging/SKILL.md) | Gemma open models (Gemma 4 12B, Gemma 3), Cloud TPUs (v5p/v6e), JAX distributed sharding, Supervised Fine-Tuning. | `gemma`, `tpu`, `jax`, `sft`, `hbm`, `geap` |
 | [`gcp-generative-media`](../gcp-generative-media/SKILL.md) | Veo 3.1 cinematic video, Gemini Omni Flash conversational video editing, DiffusionGemma, Nano Banana prompting. | `veo`, `gemini-omni`, `diffusion-gemma`, `nano-banana`, `genmedia` |
+
+---
+
+## 🌐 Cross-Cutting Technology Matrix
+
+When designing modern systems, specific architectural themes span multiple domains. Use this lookup matrix to synthesize end-to-end solutions:
+
+| Cross-Cutting Technology | Participating Domain Skills | Architectural Intersection |
+| :--- | :--- | :--- |
+| **Model Context Protocol (MCP)** | [`gcp-bigquery-ai`](../gcp-bigquery-ai/SKILL.md)<br>[`gcp-cloud-run`](../gcp-cloud-run/SKILL.md)<br>[`gcp-databases`](../gcp-databases/SKILL.md)<br>[`gcp-gemini-tooling`](../gcp-gemini-tooling/SKILL.md) | Hosting remote MCP servers on Cloud Run (`--no-cpu-throttling`), database toolboxes for Cloud SQL/Firestore, and BigQuery SQL agent access. |
+| **Identity & Zero-Trust (WIF)** | [`gcp-security-compliance`](../gcp-security-compliance/SKILL.md)<br>[`gcp-adk-agents`](../gcp-adk-agents/SKILL.md)<br>[`gcp-cloud-run`](../gcp-cloud-run/SKILL.md) | Eliminating static JSON service account keys via Workload Identity Federation (WIF) and SPIFFE agent identities. |
+| **FinOps & Hard Spend Controls** | [`gcp-finops-killswitch`](../gcp-finops-killswitch/SKILL.md)<br>[`gcp-bigquery-cost`](../gcp-bigquery-cost/SKILL.md)<br>[`gcp-gke-cost`](../gcp-gke-cost/SKILL.md) | Programmatic kill switches, slot reservation crossover formulas (690 TB/mo), and GKE unallocated spend attribution. |
+| **Serverless High Availability** | [`gcp-cloud-run`](../gcp-cloud-run/SKILL.md)<br>[`gcp-networking`](../gcp-networking/SKILL.md) | Cloud Run automated multi-region failover, Direct VPC Egress, and connectorless private service access. |
+| **Open Weights & TPU Serving** | [`gcp-frontier-emerging`](../gcp-frontier-emerging/SKILL.md)<br>[`gcp-gke-inference`](../gcp-gke-inference/SKILL.md)<br>[`gcp-gemini-robotics`](../gcp-gemini-robotics/SKILL.md) | Gemma 4 12B fine-tuning with JAX on TPU v5p/v6e, vLLM multi-cluster serving, and LiteRT edge execution. |
 
 ---
 

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gemini Model Knowledge Cutoffs & Triage Specification",
+  "lastUpdated": "2026-09-30",
+  "tiers": {
+    "tier_1a": {
+      "name": "Frontier Post-Cutoff Delta",
+      "range": ">= 04.26 (April 2026 - Present)",
+      "sortKeyMin": 202604,
+      "description": "Innovations occurring entirely after the March 2026 cutoff. Mandatory for ALL models (3.1 Pro, 3.6 Flash, 3.7 Flash, 3.8 Flash).",
+      "focus": [
+        "Gemini Enterprise Agent Platform (GEAP) GA and Agent Registry",
+        "Gemma 4 12B and distributed Cloud TPU v6e inference",
+        "Cloud Run Automated Multi-Region Failover and Serverless MCP Hosting",
+        "BigQuery Graph GA, Continuous Queries, and Autonomous Embeddings",
+        "Google Cloud Fraud Defense and Cloud CDN Private Bucket Access",
+        "Hard Spend Caps on Google Cloud Budgets and Cloud Monitoring Kill Switches"
+      ]
+    },
+    "tier_1b": {
+      "name": "Intermediate Delta",
+      "range": "02.25 - 03.26 (February 2025 - March 2026)",
+      "sortKeyMin": 202502,
+      "sortKeyMax": 202603,
+      "description": "Post-cutoff for Gemini 3.1 Pro. Validation/refinement tier for 3.6/3.7/3.8 Flash where niche domain knowledge degraded.",
+      "focus": [
+        "Vertex AI Agent Development Kit (ADK 1.0)",
+        "A2A (Agent-to-Agent) and A2UI (Agent-to-User Interface) Protocols",
+        "Google Model Armor and Workload Identity Federation (WIF)",
+        "GKE Inference Gateway and vLLM multi-cluster autoscaling",
+        "BigQuery Remote MCP Server and Vector SQL with IVF indexes",
+        "LiteRT and LiteRT-LM runtime on Edge/Mobile"
+      ]
+    },
+    "tier_2": {
+      "name": "Evergreen Architecture & Foundations",
+      "range": "<= 01.25 (January 2025 and earlier)",
+      "sortKeyMax": 202501,
+      "description": "Pre-cutoff foundation patterns across all models. Consulted on-demand for timeless mathematical thresholds, sizing heuristics, and cost crossover calculations.",
+      "focus": [
+        "BigQuery slot commitments vs on-demand crossover math (690 TB/month)",
+        "GKE Autopilot vs Standard compute allocation heuristics",
+        "VPC Peering vs Private Service Connect (PSC) scale trade-offs",
+        "Cloud SQL performance tuning and read pool replication"
+      ]
+    }
+  },
+  "models": {
+    "gemini-3.1-pro": {
+      "displayName": "Gemini 3.1 Pro",
+      "officialCutoff": "2025-01",
+      "effectiveDegradation": "2025-01",
+      "priorityTiers": ["tier_1a", "tier_1b"],
+      "guidance": "High risk of hallucinating obsolete 2024 patterns. Must prioritize Tier 1A and Tier 1B (all items >= 02.25) to overwrite deprecated APIs."
+    },
+    "gemini-3.6-flash": {
+      "displayName": "Gemini 3.6 Flash",
+      "officialCutoff": "2026-03",
+      "effectiveDegradation": "2025-01 to 2026-03 (domain-dependent fallback)",
+      "priorityTiers": ["tier_1a"],
+      "guidance": "Prioritize Tier 1A (>= 04.26) for post-cutoff features. Consult Tier 1B when working with specialized infrastructure (ADK 1.0, Model Armor, GKE Inference Gateway)."
+    },
+    "gemini-3.7-flash": {
+      "displayName": "Gemini 3.7 Flash",
+      "officialCutoff": "2026-03",
+      "effectiveDegradation": "2025-01 to 2026-03",
+      "priorityTiers": ["tier_1a"],
+      "guidance": "Prioritize Tier 1A (>= 04.26) for modern 2026 architectures. Consult Tier 1B for specialized GCP agent and GKE patterns."
+    },
+    "gemini-3.8-flash": {
+      "displayName": "Gemini 3.8 Flash",
+      "officialCutoff": "2026-03",
+      "effectiveDegradation": "2025-01 to 2026-03",
+      "priorityTiers": ["tier_1a"],
+      "guidance": "Prioritize Tier 1A (>= 04.26) for all Google Cloud architecture and AI agent tasks."
+    }
+  }
+}

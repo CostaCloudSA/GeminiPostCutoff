@@ -1,19 +1,22 @@
 # Antigravity Global Knowledge & GCP Article Ingestion Protocol
 
 ## 🎯 Scope & Context
-The user maintains a 20-domain curated Google Cloud Platform (GCP) & AI Agent knowledge base located at `~/.gemini/config/skills/`.
+The repository maintains a 21-domain curated Google Cloud Platform (GCP) & AI Agent knowledge base located in `skills/`.
 
-Whenever the user provides links/articles in conversation to be added to the knowledge base:
+Whenever new links, articles, release notes, or codelabs are ingested into the knowledge base:
 
 ---
 
 ## ⚡ Mandatory Ingestion Workflow & Rules
 
-### 1. Metadata Extraction
+### 1. Metadata Extraction & Model Cutoff Calibration
 For every provided URL:
 - Fetch or extract the **Canonical Article Title**.
-- Determine the exact **Publication Date** (Year and Month).
-- Extract core architectural insights, benchmarks, or code patterns.
+- Determine the exact **Publication Date** (Year and Month in `MM.YY` format).
+- Calibrate against the **Model Cutoff Matrix**:
+  * **Tier 1A (`>= 04.26`, April 2026 – Present)**: Post-cutoff for ALL models (Gemini 3.1 Pro, 3.6 Flash, 3.7 Flash, 3.8 Flash). Must be prioritized for recent GA releases.
+  * **Tier 1B (`02.25 – 03.26`, February 2025 – March 2026)**: Post-cutoff for Gemini 3.1 Pro; validation/refinement tier for Flash models.
+  * **Tier 2 (`<= 01.25`)**: Timeless architectural mathematics and foundational trade-offs (routed to `references/archive.md`).
 
 ### 2. Standardization & Formatting Syntax
 Every reference link MUST follow this exact format:
@@ -23,7 +26,7 @@ Every reference link MUST follow this exact format:
 - For GitHub repositories: `- [Repo Name: Description](https://github.com/...)`
 
 ### 3. Target Domain Routing
-Match each article to its primary skill vault in `~/.gemini/config/skills/<skill-name>/references/articles.md`:
+Match each article to its primary skill vault in `skills/<skill-name>/references/articles.md`:
 - Multi-agent orchestration, ADK, A2A/A2UI, Memory Bank $\to$ `gcp-adk-agents`
 - Cloud Run, serverless microservices, CPU throttling $\to$ `gcp-cloud-run`
 - GKE Autopilot, networking, Dataplane V2, Gateway API $\to$ `gcp-gke-platform`
@@ -38,22 +41,45 @@ Match each article to its primary skill vault in `~/.gemini/config/skills/<skill
 - Dialogflow CX, Live API, Voice Agents, Conversational AI $\to$ `gcp-conversational-ai`
 - Gemini CLI, Antigravity IDE, Terraform Stacks, FastMCP $\to$ `gcp-gemini-tooling`
 - Gemma 4 at scale, GEAP, Veo, AlphaFold, JAX TPU fine-tuning $\to$ `gcp-frontier-emerging`
+- Cinematic generative media, Veo 3.1, Gemini Omni Flash $\to$ `gcp-generative-media`
+- End-to-end architecture audits & pre-flight scans $\to$ `gcp-architecture-review`
 
 ### 4. Strict Mathematical Chronological Sorting
-- Within every `references/articles.md`, links MUST be strictly ordered descending by date:
+- Within every `references/articles.md` and `references/archive.md`, links MUST be strictly ordered descending by date:
   $$\text{Sort Key} = (2000 + \text{Year}) \times 100 + \text{Month}$$
 - `[09.26]` (202609) $\to$ `[08.26]` (202608) $\to$ `[07.26]` (202607) $\to$ ... $\to$ `[01.24]` (202401).
 
-### 5. SKILL.md Operational Runbook Enrichment & Standard
-When a new major feature, benchmark, or architecture pattern is ingested:
-- Adhere strictly to the codified [SKILL.md Standard Specification](./SKILL_STANDARD.md).
-- Ensure the 7 mandatory sections are populated: Domain Scope, Critical Anti-Patterns, Decision Matrices, Production Blueprints, Chronological Evolution, and Dual-Vault Reference Links.
-- Meet extraction coverage quotas (minimum 4–6 anti-patterns, 2–3 decision matrices, and 4–8 runnable production blueprints citing their source articles).
-- Report updates using the mandatory **Previous State vs. New State** metric breakdown.
+---
 
-### 6. Automated Validation Check
-- Always verify the references with the automated audit script:
-  ```bash
-  node "C:/Users/campabadal/.gemini/antigravity/scratch/audit_skills.js"
-  ```
-- Ensure **0 sorting errors** and **100% active markdown links** before concluding.
+## 🔬 5. Architectural Extraction Score (AES 1 to 5)
+
+To guarantee that ingested articles provide actionable value and prevent superficial link hoarding, every article is evaluated against the **5-Tier AES Rubric**:
+
+| Score | Level Name | Extraction Requirement | Target Destination |
+| :---: | :--- | :--- | :--- |
+| **Level 1** | **Cataloged Link** | Canonical title, date, URL formatted and chronologically sorted. | `references/articles.md` |
+| **Level 2** | **Chronological Milestone** | Added to timeline with 1–2 sentence operational impact. | `SKILL.md` (`## ⏱️ Chronological Evolution`) |
+| **Level 3** | **Architectural Rule** | Extracted non-obvious failure mode, anti-pattern, or quantitative decision threshold. | `SKILL.md` (`## 🚫 Anti-Patterns` or `## ⚖️ Decision Matrices`) |
+| **Level 4** | **Production Blueprint** | Runnable, copy-pasteable Terraform, Python, Go, or Bash snippet directly citing the source. | `SKILL.md` (`## 🛠️ Production Blueprints`) |
+| **Level 5** | **Golden Eval Verified** | Verified against an automated Antigravity agent eval prompt. | `evals/` test suite |
+
+* **Ingestion Standard**: Routine blog posts must reach at least **AES Level 2**. Major GA announcements, breaking changes, or architectural shifts MUST achieve **AES Level 4**.
+
+---
+
+## 🛠️ 6. Automated Tooling & Ingestion Assistant
+
+Maintainers should utilize the automated ingestion script to eliminate manual sorting mistakes:
+
+```bash
+# Automated Ingestion CLI
+node scripts/ingest.js --url "<URL>" --domain "<target-skill>" --date "MM.YY" --score 4
+```
+
+### Automated Verification:
+Always verify the entire repository before concluding any ingestion session:
+```bash
+node scripts/audit_skills.js
+node scripts/lint_internal_links.js
+```
+Ensure **0 sorting errors** and **100% valid relative links** before committing.

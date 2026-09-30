@@ -2,13 +2,13 @@
 
 [![Build Status](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml/badge.svg)](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Architecture_Domains-20_Specializations-green.svg)](skills/gcp-skills-index/SKILL.md)
-[![Resources](https://img.shields.io/badge/Knowledge_Base-540%2B_Resources-orange.svg)](skills/gcp-skills-index/SKILL.md)
+[![Skills](https://img.shields.io/badge/Architecture_Domains-21_Specializations-green.svg)](skills/gcp-skills-index/SKILL.md)
+[![Resources](https://img.shields.io/badge/Knowledge_Base-545%2B_Resources-orange.svg)](skills/gcp-skills-index/SKILL.md)
 [![Maintainer](https://img.shields.io/badge/Maintained%20By-CostaCloudSA-purple.svg)](https://github.com/CostaCloudSA)
 
 An authoritative, production-grade operational knowledge system and architectural design assistant for **Google Cloud Platform (GCP)** and **Frontier AI Systems (2025–2026)**.
 
-Designed for cloud enterprise architects, principal engineers, and agentic coding environments (**Google Antigravity**, **Gemini CLI**, **Claude Code**), this repository bridges the knowledge cutoff gap with vetted, field-tested architecture patterns, complete production blueprints, critical anti-patterns, and decision matrices across 20 specialized cloud domains.
+Designed for cloud enterprise architects, principal engineers, and agentic coding environments (**Google Antigravity**, **Gemini CLI**, **Claude Code**), this repository bridges the knowledge cutoff gap with vetted, field-tested architecture patterns, complete production blueprints, critical anti-patterns, and decision matrices across 21 specialized cloud domains.
 
 ---
 
@@ -19,7 +19,7 @@ Every domain skill functions as an interactive, expert-level architectural runbo
 1. **Production-Ready Blueprints**: Complete, copy-pasteable Python, Terraform, and Bash implementations using modern SDKs (Vertex AI ADK 1.0, GKE Gateway API, BigQuery Remote MCP, Cloud Run Direct VPC Egress).
 2. **Actionable Anti-Patterns & Architecture Traps**: High-impact failure modes, silent cost drains, and deprecations introduced in 2025–2026 (e.g. CPU throttling during agent calls, slot commitment cliffs, WIF token expiration).
 3. **Architecture Decision Matrices**: Quantitative, side-by-side trade-off evaluations (Latency vs Cost vs Operational Overhead) to guide critical infrastructure and platform decisions.
-4. **Dual-Vault Reference Engine**: Over 540 verified engineering deep-dives, official whitepapers, and production codelabs providing architectural evidence and citations for every design recommendation.
+4. **Dual-Vault Reference Engine**: Over 545 verified engineering deep-dives, official whitepapers, and production codelabs providing architectural evidence and citations for every design recommendation.
 5. **Zero-Token Waste Design**: Modular and lazily loaded—your AI assistant consumes only the domain runbook relevant to your current architectural query, preserving context window and response speed.
 
 ---
@@ -28,24 +28,18 @@ Every domain skill functions as an interactive, expert-level architectural runbo
 
 Foundation models—including the Gemini family—have fixed training cutoff dates. In the rapidly advancing Google Cloud ecosystem, relying solely on pre-cutoff model memory may not provide the most up to date architectural advice.
 
-**GeminiPostCutoff** acts as a live **delta architecture injection layer**. When paired with **Google Antigravity**, **Gemini CLI**, or agentic IDEs, it dynamically bridges this cutoff gap, updating the model's reasoning with 2025–2026 Google Cloud engineering realities.
+### 📅 Model Cutoff Matrix & Triage Framework
 
-### Interactive Post-Cutoff Design Scenarios
+| Model in Antigravity | Official Cutoff | Degradation Threshold | Primary Triage Focus | Recommended Vault Inspection |
+| :--- | :---: | :---: | :--- | :---: |
+| **Gemini 3.1 Pro** | **January 2025** | Jan 2025 | **Full Delta Injection**: 20+ months post-cutoff. Needs all 2025 & 2026 updates. | **Tier 1A + Tier 1B** (`>= 02.25`) |
+| **Gemini 3.6 Flash** | **March 2026** | Jan 2025 – Mar 2026 | **Frontier Delta**: 6+ months post-cutoff (GEAP, Gemma 4 12B, BigQuery Graph GA). | **Tier 1A** (`>= 04.26`) |
+| **Gemini 3.7 Flash** | **March 2026** | Jan 2025 – Mar 2026 | **Frontier Delta**: Focus on Q2-Q3 2026 GA announcements. | **Tier 1A** (`>= 04.26`) |
+| **Gemini 3.8 Flash** | **March 2026** | Jan 2025 – Mar 2026 | **Frontier Delta**: Apply latest blueprints and anti-patterns. | **Tier 1A** (`>= 04.26`) |
 
-When you ask architectural questions, the assistant automatically pulls post-cutoff runbooks into its reasoning context:
-
-* *"How should I host an autonomous customer support agent?"*  
-  👉 **Without post-cutoff skills**: Gemini defaults to custom Python webhook servers and external Redis for session state.  
-  👉 **With GeminiPostCutoff**: The assistant activates [`gcp-adk-agents`](skills/gcp-adk-agents/SKILL.md) and [`gcp-cloud-run`](skills/gcp-cloud-run/SKILL.md), producing a containerless, non-throttled Cloud Run service wired directly into Vertex AI Memory Bank and A2A multi-agent routing.
-
-* *"How do we serve open-weights models across multiple GKE clusters?"*  
-  👉 **Without post-cutoff skills**: Gemini suggests basic Kubernetes horizontal pod autoscalers behind standard Ingress.  
-  👉 **With GeminiPostCutoff**: The assistant activates [`gcp-gke-inference`](skills/gcp-gke-inference/SKILL.md), generating a complete Gateway API manifest with body-based path matching, vLLM continuous batching, and TPU v6e scheduling.
-
-* *"How do we lock down AI agent tool execution and eliminate static keys?"*  
-  👉 **Without post-cutoff skills**: Gemini generates downloadable service account keys and basic IAM roles.  
-  👉 **With GeminiPostCutoff**: The assistant activates [`gcp-security-compliance`](skills/gcp-security-compliance/SKILL.md), implementing Google Model Armor pre/post LLM inspection and Workload Identity Federation (WIF).
-
+* **Tier 1A (Frontier Delta $\ge 04.26$)**: Mandatory for all models. Covers post-March 2026 releases (GEAP GA, Gemma 4 12B TPU serving, Cloud Run automated multi-region failover, BigQuery Graph).
+* **Tier 1B (Intermediate Delta $02.25 - 03.26$)**: Post-cutoff for 3.1 Pro; serves as verification for Flash models in specialized infrastructure (ADK 1.0, Model Armor, GKE Inference Gateway).
+* **Tier 2 (Evergreen $\le 01.25$)**: Timeless architectural mathematics (BigQuery slot commitment crossover at 690 TB/mo, GKE pod sizing).
 
 ---
 
@@ -53,6 +47,7 @@ When you ask architectural questions, the assistant automatically pulls post-cut
 
 | Architectural Domain | Key Capabilities & Post-Cutoff Innovations | Runbook |
 | :--- | :--- | :---: |
+| **Architectural Review Orchestrator** | Pre-flight stack detection, phased implementation roadmaps, multi-domain audits | [**`gcp-architecture-review`**](skills/gcp-architecture-review/SKILL.md) |
 | **Multi-Agent Orchestration** | Vertex AI Agent Engine, ADK Python/Go/Java 1.0, A2A/A2UI Protocols, Memory Bank | [**`gcp-adk-agents`**](skills/gcp-adk-agents/SKILL.md) |
 | **Developer Tooling & Agent IDEs** | Gemini CLI Plan Mode, Antigravity IDE custom workflows, FastMCP, Eval-Driven Development | [**`gcp-gemini-tooling`**](skills/gcp-gemini-tooling/SKILL.md) |
 | **Enterprise Kubernetes (GKE)** | GKE Autopilot vs Standard, Gateway API, Dataplane V2, Pod Snapshots, Zero-Touch OTel | [**`gcp-gke-platform`**](skills/gcp-gke-platform/SKILL.md) |
@@ -79,32 +74,46 @@ When you ask architectural questions, the assistant automatically pulls post-cut
 
 ## ⚡ Installation & Quickstart
 
-### Method 1: Global Installation for Antigravity & Gemini CLI
-To make all 20 skills globally available across every project and workspace:
+### Method 1: Antigravity Plugin Installation (Recommended)
+Cloning as a native Antigravity Plugin automatically mounts all 21 skills, injects `rules/AGENTS.md` directives, and enables progressive disclosure across all your workspaces:
 
 ```bash
-# Clone directly into your global Gemini skills configuration
-git clone https://github.com/CostaCloudSA/GeminiPostCutoff.git ~/.gemini/config/skills/GeminiPostCutoff
+# Clone directly into your global Antigravity plugins directory
+git clone https://github.com/CostaCloudSA/GeminiPostCutoff.git ~/.gemini/config/plugins/GeminiPostCutoff
 ```
-Google Antigravity and Gemini CLI will automatically discover and index all runbooks upon startup.
+*Restart Antigravity or Gemini CLI after cloning. All runbooks are immediately available on-demand.*
 
 ---
 
-### Method 2: Project-Level Workspace (Team Git Submodule)
-To embed these runbooks directly into an enterprise repository:
+### Method 2: Automated Installation Scripts
+You can use the bundled cross-platform install script to set up the plugin or create direct skill symlinks:
+
+* **Windows (PowerShell)**:
+  ```powershell
+  # Install as Plugin
+  pwsh scripts/install.ps1
+
+  # Or link flat skills directly to ~/.gemini/config/skills/
+  pwsh scripts/install.ps1 -FlatSkills
+  ```
+
+* **Linux / macOS (Bash)**:
+  ```bash
+  # Install as Plugin
+  bash scripts/install.sh
+
+  # Or link flat skills directly
+  bash scripts/install.sh --flat-skills
+  ```
+
+---
+
+### Method 3: Project-Level Workspace (Team Git Submodule)
+To embed these runbooks directly into an enterprise repository for your entire engineering team:
 
 ```bash
 # Inside your repository root:
-git submodule add https://github.com/CostaCloudSA/GeminiPostCutoff.git .gemini/skills/GeminiPostCutoff
-```
-
----
-
-### Method 3: Antigravity Plugin Installation
-To load the suite as a packaged plugin containing both skills and architectural directives:
-
-```bash
-git clone https://github.com/CostaCloudSA/GeminiPostCutoff.git ~/.gemini/config/plugins/GeminiPostCutoff
+git submodule add https://github.com/CostaCloudSA/GeminiPostCutoff.git .agents/plugins/GeminiPostCutoff
 ```
 
 ---

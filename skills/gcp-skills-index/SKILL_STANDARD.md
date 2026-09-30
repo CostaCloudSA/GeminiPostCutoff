@@ -1,6 +1,6 @@
 # Standard Specification for GCP & AI Agent `SKILL.md` Files
 
-This specification establishes the mandatory quality, structural, and knowledge extraction standards for all skill files (`SKILL.md`) across the 20-domain curated GCP knowledge base.
+This specification establishes the mandatory quality, structural, and knowledge extraction standards for all skill files (`SKILL.md`) across the 21-domain curated GCP knowledge base.
 
 ---
 
@@ -37,8 +37,11 @@ description: >-
 <Each blueprint MUST cite its source article: *Cites: [Canonical Title](./references/articles.md)*>
 
 ## ⏱️ Chronological Evolution (2024–2026)
-<Strict descending chronological list of architectural shifts, feature releases, and deprecations>
-<Format: - **[MM.YY]**: Description of release and practical architectural impact>
+<!-- Tier 1A: Frontier Delta (>= 04.26) - Post-cutoff for ALL models -->
+<Bullet items for releases >= 04.26>
+
+<!-- Tier 1B: Intermediate Delta (02.25 - 03.26) - Post-cutoff for Gemini 3.1 Pro -->
+<Bullet items for releases 02.25 to 03.26>
 
 ## 📚 Reference Vaults & Portability Standard
 * **Active Post-Cutoff Delta Knowledge Vault (2025–2026)**:
@@ -49,20 +52,22 @@ description: >-
 
 ---
 
-## 🔬 2. Knowledge Extraction & Harvesting Standard
+## 🔬 2. Knowledge Extraction & Architectural Extraction Score (AES)
 
-To ensure that `SKILL.md` files are not superficial summaries, every skill must adhere to the following extraction quotas:
+To ensure that `SKILL.md` files are not superficial summaries, every skill and ingested resource must adhere to the **5-Tier AES Standard**:
 
-1. **Extraction Coverage Ratio**:
-   - For vaults with **$\le 15$ articles**: Minimum **4 anti-patterns**, **2 decision matrices**, and **4 production blueprints**.
-   - For vaults with **16–40 articles**: Minimum **5 anti-patterns**, **2–3 decision matrices**, and **5–6 production blueprints**.
-   - For vaults with **$> 40$ articles** (e.g., `gcp-adk-agents`, `gcp-gemini-tooling`, `gcp-gke-platform`): Minimum **6 anti-patterns**, **3 decision matrices**, and **6–8 production blueprints**.
-2. **Deep Pattern Harvesting**:
-   - Do NOT just summarize product marketing announcements.
-   - Extract **non-obvious failure modes** (e.g. CPU throttling during background threads, IAM binding overwrites, FreeSWITCH audio sample rate mismatch, BigQuery slot starvation).
-   - Extract **hard architectural numbers** (e.g. crossover point of 690 TB/month for slots vs on-demand, 400ms vs 3000ms voice agent latency, 35% KV-cache routing latency improvement).
-3. **Traceability Contract**:
-   - Every single anti-pattern, decision matrix, and production blueprint MUST explicitly cite its supporting article using the relative link syntax: `*Cites: [Canonical Title](./references/articles.md)*` or `*Cites: [Canonical Title](./references/archive.md)*`.
+| AES Level | Requirement | Mandatory Ingestion Target |
+| :---: | :--- | :--- |
+| **Level 1** | Cataloged Link | Entry inserted into `references/articles.md` in strict chronological order. |
+| **Level 2** | Chronological Milestone | Timeline entry in `## ⏱️ Chronological Evolution` with date and practical impact. |
+| **Level 3** | Architectural Rule | Concrete Anti-Pattern with remediation or quantitative Decision Matrix threshold. |
+| **Level 4** | Production Blueprint | Copy-pasteable Terraform, Python, Go, or Bash snippet citing the article. |
+| **Level 5** | Eval Verified | Validated with automated prompt eval in Antigravity or Gemini CLI. |
+
+### Quota Coverage:
+- For vaults with **$\le 15$ articles**: Minimum **4 anti-patterns**, **2 decision matrices**, and **4 production blueprints**.
+- For vaults with **16–40 articles**: Minimum **5 anti-patterns**, **2–3 decision matrices**, and **5–6 production blueprints**.
+- For vaults with **$> 40$ articles** (e.g., `gcp-adk-agents`, `gcp-gemini-tooling`, `gcp-gke-platform`): Minimum **6 anti-patterns**, **3 decision matrices**, and **6–8 production blueprints**.
 
 ---
 
