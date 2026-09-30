@@ -1,0 +1,42 @@
+name: Monthly External Link Health Audit
+
+on:
+  schedule:
+    # Runs at 00:00 UTC on the 1st day of every month
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Limit verification to first N links (0 for all)'
+        required: false
+        default: '0'
+
+jobs:
+  verify-links:
+    name: Verify External Reference URLs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Monthly External Link Verification Engine
+        run: |
+          LIMIT_FLAG=""
+          if [ "${{ github.event.inputs.limit }}" != "" ] && [ "${{ github.event.inputs.limit }}" != "0" ]; then
+            LIMIT_FLAG="--limit ${{ github.event.inputs.limit }}"
+          fi
+          node scripts/verify_external_links.js $LIMIT_FLAG --output reports/monthly_link_report.md
+
+      - name: Upload Monthly Health Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monthly-link-health-report
+          path: reports/monthly_link_report.md
+          if-no-files-found: ignore

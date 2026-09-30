@@ -8,7 +8,8 @@
     "audit:links": "node scripts/lint_internal_links.js",
     "audit:rules": "node scripts/audit_skill_rules.js",
     "detect": "node scripts/detect_stack.js",
-    "ingest": "node scripts/ingest.js"
+    "ingest": "node scripts/ingest.js",
+    "audit:external": "node scripts/verify_external_links.js"
   },
   "keywords": [
     "antigravity",

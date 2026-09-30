@@ -1,14 +1,40 @@
 # 🌌 GeminiPostCutoff: Modern Google Cloud Architecture & AI Systems Runbooks
 
 [![Build Status](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml/badge.svg)](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml)
+[![Monthly Link Audit](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/monthly_link_check.yml/badge.svg)](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/monthly_link_check.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/Architecture_Domains-21_Specializations-green.svg)](skills/gcp-skills-index/SKILL.md)
-[![Resources](https://img.shields.io/badge/Knowledge_Base-545%2B_Resources-orange.svg)](skills/gcp-skills-index/SKILL.md)
+[![Resources](https://img.shields.io/badge/Knowledge_Base-546%2B_Resources-orange.svg)](skills/gcp-skills-index/SKILL.md)
 [![Maintainer](https://img.shields.io/badge/Maintained%20By-CostaCloudSA-purple.svg)](https://github.com/CostaCloudSA)
 
 An authoritative, production-grade operational knowledge system and architectural design assistant for **Google Cloud Platform (GCP)** and **Frontier AI Systems (2025–2026)**.
 
 Designed for cloud enterprise architects, principal engineers, and agentic coding environments (**Google Antigravity**, **Gemini CLI**, **Claude Code**), this repository bridges the knowledge cutoff gap with vetted, field-tested architecture patterns, complete production blueprints, critical anti-patterns, and decision matrices across 21 specialized cloud domains.
+
+---
+
+## 🛡️ Core Governance & Architectural Safety Directives
+
+All AI agents and assistants accessing this repository must strictly adhere to two foundational governance rules codified in [`rules/AGENTS.md`](rules/AGENTS.md):
+
+### 1. 🔒 Human-Verified Model Confirmation Protocol
+> [!IMPORTANT]
+> **Anti-Hallucination Directive**: LLMs frequently misreport their active model identity or training cutoff. The assistant **MUST NEVER** guess or self-report its cutoff date without explicit human confirmation.
+
+* **Human Verification Gate**: Prior to calibrating post-cutoff deltas during an architecture audit, the assistant must confirm the active model with the user:
+  * **Option A**: **Gemini 3.6 Flash / 3.7 Flash / 3.8 Flash** (Cutoff: **March 2026**) $\to$ Prioritize **Tier 1A (`>= 04.26`, April 2026 – Present)**.
+  * **Option B**: **Gemini 3.1 Pro** (Cutoff: **January 2025**) $\to$ Prioritize **Tier 1A and Tier 1B (`>= 02.25`, February 2025 – Present)** to bridge its 20+ month gap.
+* **Fail-Safe Fallback**: If the active model has not been explicitly confirmed by the human, the assistant **MUST default to the stricter standard (Tier 1A + Tier 1B, all items `>= 02.25`)** to eliminate the risk of recommending deprecated pre-2025 syntax.
+
+### 2. 🛡️ 100% Advisory Posture & Mandatory Human Approval Gate
+> [!CAUTION]
+> **Zero Autonomous Edits**: This knowledge system operates in a **100% advisory capacity**. The assistant is strictly prohibited from making autonomous, unreviewed modifications to infrastructure code, deployment manifests, environment files, database schemas, or IAM policies.
+
+Every architectural recommendation or infrastructure change must follow a mandatory 4-step gate:
+1. **Advisory Formulation**: Analyze the architecture against domain runbooks, identifying post-cutoff improvements and anti-patterns.
+2. **Implementation Plan Artifact**: Generate a structured markdown plan detailing workload scope, canonical external citations (`https://...`), blast radius analysis, and exact code diff previews.
+3. **Explicit Human Approval Gate**: Set `RequestFeedback: true` on the artifact, stop further tool calls, and await explicit human confirmation (`Proceed` or typed approval).
+4. **Governed Execution**: Only upon receiving human approval may any files or infrastructure commands be touched.
 
 ---
 
@@ -18,15 +44,15 @@ Every domain skill functions as an interactive, expert-level architectural runbo
 
 1. **Production-Ready Blueprints**: Complete, copy-pasteable Python, Terraform, and Bash implementations using modern SDKs (Vertex AI ADK 1.0, GKE Gateway API, BigQuery Remote MCP, Cloud Run Direct VPC Egress).
 2. **Actionable Anti-Patterns & Architecture Traps**: High-impact failure modes, silent cost drains, and deprecations introduced in 2025–2026 (e.g. CPU throttling during agent calls, slot commitment cliffs, WIF token expiration).
-3. **Architecture Decision Matrices**: Quantitative, side-by-side trade-off evaluations (Latency vs Cost vs Operational Overhead) to guide critical infrastructure and platform decisions.
-4. **Dual-Vault Reference Engine**: Over 545 verified engineering deep-dives, official whitepapers, and production codelabs providing architectural evidence and citations for every design recommendation.
+3. **Architecture Decision Matrices**: Quantitative, side-by-side trade-off evaluations (Latency vs Cost vs Operational Overhead) to guide critical infrastructure decisions.
+4. **Dual-Vault Reference Engine**: Over 546 verified engineering deep-dives, official whitepapers, and production codelabs providing architectural evidence and citations for every design recommendation.
 5. **Zero-Token Waste Design**: Modular and lazily loaded—your AI assistant consumes only the domain runbook relevant to your current architectural query, preserving context window and response speed.
 
 ---
 
 ## 💡 Designing Beyond the Knowledge Cutoff
 
-Foundation models—including the Gemini family—have fixed training cutoff dates. In the rapidly advancing Google Cloud ecosystem, relying solely on pre-cutoff model memory may not provide the most up to date architectural advice.
+Foundation models—including the Gemini family—have fixed training cutoff dates. In the rapidly advancing Google Cloud ecosystem, relying solely on pre-cutoff model memory may lead to obsolete suggestions.
 
 ### 📅 Model Cutoff Matrix & Triage Framework
 
@@ -69,6 +95,26 @@ Foundation models—including the Gemini family—have fixed training cutoff dat
 | **Geospatial & Planetary AI** | Earth Engine BigQuery integration, AlphaEarth satellite embeddings, BigQuery GIS | [**`gcp-geospatial`**](skills/gcp-geospatial/SKILL.md) |
 | **Spatial Computing (Android XR)** | Android XR SDK, Jetpack XR Compose spatial UI, spatial audio, and panel immersion | [**`gcp-android-xr`**](skills/gcp-android-xr/SKILL.md) |
 | **Master Navigation & Router** | Global domain catalog, architecture activation triggers, and skill routing index | [**`gcp-skills-index`**](skills/gcp-skills-index/SKILL.md) |
+
+---
+
+## 🛠️ CLI Tooling & Operational Scripts
+
+The repository includes purpose-built Node.js utilities to assist maintainers and agents:
+
+```bash
+# 1. Pre-Flight Stack Scanner
+# Discovers Terraform, Docker, K8s, and package manifests to advise which skills to activate
+npm run detect
+
+# 2. Automated Article Ingestion CLI
+# Extracts metadata, applies date sort keys, routes to active/archive, and guides AES extraction
+npm run ingest -- --url "<URL>" --domain "<domain-skill>" --date "MM.YY" --score 4
+
+# 3. Monthly External Link Health Audit
+# Rate-limited HTTP validation across all 546+ external URLs with explicit failure reporting
+npm run audit:external
+```
 
 ---
 
@@ -115,6 +161,14 @@ To embed these runbooks directly into an enterprise repository for your entire e
 # Inside your repository root:
 git submodule add https://github.com/CostaCloudSA/GeminiPostCutoff.git .agents/plugins/GeminiPostCutoff
 ```
+
+---
+
+## 📅 Monthly Link Health & Quality Assurance
+
+To prevent IP throttling and transient CI failures on daily commits:
+* **CI Push / PR Verification**: Rapid, local checks only—verifying descending mathematical date sorting, internal markdown links, and `SKILL_STANDARD.md` quotas (`npm test`).
+* **Monthly External Link Check**: Runs automatically on the **1st of every month at 00:00 UTC** via GitHub Actions (`monthly_link_check.yml`). Checks live HTTP status codes across all 546+ external resources and publishes an explicit failure table report to GitHub Action summaries and artifact logs.
 
 ---
 

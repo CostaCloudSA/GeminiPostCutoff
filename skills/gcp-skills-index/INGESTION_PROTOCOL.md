@@ -79,7 +79,11 @@ node scripts/ingest.js --url "<URL>" --domain "<target-skill>" --date "MM.YY" --
 ### Automated Verification:
 Always verify the entire repository before concluding any ingestion session:
 ```bash
-node scripts/audit_skills.js
-node scripts/lint_internal_links.js
+# Rapid local verification on commit (sorting, internal links, quotas)
+npm test
+
+# Monthly external URL health check (checks 546+ external HTTP endpoints)
+npm run audit:external
 ```
 Ensure **0 sorting errors** and **100% valid relative links** before committing.
+

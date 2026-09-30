@@ -14,7 +14,7 @@ Total indexed resources: **83**
 - [[06.26 Blogpost]: A2A ecosystem: BigQuery Data Engineering Agent](https://medium.com/google-cloud/a2a-ecosystem-bigquery-data-engineering-agent-725aaac88a63)
 - [[06.26 Blogpost]: Deep Dive: Antigravity Agent Skills](https://medium.com/google-cloud/deep-dive-antigravity-agent-skills-b303bf05085b)
 - [[06.26 Blogpost]: SPIFFE: Why Google's New Agent Identity is the Future of AI Security](https://medium.com/google-cloud/spiffe-why-googles-new-agent-identity-is-the-future-of-ai-security-240b4a94c66f)
-- [[06.26 Blogpost]: Vertex AI is now Gemini Enterprise Agent Platform: A migration map for Agent Builders](https://blog.gazzurelli.com/vertex-ai-is-now-gemini-enterprise-agent-platform-a-migration-map-for-agent-builders-c7807b1901cf)
+- [[06.26 Blogpost]: Vertex AI is now Gemini Enterprise Agent Platform: A migration map for Agent Builders](https://medium.com/@gazzurelli/vertex-ai-is-now-gemini-enterprise-agent-platform-a-migration-map-for-agent-builders-c7807b1901cf)
 - [[06.26 Blogpost]: Genkit Middleware in Python: Retries, Fallbacks, Tool Approval](https://medium.com/@jeffdh5/genkit-middleware-in-python-retries-fallbacks-tool-approval-f3e0c5f8fa87)
 - [[06.26 Blogpost]: How A2A is Building a World of Collaborative Agents](https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/)
 - [[06.26 Blogpost]: From ADK to Gemini Enterprise: Building Production-Grade AI Agents on Google Cloud](https://medium.com/google-cloud/from-adk-to-gemini-enterprise-building-production-grade-ai-agents-on-google-cloud-e32f4977f05a)
