@@ -71,7 +71,10 @@ When designing modern systems, specific architectural themes span multiple domai
 
 ## 💡 How to Use These Skills in Agent Workflows
 
+- **100% Advisory Governance**: This skill system functions exclusively in an advisory capacity. The AI assistant is strictly prohibited from making autonomous infrastructure edits. Every proposal must be delivered as a structured implementation plan artifact with external citations, awaiting explicit human approval before any code or config files are modified.
+- **Human-Verified Model Identity**: The assistant must never guess or self-report its own model cutoff. It must confirm the active model (Gemini 3.1 Pro vs. 3.6/3.7/3.8 Flash) with the user prior to selecting triage tiers. Unconfirmed sessions default to the stricter Tier 1A + Tier 1B standard (`>= 02.25`).
 - **Automatic Domain Activation**: The AI assistant automatically detects domain-specific keywords (e.g. `adk`, `gateway-api`, `bigquery-cost`, `kill-switch`) and activates the corresponding runbook.
 - **Cross-Domain Architecture**: When architecting multi-service systems (e.g., ADK agent on Cloud Run with BigQuery AI and Model Armor), combine blueprints across [`gcp-adk-agents`](../gcp-adk-agents/SKILL.md), [`gcp-cloud-run`](../gcp-cloud-run/SKILL.md), [`gcp-bigquery-ai`](../gcp-bigquery-ai/SKILL.md), and [`gcp-security-compliance`](../gcp-security-compliance/SKILL.md).
 - **Authoritative Blueprints**: Always prioritize the production blueprints and avoid the critical anti-patterns detailed in each specialized skill over generic pre-2025 suggestions.
 - **Maintainer Specifications**: For repository maintainer standards, quotas, and ingestion protocols, refer to [SKILL_STANDARD.md](SKILL_STANDARD.md) and [INGESTION_PROTOCOL.md](INGESTION_PROTOCOL.md).
+

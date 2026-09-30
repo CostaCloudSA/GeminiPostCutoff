@@ -2,6 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Gemini Model Knowledge Cutoffs & Triage Specification",
   "lastUpdated": "2026-09-30",
+  "governance": {
+    "humanVerificationRequired": true,
+    "rationale": "Model self-reporting is error-prone. Agents must require human confirmation of active model identity.",
+    "unverifiedFallback": "tier_1a_plus_1b",
+    "advisoryPosture": "100% Advisory. Zero autonomous infrastructure edits without prior human approval via implementation plan artifact."
+  },
   "tiers": {
     "tier_1a": {
       "name": "Frontier Post-Cutoff Delta",

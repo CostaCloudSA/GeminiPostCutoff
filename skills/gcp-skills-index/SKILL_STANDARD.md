@@ -84,3 +84,18 @@ Whenever a skill or batch of skills is audited and updated, the delivery report 
 | **Active vs. Archived Vault** | Exact count of post-cutoff active delta links vs. pre-cutoff evergreen/doc links. |
 | **Key Missing Knowledge Added** | Bullet points explicitly detailing the major architectural mechanisms harvested from the articles that were completely absent from the old version. |
 | **Audit Verification** | Status of `audit_skills.js` (total links checked, sorting errors: 0, broken links: 0). |
+
+---
+
+## 🛡️ 4. Advisory Governance & Human Approval Gate
+
+Every skill in this repository serves an **exclusively advisory function**. Assistants referencing these runbooks must comply with the following governance rules:
+
+1. **Human-Verified Model Identity**: The assistant must never guess or self-report its model cutoff. It must confirm the active model with the user (Gemini 3.1 Pro vs. 3.6/3.7/3.8 Flash) before selecting triage tiers. Unconfirmed sessions default to the stricter Tier 1A + Tier 1B standard (`>= 02.25`).
+2. **Zero Autonomous Infrastructure Edits**: The assistant is strictly prohibited from modifying Terraform configurations, Cloud Run settings, GKE manifests, IAM roles, or database schemas without prior explicit human approval.
+3. **Mandatory Implementation Plan Deliverable**: Any proposed change must be presented as an implementation plan artifact containing:
+   - Recommendations and rationale.
+   - Verified external documentation links (`https://...`).
+   - Anti-patterns avoided and blast radius analysis.
+   - Code diff previews.
+4. **Explicit Human Sign-Off**: The artifact must set `RequestFeedback: true` and await explicit user approval (`Proceed` or typed confirmation) before modifying any infrastructure files.
