@@ -2,7 +2,7 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gemini-tooling`.
 
-Total indexed resources: **67**
+Total indexed resources: **68**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
 - [[08.26 Blogpost]: Eval-Driven Development for Agent Skills (Firebase Blog)](https://firebase.blog/posts/2026/08/eval-driven-development-agent-skills)
@@ -33,6 +33,7 @@ Total indexed resources: **67**
 - [[02.26 Blogpost]: We Built a 100K-Line Enterprise App Using AI — Here's Why Vibe-Coding Couldn't](https://pub.towardsai.net/we-built-a-100k-line-enterprise-app-using-ai-heres-why-vibe-coding-couldn-t-4f1220d08203)
 - [[02.26 Blogpost]: 7 Technical Takeaways from Using Gemini to Generate Code Samples at Scale](https://cloud.google.com/blog/topics/developers-practitioners/7-technical-takeaways-from-using-gemini-to-generate-code-samples-at-scale/)
 - [[02.26 Blogpost]: Coding with Gemini CLI and the Developer Knowledge API](https://medium.com/google-cloud/coding-with-gemini-cli-and-the-developer-knowledge-api-006503eceb8e)
+- [[02.26 Blogpost]: Troubleshooting Google Cloud with Google Cloud Logging and Developer Knowledge MCP Servers](https://medium.com/google-cloud/troubleshooting-google-cloud-with-google-cloud-logging-and-developer-knowledge-mcp-servers-c0be34da985a)
 - [[01.26 Article]: Agents Are Now Files (Roya90)](https://medium.com/@roya90/agents-are-now-files-4ecc3c352a29)
 - [[01.26 Article]: Google Cloud Skills Tutorial Part 5: Build Your Own Custom Skill](https://medium.com/google-cloud/google-cloud-skills-tutorial-part-5-build-your-own-custom-skill-1d7082f31936)
 - [[01.26 Blogpost]: How Google SREs Use Gemini CLI to Solve Real-World Outages](https://cloud.google.com/blog/topics/developers-practitioners/how-google-sres-use-gemini-cli-to-solve-real-world-outages/)

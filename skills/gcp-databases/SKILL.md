@@ -22,10 +22,10 @@ Activate this skill whenever:
 ## 🚫 Critical Anti-Patterns & Architecture Traps
 
 > [!CAUTION]
-> **Anti-Pattern 1: Default PostgreSQL Checkpoint & Autovacuum Traps on Cloud SQL [03.26]**
+> **Anti-Pattern 1: Default PostgreSQL Checkpoint & Autovacuum Traps on Cloud SQL [01.26]**
 > Out-of-the-box Cloud SQL PostgreSQL settings use conservative checkpoint and autovacuum defaults. On write-heavy ingestion workloads, checkpoints trigger every few minutes, forcing intensive dirty buffer disk flushes that spike IOPS and freeze concurrent transactions.
 > - **Mandatory Fix**: Set `checkpoint_completion_target = 0.9`, scale `max_wal_size` up to `16GB`, and reduce `autovacuum_vacuum_scale_factor` to `0.05` to prevent aggressive table bloat.
-> *Cites: [Cloud SQL 3x Write Throughput Optimization](./references/articles.md)*
+> *Cites: [Unlocking 3x Write Performance: A Deep Dive into Cloud SQL MySQL Optimizations](./references/articles.md)*
 
 > [!WARNING]
 > **Anti-Pattern 2: Unbuffered MySQL InnoDB Write Bottlenecks [01.26]**
@@ -80,7 +80,7 @@ Activate this skill whenever:
 
 ## 🛠️ Production Blueprints
 
-### Blueprint 1: Cloud SQL PostgreSQL High-Performance Parameter Patch [03.26]
+### Blueprint 1: Cloud SQL PostgreSQL High-Performance Parameter Patch [01.26]
 Apply production-grade checkpoint, WAL, and autovacuum flags using `gcloud`:
 ```bash
 gcloud sql instances patch prod-pg-instance \
@@ -95,7 +95,7 @@ gcloud sql instances patch prod-pg-instance \
     shared_buffers=16777216,\
     work_mem=65536
 ```
-*Cites: [Cloud SQL 3x Write Throughput Optimization](./references/articles.md)*
+*Cites: [Unlocking 3x Write Performance: A Deep Dive into Cloud SQL MySQL Optimizations](./references/articles.md)*
 
 ---
 

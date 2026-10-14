@@ -36,7 +36,7 @@ Activate this skill whenever:
 > [!WARNING]
 > **Anti-Pattern 3: Fine-Tuning Gemini Foundation Models without Baselines [01.25]**
 > Submitting expensive Supervised Fine-Tuning (SFT) jobs without prior prompt engineering, context caching, or few-shot baselining often yields negligible accuracy gains at significant cost.
-> - **Standard Protocol**: Benchmark 200+ representative validation examples on Gemini 2.5 Flash using few-shot prompts and Context Caching before committing to an SFT run.
+> - **Standard Protocol**: Benchmark 200+ representative validation examples on `gemini-3.8-flash` or `gemini-4-argon` using few-shot prompts and Context Caching before committing to an SFT run.
 > *Cites: [Supervised Fine Tuning for Gemini: A best practices guide](./references/articles.md)*
 
 > [!CAUTION]
@@ -50,6 +50,12 @@ Activate this skill whenever:
 > Evaluating RAG retrieval pipelines solely through subjective manual spot-checks fails to detect retrieval drift, hallucinated answers, or low context relevance across diverse queries.
 > - **Solution**: Implement continuous automated evaluation using **DeepEval** measuring Faithfulness, Answer Relevance, and Contextual Precision against a golden test dataset.
 > *Cites: [RAG Evaluation — A Step-by-Step Guide with DeepEval](./references/articles.md)*
+
+> [!CAUTION]
+> **Anti-Pattern 6: Dynamic Shape Recompilation Stalls in JAX TPU Training Loops [01.26]**
+> Passing variable-length token sequences into `@jax.jit` functions without static bucket padding forces XLA to recompile the computation graph on every batch step, degrading TPU utilization from >85% MFU to <10%.
+> - **Mandatory Standard**: Pad all input token batches to fixed power-of-two sequence buckets (e.g., 512, 1024, 2048, 4096) and enable persistent XLA compilation caching (`jax.config.update("jax_compilation_cache_dir", "gs://...")`).
+> *Cites: [A Developer's Guide to Debugging JAX on Cloud TPUs: Essential Tools and Techniques](./references/articles.md)*
 
 ---
 
@@ -68,10 +74,20 @@ Activate this skill whenever:
 ### 2. Model Adaptation Strategy Decision Matrix [01.25, 02.26]
 | Strategy | Compute Cost | Latency Impact | Data Requirement | When to Use |
 | :--- | :--- | :--- | :--- | :--- |
-| **Context Caching** | Low ($0.025/1M token hr) | Low (-60% TTFT) | None (Prompt only) | Static repositories, system manuals |
+| **Context Caching** | Low (\$0.025/1M token hr) | Low (-60% TTFT) | None (Prompt only) | Static repositories, system manuals |
 | **Vertex RAG Engine** | Low (Vector index queries) | Moderate (+150ms) | Unstructured chunks | Dynamic knowledge base updates |
 | **Supervised Fine-Tuning** | High (TPU/GPU hours) | Baseline model latency | 500–5,000 golden pairs | Domain dialect, strict JSON adherence |
 *Cites: [Supervised Fine Tuning for Gemini: A best practices guide](./references/articles.md) and [Vertex AI Context Caching with Gemini](./references/articles.md)*
+
+---
+
+### 3. Cloud TPU Generation Selection Matrix (v5e vs. v5p vs. v6e Trillium) [05.26, 01.26]
+| TPU Generation | HBM Capacity / Chip | Peak BF16 Compute | Interconnect Topology | Optimal Workload |
+| :--- | :--- | :--- | :--- | :--- |
+| **Cloud TPU v5e** | 16 GB HBM2e | 197 TFLOPS | 2D Torus (up to 256 chips) | Cost-optimal Gemma 4 12B serving & LoRA fine-tuning |
+| **Cloud TPU v5p** | 95 GB HBM2e | 459 TFLOPS | 3D Torus (up to 8,960 chips) | Large-scale distributed pre-training & multi-pod FSDP |
+| **Cloud TPU v6e (Trillium)** | 32 GB HBM3 | 918 TFLOPS (4.7x v5e) | High-speed ICI (2x bandwidth) | Low-latency frontier inference, long-context Gemma 4 serving |
+*Cites: [Serve and Inference Gemma 4 on TPU](./references/articles.md) and [A Developer's Guide to Debugging JAX on Cloud TPUs: Essential Tools and Techniques](./references/articles.md)*
 
 ---
 
@@ -157,13 +173,16 @@ tuning_job.run()
 ### Blueprint 4: Continuous RAG Pipeline Evaluation with DeepEval [01.25]
 Validate retrieval precision, answer faithfulness, and hallucination rates in Vertex AI search:
 ```python
+import os
 from deepeval import evaluate
 from deepeval.metrics import FaithfulnessMetric, ContextualPrecisionMetric
 from deepeval.test_case import LLMTestCase
 
+eval_model = os.getenv("DEEPEVAL_JUDGE_MODEL", "gemini-4-argon")
+
 # 1. Define evaluation metric thresholds
-faithfulness = FaithfulnessMetric(threshold=0.8, model="gemini-2.5-flash")
-precision = ContextualPrecisionMetric(threshold=0.7, model="gemini-2.5-flash")
+faithfulness = FaithfulnessMetric(threshold=0.8, model=eval_model)
+precision = ContextualPrecisionMetric(threshold=0.7, model=eval_model)
 
 # 2. Build test case with retrieved contexts
 test_case = LLMTestCase(
@@ -196,6 +215,25 @@ gcloud run deploy gemma-4-service \
     --add-volume-mount=volume=weights-vol,mount-path=/mnt/gcs
 ```
 *Cites: [Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](./references/articles.md) and [Gemma 4 12B: The Developer Guide](./references/articles.md)*
+
+---
+
+### Blueprint 6: Persistent XLA Compilation Cache & JAX Profiler Trace on Cloud TPU [01.26]
+Eliminate cold XLA recompilation delays across TPU restarts and capture HBM step traces to Cloud Storage:
+```python
+import jax
+import jax.numpy as jnp
+
+# 1. Enable persistent XLA compilation cache in GCS
+jax.config.update("jax_compilation_cache_dir", "gs://my-tpu-artifacts/xla_cache")
+jax.config.update("jax_persistent_cache_min_entry_size_bytes", 0)
+
+# 2. Capture TPU step profile to TensorBoard / Perfetto
+with jax.profiler.trace("gs://my-tpu-artifacts/profiler_traces"):
+    x = jnp.ones((4096, 4096), dtype=jnp.bfloat16)
+    y = jnp.dot(x, x).block_until_ready()
+```
+*Cites: [A Developer's Guide to Debugging JAX on Cloud TPUs: Essential Tools and Techniques](./references/articles.md)*
 
 ---
 

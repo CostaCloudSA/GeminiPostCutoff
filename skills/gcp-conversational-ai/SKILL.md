@@ -89,7 +89,7 @@ async def connect_voice_agent(bearer_token: str):
         # 1. Send Session Setup Message
         setup_payload = {
             "setup": {
-                "model": "projects/my-gcp-project/locations/us-central1/publishers/google/models/gemini-2.5-flash-native-audio",
+                "model": "projects/my-gcp-project/locations/us-central1/publishers/google/models/gemini-live-native-audio",
                 "generation_config": {
                     "response_modalities": ["AUDIO"],
                     "speech_config": {
@@ -145,6 +145,7 @@ async def connect_voice_agent(bearer_token: str):
 ### Blueprint 2: BigQuery Conversational Analytics from ADK Tools [07.26, 02.26]
 Allow conversational agents to query enterprise datasets safely without generating vulnerable SQL:
 ```python
+import os
 from google.cloud import bigquery_dataplex_v1
 from google.adk import Agent, Tool
 
@@ -171,7 +172,7 @@ def query_business_kpis(natural_language_question: str) -> dict:
 
 voice_agent = Agent(
     name="ExecutiveVoiceConcierge",
-    model="gemini-2.5-flash",
+    model=os.getenv("CONVERSATIONAL_AGENT_MODEL", "gemini-4-argon"),
     instruction="Answer executive revenue queries using query_business_kpis.",
     tools=[query_business_kpis]
 )

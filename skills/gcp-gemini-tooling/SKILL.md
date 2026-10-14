@@ -57,6 +57,12 @@ Activate this skill whenever:
 > - **Solution**: Define specialized subagents with strictly scoped system prompts and minimal tool permissions (e.g. read-only researcher vs test runner).
 > *Cites: [Subagents have arrived in Gemini CLI](./references/articles.md) and [Google Just Shipped 13 Agent Skills. I Plugged Them Into Gemini CLI and Watched Code Quality Jump](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 7: Natural-Language Prompt Begging for JSON Instead of Enforced Response Schemas [04.25, 08.26]**
+> Appending "Please return ONLY valid JSON, do not include markdown backticks" to prompts fails under edge-case inputs and breaks downstream parsers in CI/CD automation.
+> - **Mandatory Standard**: Always pass `response_mime_type="application/json"` and a typed `response_schema` (Pydantic / JSON Schema) in `GenerateContentConfig`.
+> *Cites: [Structured Output with Gemini Models: Begging, Threatening, and JSON-ing](./references/articles.md) and [Eval-Driven Development for Agent Skills (Firebase Blog)](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -78,6 +84,17 @@ Activate this skill whenever:
 | `google_project_iam_member` | Single role + Single principal | Additive only; preserves all other members | **Safe (Standard)** |
 | `google_project_iam_binding` | Single role + Member list | Overwrites ALL members for that specific role | **Dangerous (High Risk)** |
 | `google_project_iam_policy` | Entire project IAM policy | Overwrites ALL roles and members across project | **Catastrophic (Avoid)** |
+
+---
+
+### 3. Antigravity & Gemini CLI Customization Primitive Selection Matrix [04.26, 06.26]
+| Customization Primitive | Activation Trigger | Execution Scope | Ideal Use Case |
+| :--- | :--- | :--- | :--- |
+| **Global/Workspace Rules (`GEMINI.md` / `AGENTS.md`)** | Always active on every turn | System-wide behavioral guardrails | Enforcing 100% advisory mode, model confirmation gates, formatting standards |
+| **Domain Skills (`skills/<domain>/SKILL.md`)** | Progressive on-demand discovery | Loaded only when domain matches | Deep technical runbooks, Terraform/Python blueprints, domain anti-patterns |
+| **Lifecycle Hooks (`hooks.json`)** | Deterministic pre/post tool execution | Local shell command callback | Running `terraform fmt`, `ruff check`, or command safety auditing |
+| **Scoped Subagents (`subagents.json`)** | Explicit delegation (`invoke_subagent`) | Isolated context window & toolset | Parallel codebase research, isolated unit test generation, security verification |
+*Cites: [Deep Dive: Antigravity Agent Skills](./references/articles.md), [Subagents have arrived in Gemini CLI](./references/articles.md), and [Tailor Gemini CLI to your workflow with hooks](./references/articles.md)*
 
 ---
 
@@ -115,11 +132,11 @@ resource "google_service_account_iam_member" "wif_binding" {
   member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_pool.name}/attribute.repository/my-org/my-repo"
 }
 ```
-*Cites: [How to Remove Service Account Keys from GitHub Actions in 2026](./references/articles.md) and [The only Terraform pipeline you will ever need](./references/articles.md)*
+*Cites: [How to Remove Service Account Keys from GitHub Actions, GitLab, and Terraform in Google Cloud in 2026](./references/articles.md) and [The only Terraform pipeline you will ever need](./references/articles.md)*
 
 ---
 
-### Blueprint 2: FastMCP Server Integration for Developer Tools [09.25, 06.26]
+### Blueprint 2: FastMCP Server Integration for Developer Tools [09.25, 02.26]
 Build a lightweight, type-safe MCP server exposing GCP diagnostics to Gemini CLI and Antigravity:
 ```python
 from fastmcp import FastMCP
@@ -140,7 +157,7 @@ def search_recent_errors(project_id: str, limit: int = 10) -> list[str]:
 if __name__ == "__main__":
     mcp.run()
 ```
-*Cites: [Gemini CLI 🤝 FastMCP: Simplifying MCP server development](./references/articles.md) and [Troubleshooting Google Cloud with Cloud Logging MCP](./references/articles.md)*
+*Cites: [Gemini CLI 🤝 FastMCP: Simplifying MCP server development](./references/articles.md) and [Troubleshooting Google Cloud with Google Cloud Logging and Developer Knowledge MCP Servers](./references/articles.md)*
 
 ---
 
@@ -239,7 +256,7 @@ resource "google_cloud_run_v2_service" "orchestrator" {
 ---
 
 ### Blueprint 6: Gemini CLI Subagent Configuration (`subagents.json`) [04.26]
-Define scoped subagents for autonomous codebase exploration:
+Define scoped subagents for autonomous codebase exploration using model inheritance or current-generation models:
 ```json
 {
   "subagents": [
@@ -248,14 +265,14 @@ Define scoped subagents for autonomous codebase exploration:
       "description": "Explores project directories and analyzes architectural patterns",
       "system_prompt": "You are a read-only architecture researcher. Inspect code and return structured summaries without editing files.",
       "tools": ["read_file", "search_files", "grep_code"],
-      "model": "gemini-2.5-flash"
+      "model": "gemini-3.8-flash"
     },
     {
       "name": "test-generator",
       "description": "Generates isolated unit and integration tests for modified components",
       "system_prompt": "You are a specialized test engineer. Generate comprehensive pytest or Jest suites with 100% boundary test coverage.",
       "tools": ["read_file", "write_file", "run_tests"],
-      "model": "gemini-2.5-pro"
+      "model": "gemini-4-argon"
     }
   ]
 }
@@ -264,9 +281,10 @@ Define scoped subagents for autonomous codebase exploration:
 
 ---
 
-### Blueprint 7: Eval-Driven Development (EDD) Skill Test Harness [08.26]
+### Blueprint 7: Eval-Driven Development (EDD) Skill Test Harness [08.26, 04.25]
 Validate that an Antigravity or Gemini CLI skill meets factual and deterministic requirements:
 ```python
+import os
 import pytest
 from google import genai
 from google.genai import types
@@ -277,7 +295,7 @@ def test_skill_deterministic_json():
     """Validates that skill prompt returns conforming structured JSON without natural language begging."""
     prompt = "Review this Terraform file and output severity, resource, and remediation."
     response = client.models.generate_content(
-        model='gemini-2.5-flash',
+        model=os.getenv("EDD_EVAL_MODEL", "gemini-4-argon"),
         contents=prompt,
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
@@ -288,6 +306,38 @@ def test_skill_deterministic_json():
     assert "severity" in response.text
 ```
 *Cites: [Eval-Driven Development for Agent Skills (Firebase Blog)](./references/articles.md) and [Structured Output with Gemini Models: Begging, Threatening, and JSON-ing](./references/articles.md)*
+
+---
+
+### Blueprint 8: Multi-Environment Terraform Stacks Deployment Configuration [08.26, 01.26]
+Structure modular Terraform Stacks across `dev`, `staging`, and `prod` with isolated state and WIF authentication:
+```hcl
+# deployments.tfdeploy.hcl
+identity_token "gcp" {
+  audience = "//iam.googleapis.com/projects/123456789/locations/global/workloadIdentityPools/terraform-stacks-pool/providers/stacks-provider"
+}
+
+deployment "production" {
+  inputs = {
+    project_id      = "enterprise-prod-01"
+    region          = "us-central1"
+    identity_token  = identity_token.gcp.jwt
+    min_instances   = 2
+    enable_armor    = true
+  }
+}
+
+deployment "staging" {
+  inputs = {
+    project_id      = "enterprise-staging-01"
+    region          = "us-central1"
+    identity_token  = identity_token.gcp.jwt
+    min_instances   = 0
+    enable_armor    = true
+  }
+}
+```
+*Cites: [I Turned Three Weeks of gcloud Commands Into Terraform](./references/articles.md) and [The only Terraform pipeline you will ever need](./references/articles.md)*
 
 ---
 

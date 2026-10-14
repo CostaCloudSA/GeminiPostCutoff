@@ -33,7 +33,7 @@ if (-not $FlatSkills) {
     }
     
     Write-Host "✓ Installed successfully as Antigravity Plugin!" -ForegroundColor Green
-    Write-Host "Restart Antigravity or Gemini CLI to activate all 21 domain skills." -ForegroundColor White
+    Write-Host "Restart Antigravity or Gemini CLI to activate all 22 domain skills (plus Master Router)." -ForegroundColor White
 } else {
     # Alternative: Direct Skill Symlinks
     $skillsTargetDir = Join-Path $homeDir ".gemini\config\skills"

@@ -1,15 +1,22 @@
 {
   "name": "gemini-post-cutoff",
-  "version": "1.1.0",
-  "description": "Curated collection of 21 Google Cloud Platform & AI Agent production skills spanning 2025-2026 delta architecture updates.",
+  "version": "2.0.0",
+  "description": "Curated Google Cloud Platform (GCP) & AI Agent architectural skill library and dynamic cutoff-relative review engine for Google Antigravity and Gemini CLI (22 domains, 739+ dated engineering sources).",
+  "bin": {
+    "postcutoff": "./bin/postcutoff.js"
+  },
   "scripts": {
-    "test": "node scripts/audit_skills.js && node scripts/lint_internal_links.js && node scripts/audit_skill_rules.js",
+    "test": "node scripts/audit_skills.js && node scripts/lint_internal_links.js && node scripts/audit_skill_rules.js && node review_engine/tests/run_all_suites.js",
+    "test:deep": "node review_engine/tests/run_all_suites.js",
     "audit:dates": "node scripts/audit_skills.js",
     "audit:links": "node scripts/lint_internal_links.js",
     "audit:rules": "node scripts/audit_skill_rules.js",
     "detect": "node scripts/detect_stack.js",
     "ingest": "node scripts/ingest.js",
-    "audit:external": "node scripts/verify_external_links.js"
+    "audit:external": "node scripts/verify_external_links.js",
+    "audit:provenance": "node review_engine/grounding/verifier.js",
+    "audit:ast": "node review_engine/run_governance_audit.js --clean-check",
+    "review": "node review_engine/run_mesh_review.js --clean-check"
   },
   "keywords": [
     "antigravity",

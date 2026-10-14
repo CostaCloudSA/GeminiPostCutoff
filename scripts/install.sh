@@ -23,7 +23,7 @@ if [ "$FLAT_SKILLS" = false ]; then
     git clone https://github.com/CostaCloudSA/GeminiPostCutoff.git "$PLUGIN_TARGET"
   fi
   echo "✓ Installed successfully as Antigravity Plugin!"
-  echo "Restart Antigravity or Gemini CLI to activate all 21 domain skills."
+  echo "Restart Antigravity or Gemini CLI to activate all 22 domain skills (plus Master Router)."
 else
   SKILLS_TARGET="$HOME_DIR/.gemini/config/skills"
   mkdir -p "$SKILLS_TARGET"

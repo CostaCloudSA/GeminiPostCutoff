@@ -20,7 +20,7 @@ Activate this skill whenever:
 ## 🚫 Critical Anti-Patterns & Architecture Traps
 
 > [!CAUTION]
-> **Anti-Pattern 1: Distributing Long-Lived Service Account JSON Keys [04.26, 01.26]**
+> **Anti-Pattern 1: Distributing Long-Lived Service Account JSON Keys [08.26, 04.26]**
 > Storing downloaded service account keys (`credentials.json`) in CI/CD secrets (GitHub Secrets, GitLab CI) or local developer laptops introduces high-severity exfiltration risks. Once compromised, these keys provide persistent access without expiring.
 > - **Mandatory Standard**: Eliminate service account keys entirely. Enforce the `iam.disableServiceAccountKeyCreation` Organization Policy and authenticate CI/CD pipelines exclusively through **Workload Identity Federation (WIF)** using short-lived OpenID Connect (OIDC) tokens.
 > *Cites: [How to Remove Service Account Keys from GitHub Actions, GitLab, and Terraform in Google Cloud in 2026](./references/articles.md) and [Building a Secure, Serverless CI/CD Pipeline on GCP](./references/articles.md)*

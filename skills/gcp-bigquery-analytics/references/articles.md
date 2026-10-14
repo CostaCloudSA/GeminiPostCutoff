@@ -2,7 +2,7 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-bigquery-analytics`.
 
-Total indexed resources: **27**
+Total indexed resources: **29**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
 - [[08.26 Blogpost]: Zero-code, low-cost data ingestion: New BigQuery DTS capabilities](https://cloud.google.com/blog/products/data-analytics/new-bigquery-data-transfer-service-capabilities)
@@ -20,11 +20,13 @@ Total indexed resources: **27**
 - [[03.26 Blogpost]: So You Think You're a BigQuery Power User](https://blog.querylab.io/so-you-think-youre-a-bigquery-power-user-11e1e2334896)
 - [[02.26 Blogpost]: The A to Z BigQuery Security: A Battle-Tested Guide for Engineers](https://medium.com/google-cloud/comprehensive-bigquery-security-best-practices-958285edc750)
 - [[01.26 Blogpost]: Hacking BigQuery — Explicit table locks](https://medium.com/google-cloud/hacking-bigquery-explicit-table-locks-fce1dcf1d22b)
+- [[01.26 Blogpost]: We save $8k/Year: Why We Picked BigQuery-native Dataform over dbt Cloud](https://medium.com/plus-minus-one/we-save-8k-year-why-we-picked-bigquery-native-dataform-over-dbt-cloud-d90f78632efe)
 - [[01.26 Blogpost]: Introducing BigQuery managed and SQL-native inference for open models](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-managed-and-sql-native-inference-for-open-models/)
 
 ### 📅 2025 Releases & Deep Dives (Chronological)
 - [[12.25 Blogpost]: BigQuery Multi-Project Mesh: Cross-Domain Datasets with Centralized Guardrails](https://medium.com/@2nick2patel2/bigquery-multi-project-mesh-cross-domain-datasets-with-centralized-guardrails-6b4520ab41ec)
 - [[11.25 Blogpost]: Building Dataform Pipelines: A Practical Guide To Materializations](https://medium.com/google-cloud/building-dataform-pipelines-a-practical-guide-to-materializations-8123bc6cbe49)
+- [[11.25 Blogpost]: How We Cut 80% of Redundant SQL Across BigQuery Using DataForm](https://blog.dataengineerthings.org/how-we-cut-80-of-redundant-sql-across-bigquery-using-dataform-practical-guide-38553a5283fe)
 - [[11.25 Blogpost]: How We Designed the Data Infrastructure for One of France's Largest Sports/Sneaker Retailers](https://medium.com/@aiman.zaki/how-we-designed-the-data-infrastructure-for-one-of-frances-largest-sports-sneaker-retailers-7e416d7fd911)
 - [[10.25 Blogpost]: &#9881;&#65039; From Chaos to Clarity: Talking to BigQuery with MCP Toolbox's Magic Tool](https://medium.com/google-cloud/%EF%B8%8F-from-chaos-to-clarity-talking-to-bigquery-with-mcp-toolboxs-magic-tool-0036bcdd3c0c)
 - [[10.25 Blogpost]: 8 BigQuery Tricks from Python](https://medium.com/@Modexa/8-bigquery-tricks-from-python-bc1b427f93c6)

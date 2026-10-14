@@ -1,10 +1,11 @@
 {
   "name": "gemini-post-cutoff",
-  "version": "1.1.0",
-  "description": "Curated collection of 21 Google Cloud Platform & AI Agent production skills spanning 2025-2026 delta architecture updates.",
-  "author": {
-    "name": "CostaCloudSA"
-  },
-  "repository": "https://github.com/CostaCloudSA/GeminiPostCutoff",
-  "license": "Apache-2.0"
+  "displayName": "GeminiPostCutoff — GCP & AI Architecture Runbooks",
+  "version": "2.0.0",
+  "description": "Equips Antigravity with 22 post-cutoff Google Cloud & AI Agent architectural runbooks, 739 dated engineering citations, dynamic model-cutoff triage, and a 100% advisory review gate.",
+  "suggestedPrompts": [
+    "Run a post-cutoff GCP architecture review on this workspace using /plan",
+    "Design a production Vertex AI ADK 1.0 multi-agent system with A2A and Cloud Run",
+    "Audit our GKE, BigQuery, and Pub/Sub manifests for 2025-2026 anti-patterns and cost savings"
+  ]
 }

@@ -84,7 +84,7 @@ async function sync() {
 
   const skillEntries = {
     'gcp-security-compliance': [],
-    'gcp-finops-killswitch': [],
+    'gcp-computefinops': [],
     'gcp-cloud-run': [],
     'gcp-gke-platform': [],
     'gcp-gke-cost': [],
@@ -114,7 +114,7 @@ async function sync() {
       if (h.includes('Sysadmin') || h.includes('Security and Management Basics')) {
         currentSkill = 'gcp-security-compliance';
       } else if (h.includes('Hit the ground running') || h.includes('budgetary considerations')) {
-        currentSkill = 'gcp-finops-killswitch';
+        currentSkill = 'gcp-computefinops';
       } else if (h.includes('Worthwhile AI Reads')) {
         currentSkill = 'gcp-adk-agents';
       } else if (h.includes('Minimal Infrastructure') || h.includes('Infrastructure Basics') || h.includes('Cloud Run Basics') || h.includes('Agent Infrastructure on Cloud Run')) {

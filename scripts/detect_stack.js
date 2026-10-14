@@ -59,8 +59,10 @@ function scanDir(dir, depth = 0) {
           }
           if (content.includes('google_sql_') || content.includes('google_alloydb_')) addDetection('gcp-databases', `${relPath} (Cloud SQL / AlloyDB)`);
           if (content.includes('google_compute_network') || content.includes('google_compute_router')) addDetection('gcp-networking', `${relPath} (VPC / Networking)`);
-          if (content.includes('google_billing_budget') || content.includes('google_monitoring_alert_policy')) addDetection('gcp-finops-killswitch', `${relPath} (Budgets / Alerts)`);
-          if (content.includes('google_iam_workload_identity_pool')) addDetection('gcp-security-compliance', `${relPath} (Workload Identity Federation)`);
+          if (content.includes('google_billing_budget') || content.includes('google_monitoring_alert_policy')) addDetection('gcp-computefinops', `${relPath} (Budgets / Alerts)`);
+          if (content.includes('google_iam_workload_identity_pool') || content.includes('google_model_armor_')) addDetection('gcp-security-compliance', `${relPath} (Workload Identity / Model Armor)`);
+          if (content.includes('google_pubsub_') || content.includes('google_managed_kafka_') || content.includes('google_eventarc_')) addDetection('gcp-pubsub', `${relPath} (Pub/Sub / Eventarc / Managed Kafka)`);
+          if (content.includes('google_bigquery_data_transfer_config') || content.includes('google_storage_transfer_job') || content.includes('google_database_migration_service_')) addDetection('gcp-migrations', `${relPath} (Cloud / Data Warehouse Migration)`);
         } catch (e) {}
       }
 
@@ -69,11 +71,12 @@ function scanDir(dir, depth = 0) {
         addDetection('gcp-cloud-run', `${relPath} (Containerized Service)`);
       }
 
-      // 3. Application Dependencies
+      // 3. Application Dependencies (Node.js, Python, Go, Java)
       if (entry.name === 'package.json') {
         try {
           const content = fs.readFileSync(fullPath, 'utf8');
           if (content.includes('@google-cloud/bigquery')) addDetection('gcp-bigquery-ai', `${relPath} (@google-cloud/bigquery)`);
+          if (content.includes('@google-cloud/pubsub')) addDetection('gcp-pubsub', `${relPath} (@google-cloud/pubsub)`);
           if (content.includes('@google-cloud/dialogflow') || content.includes('@google/genai')) addDetection('gcp-conversational-ai', `${relPath} (Conversational AI SDK)`);
           if (content.includes('fastmcp') || content.includes('@modelcontextprotocol')) addDetection('gcp-gemini-tooling', `${relPath} (MCP Tooling)`);
         } catch (e) {}
@@ -83,10 +86,28 @@ function scanDir(dir, depth = 0) {
         try {
           const content = fs.readFileSync(fullPath, 'utf8');
           if (content.includes('google-cloud-aiplatform') || content.includes('google-adk')) addDetection('gcp-adk-agents', `${relPath} (ADK / Vertex AI)`);
+          if (content.includes('google-cloud-pubsub')) addDetection('gcp-pubsub', `${relPath} (google-cloud-pubsub)`);
           if (content.includes('litert') || content.includes('mediapipe')) addDetection('gcp-gemini-robotics', `${relPath} (LiteRT / MediaPipe)`);
           if (content.includes('vllm') || content.includes('ray')) addDetection('gcp-gke-inference', `${relPath} (vLLM / Ray Serving)`);
           if (content.includes('jax') || content.includes('gemma')) addDetection('gcp-frontier-emerging', `${relPath} (JAX / Gemma)`);
           if (content.includes('google-cloud-bigquery')) addDetection('gcp-bigquery-ai', `${relPath} (BigQuery Python SDK)`);
+        } catch (e) {}
+      }
+
+      if (entry.name === 'go.mod') {
+        try {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          if (content.includes('google.golang.org/adk') || content.includes('adk-go')) addDetection('gcp-adk-agents', `${relPath} (ADK Go SDK)`);
+          if (content.includes('cloud.google.com/go/pubsub')) addDetection('gcp-pubsub', `${relPath} (Go Pub/Sub SDK)`);
+          if (content.includes('cloud.google.com/go/bigquery')) addDetection('gcp-bigquery-analytics', `${relPath} (Go BigQuery SDK)`);
+        } catch (e) {}
+      }
+
+      if (entry.name === 'pom.xml' || entry.name === 'build.gradle' || entry.name === 'build.gradle.kts') {
+        try {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          if (content.includes('google-adk') || content.includes('com.google.adk')) addDetection('gcp-adk-agents', `${relPath} (ADK Java SDK)`);
+          if (content.includes('google-cloud-pubsub')) addDetection('gcp-pubsub', `${relPath} (Java Pub/Sub SDK)`);
         } catch (e) {}
       }
     }
@@ -115,6 +136,6 @@ if (detectedSkills.size === 0) {
   }
   console.log('\n💡 Recommended Activation Directive:');
   console.log(`Load: [${Array.from(detectedSkills.keys()).join(', ')}]`);
-  console.log(`Preserved Context: ${21 - detectedSkills.size} domain runbooks remain dormant.`);
+  console.log(`Preserved Context: ${Math.max(0, 22 - detectedSkills.size)} domain runbooks remain dormant.`);
 }
 console.log('========================================================\n');

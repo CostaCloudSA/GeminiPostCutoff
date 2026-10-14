@@ -26,7 +26,7 @@ Activate this skill whenever:
 > *Cites: [How We Cut BigQuery Costs by 35% During a Teradata-to-GCP Migration](./references/articles.md) and [This migration from Snowflake to BigQuery accelerated model building and cut costs in half](./references/articles.md)*
 
 > [!CAUTION]
-> **Anti-Pattern 2: Unmanaged S3-to-GCS File Transfers via Ad-Hoc Scripts [10.25]**
+> **Anti-Pattern 2: Unmanaged S3-to-GCS File Transfers via Ad-Hoc Scripts [10.25, 01.25]**
 > Writing bespoke Python or bash scripts to transfer terabytes of data from AWS S3 or Databricks Delta Lake to Google Cloud Storage introduces silent data corruption, lacks automatic checksum validation, and fails to resume on network timeouts.
 > - **Mandatory Standard**: Deploy **Google Cloud Storage Transfer Service (STS)**. STS executes managed, parallelized multi-part transfers directly between cloud object stores with automated CRC32C / MD5 checksum verification and scheduled delta syncs.
 > *Cites: [Migrating Delta Lake Tables to Google Cloud Storage using Storage Transfer Service](./references/articles.md) and [Cloud migrations made easy: a guide to migrating from AWS to Google Cloud](./references/articles.md)*

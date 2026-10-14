@@ -1,4 +1,4 @@
-# gcp-finops-killswitch Historical & Evergreen Archive Vault
+# gcp-computefinops Historical & Evergreen Archive Vault
 
 This archive vault houses foundational, evergreen, and pre-cutoff (<= 2024) publications, official documentation, starter kits, and foundational guides for Google Cloud FinOps, budgets, commitments, and cost optimization.
 

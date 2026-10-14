@@ -196,7 +196,7 @@ def safe_agent_query(sql: str):
             return {"error": "Query aborted: Scans more than 10 GB. Please refine WHERE filters."}
         raise e
 ```
-*Cites: [BigQuery meets ADK: 10 tips to safeguard your data from agents](./references/articles.md)*
+*Cites: [BigQuery meets ADK: 10 tips to safeguard your data (and wallet) from agents](./references/articles.md)*
 
 ---
 

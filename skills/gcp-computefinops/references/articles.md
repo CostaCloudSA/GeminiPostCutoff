@@ -1,6 +1,6 @@
-# gcp-finops-killswitch Reference Knowledge Base & Link Vault
+# gcp-computefinops Reference Knowledge Base & Link Vault
 
-This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-finops-killswitch`.
+This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-computefinops`.
 
 Total indexed resources: **17**
 

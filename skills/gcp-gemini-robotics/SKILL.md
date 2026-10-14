@@ -70,7 +70,7 @@ Activate this skill whenever:
 | **Gemma 3 4B** | 4B Dense | Text / Code | ~2.5GB (INT4) | Apple Silicon, Snapdragon X Elite, WebGPU |
 | **PaliGemma** | 3B VLM | Vision-Language | ~2.1GB (INT4) | Edge camera defect inspection, spatial navigation |
 | **DiffusionGemma** | Multimodal Diffusion | Image / Video Gen | ~12GB (FP16) | Cloud Run serverless GPU inference |
-*Cites: [Fine-Tuning and Deploying Gemma 4 at Scale on GEAP and Cloud Run](./references/articles.md) and [Gemma 4 12B: The Developer Guide](./references/articles.md)*
+*Cites: [Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](./references/articles.md) and [Gemma 4 12B: The Developer Guide](./references/articles.md)*
 
 ---
 
@@ -160,7 +160,7 @@ gcloud run deploy gemma-4-service \
     --timeout 600s \
     --execution-environment gen2
 ```
-*Cites: [Fine-Tuning and Deploying Gemma 4 at Scale on GEAP and Cloud Run](./references/articles.md)*
+*Cites: [Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](./references/articles.md)*
 
 ---
 

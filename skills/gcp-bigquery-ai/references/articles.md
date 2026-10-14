@@ -2,7 +2,7 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-bigquery-ai`.
 
-Total indexed resources: **33**
+Total indexed resources: **34**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
 - [[09.26 Blogpost]: TriLink: A BigQuery AI powered Enterprise Analytics Solution](https://www.kaggle.com/competitions/bigquery-ai-hackathon/writeups/trilink-architecting-the-ai-native-digital-service)
@@ -32,6 +32,7 @@ Total indexed resources: **33**
 - [[11.25 Blogpost]: From interaction to insight: Announcing BigQuery Agent Analytics for the Google ADK](https://cloud.google.com/blog/products/data-analytics/bigquery-agent-analytics-for-google-adk/)
 - [[11.25 Codelab]: AI-Assisted Data Science with BigQuery](https://codelabs.developers.google.com/codelabs/bigquery-data-science-notebooks)
 - [[10.25 Blogpost]: Effortless AI in BigQuery: Meet the New Managed AI Functions](https://cloud.google.com/blog/products/data-analytics/new-managed-ai-functions-in-bigquery/)
+- [[10.25 Blogpost]: Vector SQL in Practice: Embedding Tables, ANN vs. Exact Search](https://blog.stackademic.com/vector-sql-in-practice-embedding-tables-ann-vs-exact-search-d40c0295f1b6)
 - [[09.25 Blogpost]: ADK Agents for BigQuery Series Part 1](https://medium.com/google-cloud/adk-agents-for-bigquery-series-40de8cf4e3ca)
 - [[09.25 Blogpost]: Converse with your data and generate forecasts using BigQuery's new MCP and ADK tools](https://cloud.google.com/blog/products/data-analytics/ai-based-forecasting-and-analytics-in-bigquery-via-mcp-and-adk)
 - [[08.25 Blogpost]: Unifying Your Data Landscape with MCP Toolbox](https://medium.com/google-cloud/one-toolbox-many-sources-unifying-your-data-landscape-with-mcp-toolbox-c28f570eb8e4)

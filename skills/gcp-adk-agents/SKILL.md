@@ -62,6 +62,18 @@ Activate this skill whenever:
 > - **Solution**: Route all external agent requests through **Agent Gateway with Google Model Armor**, applying real-time prompt sanitization and strict token authorization before invoking ADK tools.
 > *Cites: [Securing your agent in Agent Platform with Agent Gateway and Model Armor](./references/articles.md) and [Architecting Secure Enterprise AI Agents with MCP Toolbox](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 7: Eager Top-Level SDK Imports Causing 24-Second Serverless Cold Starts [10.25]**
+> Importing heavy optional tool dependencies (e.g., Vertex AI matching engine, BigQuery clients, all MCP toolboxes) at module import time in Python ADK agents inflates Cloud Run / Agent Engine cold starts beyond 20 seconds.
+> - **Solution**: Use lazy tool initialization and deferred module imports inside ADK tool factories to slash cold-start latency by >50%.
+> *Cites: [Hacking ADK's Importer: How We Slashed 24-Second Cold Start in Half](./references/articles.md)*
+
+> [!WARNING]
+> **Anti-Pattern 8: Uncoordinated Multi-Agent Fan-Out Triggering Vertex AI HTTP 429 Quota Storms [03.26]**
+> Parallel sub-agents simultaneously bursting requests to a single regional Vertex AI endpoint without global rate coordination or cross-region fallback exhausts per-minute token quotas (`RESOURCE_EXHAUSTED` / HTTP 429).
+> - **Solution**: Enable **Global Endpoint routing** or **Provisioned Throughput** with token-bucket backoff middleware and multi-region fallback across `us-central1`, `us-east5`, and `europe-west4`.
+> *Cites: [Build Resilient LLM Applications on Vertex AI and Reduce 429 Errors](./references/articles.md) and [Five techniques to reach the efficient frontier of LLM inference](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -87,18 +99,32 @@ Activate this skill whenever:
 
 ---
 
+### 3. ADK Multi-Language Runtime Selection Matrix [03.26, 06.26]
+| Runtime SDK | Memory Footprint | Cold Start (Cloud Run) | Primary Ecosystem Strengths | Target Workload Profile |
+| :--- | :--- | :--- | :--- | :--- |
+| **ADK Python (`google-adk 2.0`)** | ~180–320 MB | 1.8s – 4.5s (lazy imports) | Rich GenAI/data science libraries, FastMCP, DeepEval | Rapid prototyping, data engineering agents, complex workflow orchestration |
+| **ADK Go (`adk-go 1.0`)** | ~25–45 MB | < 350ms (static binary) | High-concurrency goroutines, tiny container images, native gRPC | High-QPS A2A routers, SRE log auditors, edge/serverless gateways |
+| **ADK Java (`adk-java 1.0.0`)** | ~250–512 MB (GraalVM: ~65 MB) | 0.8s (CRaC / GraalVM) | Spring Boot integration, enterprise JDBC/Kafka/ERP connectors | Regulated banking/insurance backends, legacy enterprise modernization |
+*Cites: [google-adk 2.0 Is Now Stable](./references/articles.md), [ADK Go 1.0 Arrives!](./references/articles.md), and [Announcing ADK for Java 1.0.0](./references/articles.md)*
+
+---
+
 ## 🛠️ Production Blueprints
 
 ### Blueprint 1: Production ADK 2.0 Multi-Agent Workflow with Tool Approvals [06.26]
-Define a multi-agent system with human-in-the-loop tool approval and fallback retries:
+Define a multi-agent system with human-in-the-loop tool approval, fallback retries, and environment-parameterized model selection (zero hardcoded legacy model strings):
 ```python
+import os
 from google.adk import Agent, Tool, Runner
 from google.adk.workflows import SequentialWorkflow, FallbackRetry
+
+WORKER_MODEL = os.getenv("ADK_WORKER_MODEL", "gemini-3.8-flash")
+SUPERVISOR_MODEL = os.getenv("ADK_SUPERVISOR_MODEL", "gemini-4-argon")
 
 # 1. Specialized Worker Agent
 sql_analyst = Agent(
     name="SQLAnalyst",
-    model="gemini-2.5-flash",
+    model=WORKER_MODEL,
     instruction="Translate business questions into BigQuery SQL queries.",
     tools=[Tool.from_mcp("bigquery_mcp")]
 )
@@ -106,7 +132,7 @@ sql_analyst = Agent(
 # 2. Executive Coordinator with Tool Confirmation
 coordinator = Agent(
     name="Supervisor",
-    model="gemini-2.5-pro",
+    model=SUPERVISOR_MODEL,
     instruction="Coordinate user requests and seek approval before executing mutating actions.",
     sub_agents=[sql_analyst]
 )
@@ -128,12 +154,13 @@ runner = Runner(workflow=workflow)
 ### Blueprint 2: A2A Protocol Decentralized Agent Server [06.26, 01.26]
 Expose an agent as an interoperable service using the official A2A JSON-RPC protocol:
 ```python
+import os
 from google.adk import Agent
 from google.adk.protocols.a2a import A2AServer
 
 data_engineering_agent = Agent(
     name="BigQueryDataEngineer",
-    model="gemini-2.5-pro",
+    model=os.getenv("ADK_AGENT_MODEL", "gemini-4-argon"),
     instruction="Execute data pipeline operations and table schema migrations."
 )
 
@@ -155,11 +182,12 @@ if __name__ == "__main__":
 ### Blueprint 3: A2UI Declarative Dynamic UI Streaming [05.26, 03.26]
 Stream interactive structured UI components directly to client web applications:
 ```python
+import os
 from google.adk import Agent, a2ui
 
 agent = Agent(
     name="FinancialAdvisor",
-    model="gemini-2.5-pro",
+    model=os.getenv("ADK_AGENT_MODEL", "gemini-4-argon"),
     instruction="Provide spending analysis and stream UI charts directly to the user interface."
 )
 
@@ -173,13 +201,15 @@ def render_budget_chart(categories: list[str], amounts: list[float]) -> a2ui.Wid
         action_button=a2ui.Button(label="Download CSV", action_id="export_budget")
     )
 ```
-*Cites: [Developer's guide to Gemini Enterprise and A2UI integration](./references/articles.md) and [Agent to UI Protocol (A2UI) with ADK](./references/articles.md)*
+*Cites: [Developer's guide to Gemini Enterprise and A2UI integration](./references/articles.md) and [Agent to UI Protocol (A2UI) with Agent Development Kit (ADK)](./references/articles.md)*
 
 ---
 
 ### Blueprint 4: Zero-Trust Agent Security with SPIFFE & Model Armor [09.26, 06.26]
 Wrap agent execution with SPIFFE workload identity and Model Armor prompt validation:
 ```python
+import os
+from google.adk import Agent
 from google.adk.security import SpiffeIdentity, ModelArmorGuardrail
 
 # Configure SPIFFE Agent Identity
@@ -196,7 +226,7 @@ guardrail = ModelArmorGuardrail(
 
 secure_agent = Agent(
     name="SecureBillingAgent",
-    model="gemini-2.5-pro",
+    model=os.getenv("ADK_AGENT_MODEL", "gemini-4-argon"),
     identity=agent_identity,
     guardrails=[guardrail]
 )
@@ -208,6 +238,8 @@ secure_agent = Agent(
 ### Blueprint 5: Long-Term Memory Bank with Firestore [03.26, 11.25]
 Equip an agent with semantic and episodic memory that persists across independent user sessions:
 ```python
+import os
+from google.adk import Agent
 from google.adk.memory import MemoryBank, FirestoreMemoryStore
 
 memory_store = FirestoreMemoryStore(
@@ -223,7 +255,7 @@ memory_bank = MemoryBank(
 
 agent = Agent(
     name="PersonalAssistant",
-    model="gemini-2.5-pro",
+    model=os.getenv("ADK_AGENT_MODEL", "gemini-4-argon"),
     memory=memory_bank,
     instruction="Recall user preferences and previous project decisions during reasoning."
 )
@@ -241,6 +273,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/google/adk-go/adk"
 	"github.com/google/adk-go/protocols/a2a"
@@ -248,10 +281,14 @@ import (
 
 func main() {
 	ctx := context.Background()
+	model := os.Getenv("ADK_GO_MODEL")
+	if model == "" {
+		model = "gemini-3.8-flash"
+	}
 
 	agent, err := adk.NewAgent(ctx, adk.AgentConfig{
 		Name:        "GoLogAuditor",
-		Model:       "gemini-2.5-flash",
+		Model:       model,
 		Instruction: "High-throughput log auditing and anomaly detection.",
 	})
 	if err != nil {
@@ -265,6 +302,63 @@ func main() {
 }
 ```
 *Cites: [ADK Go 1.0 Arrives!](./references/articles.md)*
+
+---
+
+### Blueprint 7: ADK for Java 1.0.0 Enterprise Agent Service [03.26]
+Integrate typed Java enterprise backends with Google ADK for Java 1.0.0:
+```java
+package com.enterprise.agents;
+
+import com.google.adk.Agent;
+import com.google.adk.AgentConfig;
+import com.google.adk.Runner;
+
+public class OrderFulfillmentAgent {
+    public static void main(String[] args) {
+        String modelId = System.getenv().getOrDefault("ADK_JAVA_MODEL", "gemini-4-argon");
+
+        Agent fulfillmentAgent = Agent.builder()
+            .name("OrderFulfillmentSpecialist")
+            .model(modelId)
+            .instruction("Validate enterprise ERP inventory and schedule regional warehouse dispatches.")
+            .build();
+
+        Runner runner = Runner.create(fulfillmentAgent);
+        System.out.println("Initialized ADK Java 1.0.0 Agent: " + fulfillmentAgent.name());
+    }
+}
+```
+*Cites: [Announcing ADK for Java 1.0.0](./references/articles.md)*
+
+---
+
+### Blueprint 8: Multi-Turn Agent Telemetry & Evaluation with BigQuery Agent Analytics Plugin [01.26, 05.26]
+Stream every turn, tool call latency, and token attribution directly to BigQuery for continuous evaluation:
+```python
+import os
+from google.adk import Agent, Runner
+from google.adk.plugins.bigquery_analytics import BigQueryAgentAnalyticsPlugin
+
+bq_telemetry = BigQueryAgentAnalyticsPlugin(
+    project_id="my-gcp-project",
+    dataset_id="agent_observability",
+    table_id="adk_execution_traces",
+    flush_interval_seconds=5
+)
+
+auditor_agent = Agent(
+    name="FinOpsAuditor",
+    model=os.getenv("ADK_AGENT_MODEL", "gemini-4-argon"),
+    instruction="Analyze cloud billing exports and flag unallocated GKE and BigQuery spend."
+)
+
+runner = Runner(
+    agent=auditor_agent,
+    plugins=[bq_telemetry]
+)
+```
+*Cites: [Analyze ADK Agent execution with the BigQuery Agent Analytics Plugin](./references/articles.md) and [Tutorial Series : Gemini Enterprise Agent Platform — Part 5 : Observability and Evaluation](./references/articles.md)*
 
 ---
 

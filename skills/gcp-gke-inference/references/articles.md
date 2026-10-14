@@ -2,7 +2,7 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gke-inference`.
 
-Total indexed resources: **18**
+Total indexed resources: **20**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
 - [[07.26 Blogpost]: Securing the AI supply chain on GKE: Introducing k8s-aibom for automated AI BOMs](https://cloud.google.com/blog/products/identity-security/introducing-k8s-aibom-on-gke-for-automated-ai-bills-of-materials/)
@@ -15,6 +15,7 @@ Total indexed resources: **18**
 - [[04.26 Blogpost]: What's new in GKE at Next '26](https://cloud.google.com/blog/products/containers-kubernetes/whats-new-in-gke-at-next26/)
 - [[03.26 Blogpost]: How to Deploy LLM Inference on GKE — The Parts Tutorials Skip](https://medium.com/google-cloud/how-to-deploy-llm-inference-on-gke-the-parts-tutorials-skip-9ee0b924e45d)
 - [[03.26 Blogpost]: Inference on GKE Private Clusters](https://medium.com/google-cloud/inference-on-gke-private-clusters-70a23cc9c315)
+- [[03.26 Blogpost]: Introducing multi-cluster GKE Inference Gateway: Scale AI workloads around the world](https://cloud.google.com/blog/products/containers-kubernetes/multi-cluster-gke-inference-gateway-helps-scale-ai-workloads/)
 - [[02.26 Blogpost]: How we cut Vertex AI latency by 35% with GKE Inference Gateway](https://cloud.google.com/blog/products/containers-kubernetes/how-gke-inference-gateway-improved-latency-for-vertex-ai/)
 
 ### 📅 2025 Releases & Deep Dives (Chronological)
@@ -22,6 +23,7 @@ Total indexed resources: **18**
 - [[11.25 Blogpost]: A more native experience for Cloud TPUs with Ray on GKE](https://cloud.google.com/blog/products/containers-kubernetes/ray-on-tpus-with-gke-a-more-native-experience/)
 - [[11.25 Blogpost]: GKE: From containers to agents, the unified platform for every modern workload](https://cloud.google.com/blog/products/containers-kubernetes/gke-and-kubernetes-at-kubecon-2025/)
 - [[11.25 Blogpost]: Introducing Agent Sandbox: Strong guardrails for agentic AI on Kubernetes and GKE](https://cloud.google.com/blog/products/containers-kubernetes/agentic-ai-on-kubernetes-and-gke/)
+- [[10.25 Blogpost]: Body-Based Routing with GKE Inference Gateway](https://medium.com/google-cloud/intelligent-ai-workloads-body-based-routing-with-gke-inference-gateway-and-internal-load-balancing-55630bdea165)
 - [[09.25 Blogpost]: Practical Guide to Kueue and Custom Compute Classes](https://medium.com/google-cloud/practical-guide-to-kueue-and-custom-compute-classes-85a3fe287487)
 - [[08.25 Blogpost]: Supercharge your AI: GKE inference reference architecture](https://cloud.google.com/blog/topics/developers-practitioners/supercharge-your-ai-gke-inference-reference-architecture-your-blueprint-for-production-ready-inference/)
 - [[07.25 Blogpost]: Implementing High-Performance LLM Serving on GKE](https://cloud.google.com/blog/topics/developers-practitioners/implementing-high-performance-llm-serving-on-gke-an-inference-gateway-walkthrough/)

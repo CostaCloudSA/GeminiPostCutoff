@@ -1,11 +1,11 @@
 ---
-name: gcp-finops-killswitch
+name: gcp-computefinops
 description: >-
-  Use this skill for GCP FinOps, automated Cloud Monitoring kill switches,
-  budget alerts, spend-based CUDs, Gemini API cost tracking, and Flex-start VMs.
+  Use this skill for GCP Compute FinOps, compute right-sizing, reservation crossover,
+  spend-based CUDs, Gemini API cost tracking, Flex-start VMs, and automated budget protection.
 ---
 
-# GCP FinOps, Budget Automation & Cloud Kill Switch Runbook
+# GCP Compute FinOps & Cost Optimization Runbook
 
 ## 🎯 Domain Scope & Activation Triggers
 Activate this skill whenever:
@@ -190,6 +190,7 @@ def stop_billing_on_budget_exceeded(event, context):
 ### Blueprint 4: Cost-Attributed Gemini API Invocations with Request Labels [03.26, 12.25]
 Attribute Gemini API token consumption to departmental cost centers for accurate billing analysis:
 ```python
+import os
 from google import genai
 from google.genai import types
 
@@ -198,7 +199,7 @@ client = genai.Client()
 def generate_cost_tracked_insight(prompt: str, cost_center: str, environment: str) -> str:
     """Invokes Gemini with labels to facilitate granular FinOps BigQuery billing export."""
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model=os.getenv("GEMINI_FINOPS_MODEL", "gemini-3.8-flash"),
         contents=prompt,
         config=types.GenerateContentConfig(
             temperature=0.2,

@@ -47,13 +47,13 @@ for (const skill of skills) {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
-      if (line.startsWith('### 🌟 2026')) {
+      if (line.startsWith('### 🌟 2026') || line.startsWith('## 🚀 2026')) {
         currentYearSection = 2026;
         lastDateKey = 202612;
-      } else if (line.startsWith('### 📅 2025')) {
+      } else if (line.startsWith('### 📅 2025') || line.startsWith('## ⚡ 2025')) {
         currentYearSection = 2025;
         lastDateKey = 202512;
-      } else if (line.startsWith('### 🏛️ 2024')) {
+      } else if (line.startsWith('### 🏛️ 2024') || line.startsWith('### 💎')) {
         currentYearSection = 2024;
         lastDateKey = 202412;
       } else if (line.startsWith('### 🛠️') || line.startsWith('### 🐙') || line.startsWith('### 📖')) {

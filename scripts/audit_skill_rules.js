@@ -11,8 +11,9 @@ const batches = {
   'Batch A': ['gcp-bigquery-cost', 'gcp-bigquery-analytics', 'gcp-bigquery-ai', 'gcp-databases'],
   'Batch B': ['gcp-cloud-run', 'gcp-gke-platform', 'gcp-gke-inference', 'gcp-gke-cost'],
   'Batch C': ['gcp-adk-agents', 'gcp-conversational-ai', 'gcp-gemini-tooling', 'gcp-frontier-emerging'],
-  'Batch D': ['gcp-finops-killswitch', 'gcp-security-compliance', 'gcp-networking', 'gcp-migrations'],
-  'Batch E': ['gcp-gemini-robotics', 'gcp-geospatial', 'gcp-android-xr', 'gcp-generative-media']
+  'Batch D': ['gcp-computefinops', 'gcp-security-compliance', 'gcp-networking', 'gcp-migrations'],
+  'Batch E': ['gcp-gemini-robotics', 'gcp-geospatial', 'gcp-android-xr', 'gcp-generative-media'],
+  'Batch F': ['gcp-pubsub', 'gcp-architecture-review']
 };
 
 const requiredSections = [
@@ -60,19 +61,19 @@ function auditSkill(skillName) {
     report.activeArticlesCount = matches ? matches.length : 0;
   }
 
-  // Determine Quota Tier
+  // Determine Minimum Floor Tier (Uncapped upper bounds)
   if (report.activeArticlesCount > 40) {
-    report.tier = 'Large (>40)';
+    report.tier = 'Large (>40, Uncapped)';
     report.reqAntiPatterns = 6;
     report.reqDecisionMatrices = 2;
     report.reqBlueprints = 6;
   } else if (report.activeArticlesCount >= 16) {
-    report.tier = 'Medium (16-40)';
+    report.tier = 'Medium (16-40, Uncapped)';
     report.reqAntiPatterns = 5;
     report.reqDecisionMatrices = 2;
     report.reqBlueprints = 5;
   } else {
-    report.tier = 'Small (<=15)';
+    report.tier = 'Small (<=15, Uncapped)';
     report.reqAntiPatterns = 4;
     report.reqDecisionMatrices = 2;
     report.reqBlueprints = 4;
@@ -94,7 +95,7 @@ function auditSkill(skillName) {
     report.failures.push(`Missing mandatory sections: ${report.missingSections.join(', ')}`);
   }
 
-  // Count Anti-Patterns
+  // Count Anti-Patterns (Minimum floor only; no upper cap)
   const antiMatches = content.match(/\*\*Anti-Pattern\s+\d+:/gi);
   report.antiPatternsCount = antiMatches ? antiMatches.length : 0;
   if (report.antiPatternsCount < report.reqAntiPatterns) {
@@ -102,7 +103,7 @@ function auditSkill(skillName) {
     report.failures.push(`Anti-Patterns: ${report.antiPatternsCount} found, minimum ${report.reqAntiPatterns} required`);
   }
 
-  // Count Decision Matrices
+  // Count Decision Matrices (Minimum floor only; no upper cap)
   const matrixMatches = content.match(/\| :--- \| :--- \|/g);
   report.decisionMatricesCount = matrixMatches ? matrixMatches.length : 0;
   if (report.decisionMatricesCount < report.reqDecisionMatrices) {
@@ -110,7 +111,7 @@ function auditSkill(skillName) {
     report.failures.push(`Decision Matrices: ${report.decisionMatricesCount} tables found, minimum ${report.reqDecisionMatrices} required`);
   }
 
-  // Count Blueprints
+  // Count Blueprints (Minimum floor only; no upper cap)
   const bpMatches = content.match(/### Blueprint \d+:/gi);
   report.blueprintsCount = bpMatches ? bpMatches.length : 0;
   if (report.blueprintsCount < report.reqBlueprints) {
@@ -118,12 +119,23 @@ function auditSkill(skillName) {
     report.failures.push(`Blueprints: ${report.blueprintsCount} found, minimum ${report.reqBlueprints} required`);
   }
 
-  // Check Citations
-  const citeMatches = content.match(/\*Cites:\s*\[[^\]]+\]\(\.\/references\/articles\.md\)/gi);
+  // Check Citations (both articles.md and archive.md relative links supported)
+  const citeMatches = content.match(/\*Cites:\s*\[[^\]]+\]\(\.\/references\/(?:articles|archive)\.md\)/gi);
   report.citationsCount = citeMatches ? citeMatches.length : 0;
   if (report.citationsCount < (report.antiPatternsCount + report.blueprintsCount)) {
     report.passed = false;
     report.failures.push(`Citations: ${report.citationsCount} found, expected citations for every anti-pattern and blueprint`);
+  }
+
+  // Check for deprecated pre-2026 model identifiers inside code blocks
+  const codeBlockRegex = /```[\s\S]*?```/g;
+  const codeBlocks = content.match(codeBlockRegex) || [];
+  for (const block of codeBlocks) {
+    if (/gemini-2\.5-(?:flash|pro)|gemini-1\.5-(?:flash|pro)/i.test(block)) {
+      report.passed = false;
+      report.failures.push('Deprecated model identifier (gemini-2.5-* or gemini-1.5-*) found inside production blueprint code block');
+      break;
+    }
   }
 
   // Check Archive Vault Presence
@@ -136,7 +148,7 @@ function auditSkill(skillName) {
 }
 
 console.log('======================================================================');
-console.log('AUDITING GCP SKILLS AGAINST SKILL_STANDARD.MD SPECIFICATION');
+console.log('AUDITING GCP SKILLS AGAINST SKILL_STANDARD.MD SPECIFICATION (22 SKILLS)');
 console.log('======================================================================\n');
 
 let totalAudited = 0;
@@ -167,7 +179,7 @@ for (const [batchName, skills] of Object.entries(batches)) {
 
 console.log(`Audited: ${totalAudited}, Passed: ${totalPassed}`);
 if (totalPassed === totalAudited) {
-  console.log('✓ All 20 skills fully satisfy SKILL_STANDARD.md quotas!\n');
+  console.log(`✓ All ${totalAudited} skills fully satisfy SKILL_STANDARD.md minimum floors and zero-legacy-model rules!\n`);
 } else {
   process.exit(1);
 }

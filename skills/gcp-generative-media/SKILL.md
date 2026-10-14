@@ -188,6 +188,7 @@ print(f"Asset generated successfully with SynthID watermark: {len(response.gener
 ### Blueprint 5: Multimodal Video Physics & Motion Trajectory Analysis [02.26]
 Analyze athlete motion dynamics, trajectory angles, and velocity curves from video frames:
 ```python
+import os
 from google import genai
 from google.genai import types
 
@@ -196,7 +197,7 @@ client = genai.Client()
 video_file = client.files.upload(file="snowboard_halfpipe_jump.mp4")
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model=os.getenv("MULTIMODAL_ANALYSIS_MODEL", "gemini-4-argon"),
     contents=[
         video_file,
         (

@@ -22,7 +22,7 @@ Activate this skill whenever:
 ## 🚫 Critical Anti-Patterns & Architecture Traps
 
 > [!CAUTION]
-> **Anti-Pattern 1: Third-Party Orchestrator SaaS Tax (dbt Cloud) [01.26]**
+> **Anti-Pattern 1: Third-Party Orchestrator SaaS Tax (dbt Cloud) [01.26, 11.25]**
 > Paying for external transformation SaaS (dbt Cloud, external compute workers) adds $8k–$25k/yr in redundant licensing, extra VPC network egress fees, and fragile external API tokens.
 > - **Solution**: Use **BigQuery-Native Dataform** (`definitions/`, `includes/`, assertions, incremental models). Dataform runs transformations natively inside BigQuery slot capacity with zero egress and native Cloud IAM.
 > *Cites: [We save $8k/Year: Why We Picked BigQuery-native Dataform over dbt Cloud](./references/articles.md) and [How We Cut 80% of Redundant SQL Across BigQuery Using DataForm](./references/articles.md)*
