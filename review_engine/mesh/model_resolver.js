@@ -1,11 +1,14 @@
 /**
  * Dynamic Model & Cutoff-Relative Tier Resolver
- * Part of GeminiPostCutoff Architecture Review Engine (v2.0)
+ * Part of GeminiPostCutoff Architecture Review Engine (v2.1)
  *
  * Eliminates hardcoded default models and static markdown tier dependencies.
  * Differentiates between:
  *  - Newest generation models (e.g., Gemini 4 Argon or future models via --cutoff)
  *  - Older generation models (e.g., Gemini 3.8 Flash, Gemini 3.1 Pro)
+ *  - Oldest Active Model (--model oldest-active): dynamically selects the earliest
+ *    non-deprecated model in config/model_cutoffs.json (currently gemini-3.1-pro)
+ *    and automatically shifts forward when older models are marked deprecated.
  *  - Unverified / Unspecified models (Fail-Safe Earliest Active Horizon)
  *
  * Computes Dynamic Cutoff-Relative Tiers using month delta math:
@@ -26,7 +29,7 @@ class ModelCutoffResolver {
       return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
     }
     return {
-      version: '2.0.0',
+      version: '2.1.0',
       unverified_failsafe: {
         policy: 'CONSERVATIVE_EARLIEST_ACTIVE_HORIZON',
         effective_cutoff: '2025-01',
@@ -35,6 +38,46 @@ class ModelCutoffResolver {
       },
       models: {}
     };
+  }
+
+  /**
+   * Dynamically resolves the oldest active (non-deprecated) model in config/model_cutoffs.json.
+   * Currently resolves to gemini-3.1-pro (2025-01). Automatically advances to the next
+   * earliest active model when older models are marked lifecycle: "deprecated" or deprecated: true.
+   */
+  static resolveOldestActiveModel() {
+    const config = this.loadConfig();
+    const models = config.models || {};
+    const activeEntries = Object.entries(models)
+      .filter(([_, entry]) => entry.deprecated !== true && entry.lifecycle !== 'deprecated')
+      .sort((a, b) => a[1].cutoff_sort_key - b[1].cutoff_sort_key);
+
+    if (activeEntries.length > 0) {
+      const [oldestKey, oldestEntry] = activeEntries[0];
+      const cutoffSortKey = oldestEntry.cutoff_sort_key;
+      const officialCutoff = oldestEntry.official_cutoff;
+      const postCutoffStart = this.getPostCutoffStartMMYY(cutoffSortKey);
+      const isNewest = oldestEntry.generation_status === 'newest';
+
+      return {
+        id: oldestKey,
+        requested_model: 'oldest-active',
+        display_name: oldestEntry.display_name,
+        generation: oldestEntry.generation || 'Gemini',
+        generation_status: oldestEntry.generation_status || 'older',
+        official_cutoff: officialCutoff,
+        cutoff_sort_key: cutoffSortKey,
+        post_cutoff_start: postCutoffStart,
+        is_verified: true,
+        is_newest_generation: isNewest,
+        is_oldest_active_model: true,
+        active_model_pool_size: activeEntries.length,
+        inject_boundary_tier_by_default: !isNewest && cutoffSortKey <= 202501,
+        label: `${officialCutoff} (${oldestEntry.display_name} — OLDEST ACTIVE MODEL) [Dynamic Tier 1: >= ${postCutoffStart}]`
+      };
+    }
+
+    return this.resolve({});
   }
 
   /**
@@ -189,8 +232,14 @@ class ModelCutoffResolver {
       rawCutoff = input.cutoff || input.targetCutoff || process.env.GEMINI_CUTOFF || null;
     }
 
-    if (rawModel && (rawModel === 'unverified' || rawModel === 'auto' || rawModel === 'failsafe')) {
-      rawModel = null;
+    if (rawModel) {
+      const lower = rawModel.toLowerCase().trim();
+      if (lower === 'oldest-active' || lower === 'oldest_active' || lower === 'oldest') {
+        return this.resolveOldestActiveModel();
+      }
+      if (lower === 'unverified' || lower === 'auto' || lower === 'failsafe') {
+        rawModel = null;
+      }
     }
 
     const explicitCutoff = this.parseCutoffDate(rawCutoff);
@@ -217,6 +266,8 @@ class ModelCutoffResolver {
             display_name: entry.display_name,
             generation: entry.generation || 'Gemini',
             generation_status: entry.generation_status || 'older',
+            lifecycle: entry.lifecycle || (entry.deprecated ? 'deprecated' : 'active'),
+            deprecated: Boolean(entry.deprecated),
             official_cutoff: officialCutoff,
             cutoff_sort_key: cutoffSortKey,
             post_cutoff_start: postCutoffStart,
@@ -241,6 +292,8 @@ class ModelCutoffResolver {
         display_name: rawModel,
         generation: genNum ? `Gemini ${genNum}` : 'Custom/Future Gemini',
         generation_status: isNewestInferred ? 'newest' : 'older',
+        lifecycle: 'active',
+        deprecated: false,
         official_cutoff: cutoffObj.iso,
         cutoff_sort_key: cutoffObj.sortKey,
         post_cutoff_start: postCutoffStart,
@@ -261,6 +314,8 @@ class ModelCutoffResolver {
         display_name: `Cutoff-Calibrated Model (${explicitCutoff.iso})`,
         generation: 'Cutoff-Calibrated',
         generation_status: isNewest ? 'newest' : 'older',
+        lifecycle: 'active',
+        deprecated: false,
         official_cutoff: explicitCutoff.iso,
         cutoff_sort_key: explicitCutoff.sortKey,
         post_cutoff_start: postCutoffStart,
@@ -271,21 +326,30 @@ class ModelCutoffResolver {
       };
     }
 
-    // 4. Unverified / Unspecified Model -> Conservative Fail-Safe Horizon (No Hardcoded Default Model!)
-    const postCutoffStart = this.getPostCutoffStartMMYY(failsafe.cutoff_sort_key);
+    // 4. Unverified / Unspecified Model -> Conservative Fail-Safe Horizon (Dynamically tracks oldest active model!)
+    const activeEntries = Object.entries(models)
+      .filter(([_, entry]) => entry.deprecated !== true && entry.lifecycle !== 'deprecated')
+      .sort((a, b) => a[1].cutoff_sort_key - b[1].cutoff_sort_key);
+
+    const earliestCutoffKey = activeEntries.length > 0 ? activeEntries[0][1].cutoff_sort_key : failsafe.cutoff_sort_key;
+    const earliestCutoffIso = activeEntries.length > 0 ? activeEntries[0][1].official_cutoff : failsafe.effective_cutoff;
+    const postCutoffStart = this.getPostCutoffStartMMYY(earliestCutoffKey);
+
     return {
       id: 'unverified-failsafe',
       requested_model: 'unverified-failsafe',
       display_name: 'Unverified Model (Conservative Fail-Safe Horizon)',
       generation: 'Unverified',
       generation_status: 'unverified',
-      official_cutoff: failsafe.effective_cutoff,
-      cutoff_sort_key: failsafe.cutoff_sort_key,
+      lifecycle: 'active',
+      deprecated: false,
+      official_cutoff: earliestCutoffIso,
+      cutoff_sort_key: earliestCutoffKey,
       post_cutoff_start: postCutoffStart,
       is_verified: false,
       is_newest_generation: false,
       inject_boundary_tier_by_default: true,
-      label: `${failsafe.effective_cutoff} (Unverified Model Fail-Safe Horizon) [Dynamic Tier 1: >= ${postCutoffStart}]`
+      label: `${earliestCutoffIso} (Unverified Model Fail-Safe Horizon) [Dynamic Tier 1: >= ${postCutoffStart}]`
     };
   }
 }

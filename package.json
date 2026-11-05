@@ -1,7 +1,7 @@
 {
   "name": "gemini-post-cutoff",
-  "version": "2.0.0",
-  "description": "Curated Google Cloud Platform (GCP) & AI Agent architectural skill library and dynamic cutoff-relative review engine for Google Antigravity and Gemini CLI (22 domains, 739+ dated engineering sources).",
+  "version": "2.1.0",
+  "description": "Curated Google Cloud Platform (GCP) & AI Agent architectural skill library, dynamic cutoff-relative review engine, and incremental slow-crawler maintenance suite for Google Antigravity and Gemini CLI (22 domains, 739+ dated engineering sources).",
   "bin": {
     "postcutoff": "./bin/postcutoff.js"
   },
@@ -12,8 +12,7 @@
     "audit:links": "node scripts/lint_internal_links.js",
     "audit:rules": "node scripts/audit_skill_rules.js",
     "detect": "node scripts/detect_stack.js",
-    "ingest": "node scripts/ingest.js",
-    "audit:external": "node scripts/verify_external_links.js",
+    "crawl": "node scripts/slow_crawler.js",
     "audit:provenance": "node review_engine/grounding/verifier.js",
     "audit:ast": "node review_engine/run_governance_audit.js --clean-check",
     "review": "node review_engine/run_mesh_review.js --clean-check"

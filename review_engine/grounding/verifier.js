@@ -511,17 +511,7 @@ function generateMarkdownReport(results, summary) {
   }
 
   if (!hasDiscrepancies) {
-    md += `> [!TIP]\n> **Flawless Baseline**: All operational claims across all 21 skills resolve with 100% fidelity to their canonical external source URLs with zero date discrepancies.\n\n`;
-  }
-
-  md += `## 📈 Article Operationalization Potential (Unutilized Vault Articles)\n\n`;
-  md += `The following table details indexed articles in \`references/articles.md\` that are currently available for further enrichment into new blueprints or decision matrices:\n\n`;
-  md += `| Specialized Domain Skill | Total Vault Articles | Operationalized in Runbook | Available for Enrichment |\n`;
-  md += `| :--- | :---: | :---: | :---: |\n`;
-
-  for (const r of results) {
-    const available = r.totalArticles - r.utilizedArticlesCount;
-    md += `| \`${r.skillName}\` | ${r.totalArticles} | ${r.utilizedArticlesCount} | **${available} articles** |\n`;
+    md += `> [!TIP]\n> **Flawless Baseline**: All operational claims across all ${summary.totalSkills} skills resolve with 100% fidelity to their canonical external source URLs with zero date discrepancies.\n`;
   }
 
   fs.writeFileSync(reportPath, md, 'utf8');

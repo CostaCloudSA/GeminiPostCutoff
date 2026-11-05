@@ -1,11 +1,15 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
+  "oldest_active_model_policy": {
+    "policy": "DYNAMIC_MINIMUM_ACTIVE_CUTOFF",
+    "description": "Resolves the oldest active (non-deprecated) model in the registry. Used by the Incremental Slow Crawler and Unverified Fail-Safe Horizon so that concepts are only pruned once even the oldest supported model has absorbed them. Automatically shifts forward as older models are marked deprecated."
+  },
   "unverified_failsafe": {
     "policy": "CONSERVATIVE_EARLIEST_ACTIVE_HORIZON",
     "effective_cutoff": "2025-01",
     "cutoff_sort_key": 202501,
     "generation_status": "unverified",
-    "description": "Applied when the active model is not explicitly specified or verified by the user. Treats all articles >= 02.25 as Dynamic Tier 1 (Post-Cutoff Delta) to eliminate pre-2025 syntax regressions."
+    "description": "Applied when the active model is not explicitly specified or verified by the user. Dynamically tracks the oldest active model cutoff (>= 02.25 while gemini-3.1-pro is active) to eliminate pre-cutoff syntax regressions."
   },
   "dynamic_tier_rules": {
     "tier_1_post_cutoff": {
@@ -38,6 +42,8 @@
       "display_name": "Gemini 4 Argon",
       "generation": "Gemini 4",
       "generation_status": "newest",
+      "lifecycle": "active",
+      "deprecated": false,
       "aliases": ["argon-4.0", "gemini-4-argon", "gemini-4-argon-high", "argon", "4.0"],
       "official_cutoff": "2026-03",
       "cutoff_sort_key": 202603,
@@ -47,6 +53,8 @@
       "display_name": "Gemini 3.8 Flash",
       "generation": "Gemini 3.x",
       "generation_status": "older",
+      "lifecycle": "active",
+      "deprecated": false,
       "aliases": ["flash-3.8", "gemini-3.8-flash", "3.8"],
       "official_cutoff": "2026-03",
       "cutoff_sort_key": 202603,
@@ -56,6 +64,8 @@
       "display_name": "Gemini 3.7 Flash",
       "generation": "Gemini 3.x",
       "generation_status": "older",
+      "lifecycle": "active",
+      "deprecated": false,
       "aliases": ["flash-3.7", "gemini-3.7-flash", "3.7"],
       "official_cutoff": "2026-03",
       "cutoff_sort_key": 202603,
@@ -65,6 +75,8 @@
       "display_name": "Gemini 3.6 Flash",
       "generation": "Gemini 3.x",
       "generation_status": "older",
+      "lifecycle": "active",
+      "deprecated": false,
       "aliases": ["flash-3.6", "gemini-3.6-flash", "3.6"],
       "official_cutoff": "2026-03",
       "cutoff_sort_key": 202603,
@@ -74,10 +86,12 @@
       "display_name": "Gemini 3.1 Pro",
       "generation": "Gemini 3.x",
       "generation_status": "older",
+      "lifecycle": "active",
+      "deprecated": false,
       "aliases": ["pro-3.1", "gemini-3.1-pro", "3.1"],
       "official_cutoff": "2025-01",
       "cutoff_sort_key": 202501,
-      "notes": "Older generation Pro model (Cutoff: January 2025). Dynamic Tier 1 covers all releases >= 02.25."
+      "notes": "Oldest active generation Pro model (Cutoff: January 2025). Dynamic Tier 1 covers all releases >= 02.25. When deprecated, resolveOldestActiveModel() automatically advances to 2026-03."
     }
   }
 }

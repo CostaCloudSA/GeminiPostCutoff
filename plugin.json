@@ -1,11 +1,11 @@
 {
   "name": "gemini-post-cutoff",
   "displayName": "GeminiPostCutoff — GCP & AI Architecture Runbooks",
-  "version": "2.0.0",
-  "description": "Equips Antigravity with 22 post-cutoff Google Cloud & AI Agent architectural runbooks, 739 dated engineering citations, dynamic model-cutoff triage, and a 100% advisory review gate.",
+  "version": "2.1.0",
+  "description": "Equips Antigravity with 22 post-cutoff Google Cloud & AI Agent architectural runbooks, 739 dated engineering citations, dynamic model-cutoff triage, Antigravity scheduled prompt automations, and a 100% advisory review gate.",
   "suggestedPrompts": [
     "Run a post-cutoff GCP architecture review on this workspace using /plan",
-    "Design a production Vertex AI ADK 1.0 multi-agent system with A2A and Cloud Run",
+    "Run the daily incremental slow-crawler batch audit (`npm run crawl`) and check for 404s or Developer Knowledge API absorption",
     "Audit our GKE, BigQuery, and Pub/Sub manifests for 2025-2026 anti-patterns and cost savings"
   ]
 }

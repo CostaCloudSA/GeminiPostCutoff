@@ -78,23 +78,20 @@ To guarantee that ingested articles provide actionable value and prevent superfi
 
 ---
 
-## 🛠️ 6. Automated Tooling & Ingestion Assistant
+## 🛠️ 6. Antigravity Scheduled Prompt Automations & Incremental Slow Crawler
 
-Maintainers should utilize the automated ingestion script to eliminate manual sorting mistakes:
+Instead of hardcoding static regex ingestion scripts or monolithic batch link checks, periodic discovery, Soft-404 inspection, content quality auditing, and Developer Knowledge API (`developerknowledge.googleapis.com`) absorption checks are offloaded to **Google Antigravity Scheduled Prompt Automations** documented in [`docs/AUTOMATIONS_GALLERY.md`](../../docs/AUTOMATIONS_GALLERY.md).
 
 ```bash
-# Automated Ingestion CLI
-node scripts/ingest.js --url "<URL>" --domain "<target-skill>" --date "MM.YY" --score 4
+# Run a 6-link incremental slow-crawler batch (calibrated against the oldest active model via ModelCutoffResolver):
+npm run crawl
 ```
 
 ### Automated Verification:
-Always verify the entire repository before concluding any ingestion session:
+Always verify the entire repository before concluding any ingestion or compaction session:
 ```bash
 # Rapid local verification on commit (sorting, internal links, minimum floors, grounding)
 npm test
-node review_engine/grounding/verifier.js
-
-# Monthly external URL health check (checks 739+ external HTTP endpoints)
-npm run audit:external
+npm run audit:provenance
 ```
 Ensure **0 sorting errors**, **0 unresolved citations**, and **100% valid relative links** before committing.

@@ -1,7 +1,7 @@
 # 🌌 GeminiPostCutoff: Post-Cutoff Google Cloud & AI Agent Runbooks for Antigravity
 
 [![Build Status](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml/badge.svg)](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml)
-[![Monthly Link Audit](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/monthly_link_check.yml/badge.svg)](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/monthly_link_check.yml)
+[![Automations Gallery](https://img.shields.io/badge/Antigravity_Automations-5_Scheduled_Workflows-teal.svg)](docs/AUTOMATIONS_GALLERY.md)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/Architecture_Domains-22_Specializations-green.svg)](skills/gcp-skills-index/SKILL.md)
 [![Resources](https://img.shields.io/badge/Knowledge_Base-739%2B_Resources-orange.svg)](skills/gcp-skills-index/SKILL.md)
@@ -231,7 +231,9 @@ curl -X POST https://architecture-reviewer-a2a-<hash>.a.run.app/rpc \
   }'
 ```
 
-### 3. Maintainer Ingestion & Verification Suite
+### 3. Antigravity Scheduled Prompt Automations & Incremental Slow Crawler
+Instead of hardcoding brittle batch scrapers or static ingestion scripts, periodic maintenance (Hard/Soft-404 checks, content quality verification against original `SKILL.md` captures, Developer Knowledge API + oldest-active-model absorption checks, and `dev`-to-`prod` drift audits) is offloaded to **Antigravity Scheduled Prompt Automations** documented in [**`docs/AUTOMATIONS_GALLERY.md`**](docs/AUTOMATIONS_GALLERY.md):
+
 ```bash
 # Run all skill chronological audits, internal link checks, rule floor checks, and 7 deep test suites:
 npm test
@@ -239,8 +241,8 @@ npm test
 # Verify bidirectional provenance across all 22 skills, 739 vault links, and 116 AST code blocks:
 npm run audit:provenance
 
-# Ingest a new dated Google Cloud engineering article into the appropriate skill vault:
-npm run ingest -- --url "<URL>" --domain "<domain-skill>" --date "MM.YY" --score 4
+# Run a 6-link incremental slow-crawler batch (checks Hard/Soft 404s, content quality & DK/model absorption):
+npm run crawl
 ```
 
 ---

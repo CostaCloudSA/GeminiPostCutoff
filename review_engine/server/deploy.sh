@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Advisory Cloud Run A2A Service Deployment Script
+# Advisory Cloud Run A2A Service Deployment Script (v2.1)
 # Part of GeminiPostCutoff Architecture Review Engine
 # ==============================================================================
 set -euo pipefail
 
 PROJECT_ID="${1:-$(gcloud config get-value project 2>/dev/null || echo "")}"
 REGION="${2:-us-central1}"
+GEMINI_MODEL="${GEMINI_MODEL:-oldest-active}"
+CANARY="${CANARY:-false}"
 SERVICE_NAME="architecture-reviewer-a2a"
 IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/geminipostcutoff/${SERVICE_NAME}:latest"
 
@@ -17,12 +19,13 @@ if [ -z "$PROJECT_ID" ]; then
 fi
 
 echo "=============================================================================="
-echo "ADVISORY CLOUD RUN A2A MICROSERVICE DEPLOYMENT"
+echo "ADVISORY CLOUD RUN A2A MICROSERVICE DEPLOYMENT (v2.1)"
 echo "=============================================================================="
-echo "Project:   ${PROJECT_ID}"
-echo "Region:    ${REGION}"
-echo "Service:   ${SERVICE_NAME}"
-echo "Image:     ${IMAGE_URI}"
+echo "Project:      ${PROJECT_ID}"
+echo "Region:       ${REGION}"
+echo "Service:      ${SERVICE_NAME}"
+echo "Model Policy: ${GEMINI_MODEL}"
+echo "Image:        ${IMAGE_URI}"
 echo ""
 
 echo "Step 1: Enabling Required GCP APIs..."
@@ -41,11 +44,17 @@ gcloud artifacts repositories create geminipostcutoff \
 
 echo "Step 3: Building Container Image with Cloud Build..."
 gcloud builds submit . \
-  --config=review_engine/server/cloudbuild.yaml \
-  --substitutions=_IMAGE_URI="${IMAGE_URI}" \
+  --tag="${IMAGE_URI}" \
   --project="${PROJECT_ID}"
 
-echo "Step 4: Deploying Cloud Run Service with Direct VPC Egress & Non-Throttled CPU..."
+TRAFFIC_FLAGS=()
+if [ "$CANARY" = "true" ]; then
+  echo "Step 4: Deploying Canary Revision (--no-traffic --tag=v2-canary)..."
+  TRAFFIC_FLAGS=(--no-traffic --tag=v2-canary)
+else
+  echo "Step 4: Deploying Cloud Run Service with Direct VPC Egress & Non-Throttled CPU..."
+fi
+
 gcloud run deploy "${SERVICE_NAME}" \
   --image="${IMAGE_URI}" \
   --region="${REGION}" \
@@ -56,7 +65,8 @@ gcloud run deploy "${SERVICE_NAME}" \
   --max-instances=10 \
   --cpu=2 \
   --memory=2Gi \
-  --set-env-vars="NODE_ENV=production,MODEL_CALIBRATION=flash-3.8" \
+  --set-env-vars="NODE_ENV=production,GEMINI_MODEL=${GEMINI_MODEL}" \
+  "${TRAFFIC_FLAGS[@]}" \
   --project="${PROJECT_ID}"
 
 echo "Step 5: Granting Invoker Role to Authorized Teammates / CI Service Accounts..."

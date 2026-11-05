@@ -18,7 +18,8 @@ function parseArgs() {
   const args = process.argv.slice(2);
   const options = {
     target: path.join(__dirname, 'tests', 'fixtures'),
-    model: 'flash-3.8',
+    model: null,
+    cutoff: null,
     minScore: 0,
     failOnCritical: false,
     cleanCheck: false
@@ -30,6 +31,8 @@ function parseArgs() {
       options.target = path.resolve(args[++i]);
     } else if (arg === '--model' && args[i + 1]) {
       options.model = args[++i];
+    } else if (arg === '--cutoff' && args[i + 1]) {
+      options.cutoff = args[++i];
     } else if (arg === '--min-score' && args[i + 1]) {
       options.minScore = parseInt(args[++i], 10);
     } else if (arg === '--fail-on-critical') {
@@ -51,12 +54,15 @@ function runAudit(targetDir, options, reportFilename) {
     fs.mkdirSync(reportsDir, { recursive: true });
   }
 
+  const engine = new HubAndSpokeGovernanceEngine({
+    targetModel: options.model,
+    targetCutoff: options.cutoff
+  });
   console.log('='.repeat(75));
-  console.log(`AST PRE-FLIGHT & HUB-AND-SPOKE GOVERNANCE AUDITOR (MODEL: ${options.model.toUpperCase()})`);
+  console.log(`AST PRE-FLIGHT & HUB-AND-SPOKE GOVERNANCE AUDITOR (${engine.modelProfile.label})`);
   console.log('='.repeat(75));
   console.log(`Auditing target: ${targetDir}\n`);
 
-  const engine = new HubAndSpokeGovernanceEngine({ targetModel: options.model });
   const auditResult = engine.auditDirectory(targetDir);
 
   console.log('--- GOVERNANCE PILLAR HEALTH SCORES ---');

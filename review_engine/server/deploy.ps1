@@ -1,15 +1,17 @@
 <#
 .SYNOPSIS
     Advisory Cloud Run A2A Service Deployment Script (PowerShell)
-    Part of GeminiPostCutoff Architecture Review Engine
+    Part of GeminiPostCutoff Architecture Review Engine (v2.1)
 #>
 param(
     [string]$ProjectId = $(gcloud config get-value project 2>$null),
-    [string]$Region = "us-central1"
+    [string]$Region = "us-central1",
+    [string]$GeminiModel = "oldest-active",
+    [switch]$Canary
 )
 
 if (-not $ProjectId) {
-    Write-Error "Error: ProjectId not provided and not set in gcloud config. Usage: .\deploy.ps1 -ProjectId <PROJECT_ID> [-Region <REGION>]"
+    Write-Error "Error: ProjectId not provided and not set in gcloud config. Usage: .\deploy.ps1 -ProjectId <PROJECT_ID> [-Region <REGION>] [-GeminiModel <MODEL_OR_OLDEST_ACTIVE>] [-Canary]"
     exit 1
 }
 
@@ -17,12 +19,13 @@ $ServiceName = "architecture-reviewer-a2a"
 $ImageUri = "${Region}-docker.pkg.dev/${ProjectId}/geminipostcutoff/${ServiceName}:latest"
 
 Write-Host "==============================================================================" -ForegroundColor Cyan
-Write-Host "ADVISORY CLOUD RUN A2A MICROSERVICE DEPLOYMENT (POWERSHELL)" -ForegroundColor Cyan
+Write-Host "ADVISORY CLOUD RUN A2A MICROSERVICE DEPLOYMENT (POWERSHELL v2.1)" -ForegroundColor Cyan
 Write-Host "==============================================================================" -ForegroundColor Cyan
-Write-Host "Project:   $ProjectId"
-Write-Host "Region:    $Region"
-Write-Host "Service:   $ServiceName"
-Write-Host "Image:     $ImageUri`n"
+Write-Host "Project:     $ProjectId"
+Write-Host "Region:      $Region"
+Write-Host "Service:     $ServiceName"
+Write-Host "Model Policy:$GeminiModel"
+Write-Host "Image:       $ImageUri`n"
 
 Write-Host "Step 1: Enabling Required GCP APIs..." -ForegroundColor Yellow
 gcloud services enable run.googleapis.com artifactregistry.googleapis.com cloudbuild.googleapis.com --project=$ProjectId
@@ -33,7 +36,14 @@ gcloud artifacts repositories create geminipostcutoff --repository-format=docker
 Write-Host "Step 3: Building Container Image..." -ForegroundColor Yellow
 gcloud builds submit . --tag=$ImageUri --project=$ProjectId
 
-Write-Host "Step 4: Deploying Cloud Run Service with Direct VPC Egress & Non-Throttled CPU..." -ForegroundColor Yellow
+$TrafficFlags = @()
+if ($Canary) {
+    Write-Host "Step 4: Deploying Canary Revision (--no-traffic --tag=v2-canary)..." -ForegroundColor Yellow
+    $TrafficFlags = @("--no-traffic", "--tag=v2-canary")
+} else {
+    Write-Host "Step 4: Deploying Cloud Run Service with Direct VPC Egress & Non-Throttled CPU..." -ForegroundColor Yellow
+}
+
 gcloud run deploy $ServiceName `
     --image=$ImageUri `
     --region=$Region `
@@ -44,7 +54,8 @@ gcloud run deploy $ServiceName `
     --max-instances=10 `
     --cpu=2 `
     --memory=2Gi `
-    --set-env-vars="NODE_ENV=production,MODEL_CALIBRATION=flash-3.8" `
+    --set-env-vars="NODE_ENV=production,GEMINI_MODEL=$GeminiModel" `
+    @TrafficFlags `
     --project=$ProjectId
 
 Write-Host "`n[SUCCESS] Cloud Run A2A Architecture Reviewer Service Ready!" -ForegroundColor Green
