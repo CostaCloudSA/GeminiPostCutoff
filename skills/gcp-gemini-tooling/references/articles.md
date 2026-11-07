@@ -2,9 +2,16 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gemini-tooling`.
 
-Total indexed resources: **70**
+Total indexed resources: **77**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Getting Started with the Google Cloud CLI Remote MCP Server](https://medium.com/google-cloud/getting-started-with-the-google-cloud-cli-remote-mcp-server-bc4ea2e11c5d)
+- [[10.26 Blogpost]: Google Cloud CLI Remote MCP Server (Part 2): Building a Multi-Node ADK Workflow for Cloud Audit & Remediation](https://medium.com/google-cloud/google-cloud-cli-remote-mcp-server-part-2-building-a-multi-node-adk-workflow-for-cloud-audit-1f921f2593ea)
+- [[10.26 Blogpost]: Google Cloud CLI Remote MCP Server (Part 4): Handling & Verifying Long-Running gcloud Commands](https://medium.com/google-cloud/google-cloud-cli-remote-mcp-server-part-4-handling-verifying-long-running-gcloud-commands-7b1ebc34dadb)
+- [[10.26 Blogpost]: Devs guide to MCP Apps in Gemini](https://cloud.google.com/blog/topics/developers-practitioners/devs-guide-to-mcp-apps-in-gemini/)
+- [[10.26 Blogpost]: Four eval engineering lessons](https://cloud.google.com/blog/topics/developers-practitioners/four-eval-engineering-lessons/)
+- [[10.26 Blogpost]: Optimizing a 200,000-line Python codebase overnight with Gemini 4 Argon](https://developers.googleblog.com/optimizing-a-200000-line-python-codebase-overnight-with-gemini-4-argon/)
+- [[10.26 Blogpost]: Bringing you the Data Agent Kit](https://cloud.google.com/blog/products/data-analytics/bringing-you-the-data-agent-kit/)
 - [[09.26 Blogpost]: Google Cloud CLI remote MCP server in preview](https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-cli-remote-mcp-server-in-preview/)
 - [[09.26 Blogpost]: Data Agent Kit is now GA: Bring Google Data Cloud to any coding agent](https://cloud.google.com/blog/topics/developers-practitioners/data-agent-kit-is-now-ga-bring-google-data-cloud-to-any-coding-agent/)
 - [[08.26 Blogpost]: Eval-Driven Development for Agent Skills (Firebase Blog)](https://firebase.blog/posts/2026/08/eval-driven-development-agent-skills)

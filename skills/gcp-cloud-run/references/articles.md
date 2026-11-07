@@ -2,9 +2,12 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-cloud-run`.
 
-Total indexed resources: **44**
+Total indexed resources: **47**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Shipping an MCP server on Google Cloud](https://medium.com/google-cloud/shipping-an-mcp-server-on-google-cloud-907154f755b5)
+- [[10.26 Blogpost]: PHP on Cloud Run: Cut Your Latency with PHP 8.5 and Persistent Sockets](https://medium.com/google-cloud/php-on-cloud-run-cut-your-latency-with-php-8-5-and-persistent-sockets-7ff749fd02a9)
+- [[10.26 Blogpost]: Temporal Serverless Workers on Cloud Run worker pools](https://cloud.google.com/blog/products/serverless/temporal-serverless-workers-on-cloud-run-worker-pools/)
 - [[10.26 Blogpost]: Introducing the Server Side Cloud Swift SDK](https://cloud.google.com/blog/topics/developers-practitioners/introducing-the-server-side-cloud-swift-sdk/)
 - [[08.26 Blogpost]: Deploying Secure MCP Servers on Cloud Run](https://medium.com/@fhinkel/deploying-secure-mcp-servers-on-cloud-run-6b5d4b842a70)
 - [[08.26 Blogpost]: Building a Secure, Serverless CI/CD Pipeline on GCP](https://medium.com/google-cloud/building-a-secure-serverless-ci-cd-pipeline-on-gcp-a7c83c66824b)

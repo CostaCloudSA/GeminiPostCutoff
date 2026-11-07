@@ -51,6 +51,12 @@ Activate this skill whenever:
 > - **Solution**: Transition to **Hyperdisk Balanced**, which allows decoupling storage capacity (GB) from provisioned IOPS and throughput (MB/s).
 > *Cites: [Google Cloud Persistent Disks: A Comprehensive Tutorial](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Siloed Agent Tooling Across Relational and Unstructured Operational Data [10.26]**
+> Building separate, disconnected retrieval pipelines for structured operational database rows (Cloud SQL / AlloyDB) and unstructured documents forces AI agents to reconcile stale context in-memory.
+> - **Solution**: Use unified database agent architectures combining **MCP Toolbox for Databases** with hybrid vector + relational queries so agents analyze structured transactional tables and unstructured document embeddings in a single governed tool call.
+> *Cites: [Building Agents to Analyze Structured and Unstructured Data](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -240,6 +246,7 @@ Run the official Cloud SQL MCP server with IAM Workload Identity:
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Unified AI agent patterns for analyzing structured operational tables and unstructured documents.
 - **[04.26]**: Firestore Pipelines GA: native cross-collection joins, aggregations, and HNSW vector search in Firestore; MCP Toolbox v1.0.
 - **[04.26]**: AlloyDB ScaNN vector index integration with Cloud Run Jobs RAG backends.
 - **[03.26]**: Cloud SQL Autoscaling Read Pools with single load-balanced reader endpoint; Cloud SQL 3x PostgreSQL write throughput tuning.

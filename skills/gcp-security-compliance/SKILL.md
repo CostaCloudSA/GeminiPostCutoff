@@ -55,6 +55,12 @@ Activate this skill whenever:
 > - **Mandatory Standard**: Pair zero-trust sovereign controls and continuous compliance guardrails with machine-speed autonomous SecOps detection, threat intelligence enrichment, and Model Armor runtime interception.
 > *Cites: [Defending at Machine Speed: Securing the Public Sector in the Agentic Era](./references/articles.md) and [Cloud CISO Perspectives: How to build an AI-ready security program for the public sector](./references/articles.md)*
 
+> [!CAUTION]
+> **Anti-Pattern 7: Injecting Raw API Keys or Credentials into Agent Prompts, Tool Outputs, or Session Memory [10.26]**
+> Passing API tokens or database secrets through LLM context windows, MCP tool arguments, or tool return payloads leaks credentials into Cloud Logging traces, BigQuery Agent Analytics tables, and prompt-injection exfiltration responses.
+> - **Mandatory Standard**: Resolve secrets strictly inside the isolated tool execution boundary via **Secret Manager handle references**, automate least-privilege role scoping with **IAM Helper Agent Skills & MCP Tools**, and enforce **Scalable VPC Service Controls** perimeters and **Wiz Runtime Sensor for GKE** threat detection.
+> *Cites: [Your Agent's Context Window Is Not a Vault](./references/articles.md), [Scale agents securely with IAM Helper Agent Skills and MCP Tools](./references/articles.md), [Introducing new scalable perimeter options with VPC Service Controls](./references/articles.md), and [Wiz Sensor for GKE: Turnkey threat detection for Kubernetes](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -269,7 +275,26 @@ resource "google_cloud_asset_organization_feed" "iam_asset_feed" {
 
 ---
 
+### Blueprint 6: Handle-Based Secret Manager Resolution Outside the Agent Context Window (Python) [10.26]
+Resolve API credentials strictly inside the tool runtime so raw secrets never enter the LLM prompt, session memory, or telemetry logs:
+```python
+from google.cloud import secretmanager
+
+sm_client = secretmanager.SecretManagerServiceClient()
+
+def invoke_external_webhook(secret_handle: str, payload: dict) -> dict:
+    """Resolves Secret Manager handle inside tool boundary; secret never enters LLM context."""
+    secret_name = f"projects/my-prod-project/secrets/{secret_handle}/versions/latest"
+    api_key = sm_client.access_secret_version(name=secret_name).payload.data.decode("utf-8")
+    # Execute authenticated outbound call without echoing api_key in tool return
+    return {"status": "DELIVERED", "secret_exposed_to_context": False}
+```
+*Cites: [Your Agent's Context Window Is Not a Vault](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: IAM Helper Agent Skills & MCP tools; Secret Manager context-isolation patterns for agents; Scalable VPC Service Controls perimeters; Turnkey Wiz Runtime Sensor add-on for GKE.
 - **[09.26]**: Agent Gateway and Model Armor integration for multi-agent platform security; Machine-speed agentic cyber defense for public sector workloads.
 - **[08.26]**: Zero-trust AI agent architectures with ADK; Autonomous agent security governance frameworks.
 - **[07.26]**: k8s-aibom launched for automated AI supply chain Bill of Materials verification on GKE.

@@ -69,6 +69,12 @@ Activate this skill whenever:
 > - **Mandatory Standard**: Connect coding agents to the **Google Cloud CLI Remote MCP Server** (`https://cloudcli.googleapis.com/mcp`, running inside an isolated network-disabled sandbox) and install the **Data Agent Kit** (`accidental-data-loss-prevention` + `data-lineage` skills) before executing data cloud operations.
 > *Cites: [Google Cloud CLI remote MCP server in preview](./references/articles.md) and [Data Agent Kit is now GA: Bring Google Data Cloud to any coding agent](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 9: Synchronous Blocking on Long-Running `gcloud` MCP Commands [10.26]**
+> Invoking synchronous `gcloud` provisioning commands (GKE cluster creation, Cloud SQL instance patches, AlloyDB restores) inside an agent MCP tool call without `--async` causes HTTP/SSE client timeouts and leaves the agent blind to operation completion state.
+> - **Mandatory Standard**: Enforce the **3-Phase Async Submit (`--async`), Operation Polling (`operations describe`), and State Verification** pattern when using the Google Cloud CLI Remote MCP Server, and ground large-scale autonomous refactorings with `.agents/skills` rulefiles and deterministic eval suites.
+> *Cites: [Google Cloud CLI Remote MCP Server (Part 4): Handling & Verifying Long-Running gcloud Commands](./references/articles.md), [Getting Started with the Google Cloud CLI Remote MCP Server](./references/articles.md), [Google Cloud CLI Remote MCP Server (Part 2): Building a Multi-Node ADK Workflow for Cloud Audit & Remediation](./references/articles.md), [Optimizing a 200,000-line Python codebase overnight with Gemini 4 Argon](./references/articles.md), [Four eval engineering lessons](./references/articles.md), [Devs guide to MCP Apps in Gemini](./references/articles.md), and [Bringing you the Data Agent Kit](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -366,6 +372,7 @@ Mount the hosted Google Cloud CLI remote MCP server (`cloudcli.googleapis.com/mc
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Google Cloud CLI Remote MCP Server multi-node ADK audit workflows and 3-phase async long-running command verification; MCP Apps in Gemini; Overnight 200K-line Python ADK optimization (40% faster) with Gemini 4 Argon; Four eval engineering lessons; Data Agent Kit in Antigravity IDE.
 - **[09.26]**: Google Cloud CLI remote MCP server (`cloudcli.googleapis.com/mcp`) launched in preview; Data Agent Kit reaches GA with 26 skills for BigQuery, AlloyDB, Spanner, and Dataform.
 - **[08.26]**: Eval-Driven Development (EDD) framework for agent skills; Turning 3 weeks of gcloud CLI scripts into modular Terraform Stacks.
 - **[06.26]**: Antigravity Agent Skills deep dive; Building with Developer Knowledge API and Antigravity CLI.

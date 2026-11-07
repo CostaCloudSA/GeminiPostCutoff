@@ -9,7 +9,7 @@ description: >-
 # Google Cloud Platform & AI Agent Skills Master Index
 
 Welcome to the **Antigravity Google Cloud Platform (GCP) Expert Skills System**.
-This catalog indexes **22 specialized, production-grade operational runbooks** (plus this Master Router Index) containing **756 chronologically sorted publications, codelabs, official guides, and architectural blueprints** spanning 2024–2026.
+This catalog indexes **22 specialized, production-grade operational runbooks** (plus this Master Router Index) containing **812 chronologically sorted publications, codelabs, official guides, and architectural blueprints** spanning 2024–2026.
 
 ---
 

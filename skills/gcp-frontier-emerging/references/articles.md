@@ -2,9 +2,12 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-frontier-emerging`.
 
-Total indexed resources: **35**
+Total indexed resources: **38**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Introducing Agent Compute Engine and expanding agent governance](https://cloud.google.com/blog/topics/ai-infrastructure/introducing-agent-compute-engine-and-expanded-agent-governance/)
+- [[10.26 Blogpost]: Agent Compute Engine deep dive](https://cloud.google.com/blog/topics/ai-infrastructure/agent-compute-engine-deep-dive/)
+- [[10.26 Blogpost]: Architecting scalable, agentic biotech workloads](https://cloud.google.com/blog/topics/healthcare-life-sciences/architecting-scalable-agentic-biotech-workloads/)
 - [[10.26 Blogpost]: EmbeddingGemma 2: The Developer Guide](https://developers.googleblog.com/embeddinggemma-2-the-developer-guide)
 - [[08.26 Blogpost]: Gemma in the Cloud](https://medium.com/@amanda.e.fitch/gemma-in-the-cloud-5170f8a2bb40)
 - [[08.26 Blogpost]: Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](https://medium.com/google-cloud/fine-tuning-and-deploying-gemma-4-at-scale-on-gemini-enterprise-agent-platform-geap-and-cloud-run-4216403bb075)

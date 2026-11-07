@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml/badge.svg)](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/Domains-22%2B_Architecture_Skills-green.svg)](skills/gcp-skills-index/SKILL.md)
-[![Sources](https://img.shields.io/badge/Sources-756%2B_Dated_Citations-orange.svg)](skills/gcp-skills-index/SKILL.md)
+[![Sources](https://img.shields.io/badge/Sources-812%2B_Dated_Citations-orange.svg)](skills/gcp-skills-index/SKILL.md)
 
 Post-cutoff **Google Cloud Platform (GCP)** & **AI Agent** architectural runbooks for **Google Antigravity** and **Gemini CLI**.
 

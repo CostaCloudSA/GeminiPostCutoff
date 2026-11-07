@@ -2,9 +2,11 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-conversational-ai`.
 
-Total indexed resources: **10**
+Total indexed resources: **12**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Building Conversational Commerce with Multi-Agent Swarms on GCP: A Working Prototype](https://developers.googleblog.com/building-conversational-commerce-with-multi-agent-swarms-on-gcp-a-working-prototype/)
+- [[10.26 Blogpost]: Step by Step guide: Build a Voice Agent That Never Goes Silent using ADK](https://developers.googleblog.com/step-by-step-guide-build-a-voice-agent-that-never-goes-silent-using-adk/)
 - [[08.26 Blogpost]: How to Evaluate Live & Voice Agents in ADK](https://developers.googleblog.com/how-to-evaluate-live-voice-agents-in-adk/)
 - [[07.26 Blogpost]: Conversational analytics in BigQuery brings trusted agentic reasoning to everyone](https://cloud.google.com/blog/products/data-analytics/conversational-analytics-in-bigquery-now-ga/)
 - [[04.26 Blogpost]: Guide to prompting Gemini 3.1 Flash TTS (text-to-speech)](https://cloud.google.com/blog/products/ai-machine-learning/gemini-3-1-flash-tts-on-google-cloud/)

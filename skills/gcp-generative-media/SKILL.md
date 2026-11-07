@@ -40,10 +40,16 @@ Activate this skill whenever:
 > *Cites: [Veo 3.1](./references/articles.md) and [Veo 3.1 Lite - Model Card](./references/articles.md)*
 
 > [!WARNING]
-> **Anti-Pattern 4: Omitting SynthID Watermark Verification in Enterprise Pipelines [03.26, 10.25]**
+> **Anti-Pattern 4: Omitting SynthID Watermark Verification in Enterprise Pipelines [03.26, 04.26, 10.25]**
 > Publishing AI-generated media without validating imperceptible provenance watermarks creates compliance liability and vulnerability to deepfake spoofing.
 > - **Mandatory Standard**: Verify SynthID digital watermark embedding on all output video and image streams before distributing to client applications or media repositories.
 > *Cites: [Create without limits: GenMedia on Vertex AI](./references/articles.md) and [Introducing Veo 3.1 and new creative capabilities in the Gemini API](./references/articles.md)*
+
+> [!WARNING]
+> **Anti-Pattern 5: Deploying Enterprise GenMedia Pipelines Without the SAVE Trustworthiness Framework [10.26]**
+> Scaling generative image, audio, and video workflows into production without structured brand-safety, provenance, and human-review gates exposes enterprises to copyright, hallucination, and brand-alignment incidents.
+> - **Mandatory Standard**: Apply Google Cloud Consulting's **SAVE framework** (Secure provenance via SynthID, Align prompts and fine-tuning to brand guardrails, Validate outputs with automated multimodal judges, and Enforce human-in-the-loop release gates) across all Vertex AI GenMedia pipelines.
+> *Cites: [Fundamentals to engineer trustworthy gen media](./references/articles.md)*
 
 ---
 
@@ -220,6 +226,7 @@ print(response.text)
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Google Cloud Consulting SAVE framework for engineering trustworthy enterprise generative media.
 - **[09.26]**: Gemini Omni Flash (`gemini-omni-1.1-flash`) video generation and conversational editing via Interactions API; Video generation prompt guide.
 - **[08.26]**: Gemini Omni Flash model card release detailing visual synthesis architecture.
 - **[06.26]**: DiffusionGemma developer guide for open-weights image generation pipelines.

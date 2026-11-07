@@ -55,6 +55,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Provision **Compute Engine U4 Ultra-Low-Latency VMs** combined with compact placement policies and Titanium offload networking for deterministic sub-microsecond jitter.
 > *Cites: [Ultra Low Latency Solution with U4 enables high-velocity trading](./references/articles.md)*
 
+> [!CAUTION]
+> **Anti-Pattern 7: Relying on Email-Only Budget Alerts Without GA Google Cloud Spend Caps [10.26]**
+> Treating a Cloud Billing email notification as a cost control allows overnight runaway loops or misconfigured autoscalers to rack up \$70K+ bills while engineers are asleep ("an email is not a brake pedal").
+> - **Mandatory Standard**: Enable **GA Google Cloud Spend Caps** on budgets to automatically halt billable resource consumption when hard thresholds are crossed, paired with sub-minute Cloud Monitoring circuit breakers.
+> *Cites: [Google Cloud spend caps now generally available](./references/articles.md) and [The C$71K Bill Arrived Overnight. Your Budget Alert Just Watched.](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -246,7 +252,7 @@ resource "google_logging_project_sink" "archive_cold_audit_logs" {
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
-- **[10.26]**: Compute Engine U4 ultra-low-latency instance family for high-velocity financial trading workloads.
+- **[10.26]**: Google Cloud Budgets Hard Spend Caps reach General Availability (GA); Compute Engine U4 ultra-low-latency instance family for high-velocity financial trading workloads.
 - **[07.26]**: Google Cloud Budgets introduces native hard spend caps and early anomaly notifications.
 - **[04.26]**: Cloud Logging cost governance strategies; balancing AI cost and performance.
 - **[03.26]**: Granular AI cost tracking for Vertex AI and Gemini APIs; Cloud Batch GPU with Flex-start VMs.

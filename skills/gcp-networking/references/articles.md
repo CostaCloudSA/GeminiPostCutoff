@@ -2,9 +2,12 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-networking`.
 
-Total indexed resources: **10**
+Total indexed resources: **13**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Using VPC Flow Logs to troubleshoot GKE workloads](https://cloud.google.com/blog/products/containers-kubernetes/using-vpc-flow-logs-to-troubleshoot-gke-workloads/)
+- [[10.26 Blogpost]: Streaming comes to API Gateway: real-time and AI-ready APIs, without changing your spec](https://developers.googleblog.com/streaming-comes-to-api-gateway-real-time-and-ai-ready-apis-without-changing-your-spec/)
+- [[10.26 Blogpost]: Announcing MCP support in Apigee hybrid: agentic tools that run in your own cluster](https://developers.googleblog.com/announcing-mcp-support-in-apigee-hybrid-agentic-tools-that-run-in-your-own-cluster/)
 - [[10.26 Blogpost]: IP Address Management on Google Cloud: Implementing IPAM in a Shared VPC with Terraform](https://medium.com/google-cloud/ip-address-management-on-google-cloud-implementing-ipam-in-a-shared-vpc-with-terraform-49b183545ae0)
 - [[07.26 Blogpost]: Cloud CDN Now Supports Private Bucket Access — No More Public Buckets or Signed URLs](https://chimbu.medium.com/cloud-cdn-now-supports-private-bucket-access-no-more-public-buckets-or-signed-urls-688beb886be4)
 - [[04.26 Blogpost]: Introducing Virgo Network, Google's scale-out AI data center fabric](https://cloud.google.com/blog/products/networking/introducing-virgo-megascale-data-center-fabric/)

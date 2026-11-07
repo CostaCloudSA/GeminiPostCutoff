@@ -51,6 +51,12 @@ Activate this skill whenever:
 > - **Solution**: Implement **Data Catalog Policy Tags** combined with **Dynamic Data Masking** (SHA-256 hash or nullify) and Cloud KMS AEAD column-level encryption.
 > *Cites: [All You Need to Know About Securing Sensitive Data in BigQuery](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Naive `MAX(updated_at)` Watermarks in Incremental Pipelines Dropping Late-Arriving Data [10.26]**
+> Filtering incremental dbt/Dataform models strictly on `WHERE event_ts > (SELECT MAX(event_ts) FROM {{ this }})` without lookback windows, deterministic partition replacement (`insert_overwrite`), and Dataflow allowed-lateness watermarks silently drops late-arriving streaming records and corrupts backfills.
+> - **Standard Protocol**: Pair Dataflow event-time watermarks and reconciliation pipelines with partition-scoped `insert_overwrite` backfills, enforce domain-driven column security via **Data Governance Tags**, and use **Gemini 4 Argon** for agentic data remediation at scale.
+> *Cites: [Reprocessing BigQuery at Scale: The Hidden Failure Modes of Incremental dbt Pipelines](./references/articles.md), [Handling Late-Arriving Data in Google Cloud Dataflow: A Production Architecture for 100% Eventual Consistency](./references/articles.md), [Data Governance at Scale with Gemini 4 Argon & BigQuery](./references/articles.md), [Domain-Driven BigQuery Column Security: Moving to Data Governance Tags](./references/articles.md), [Learning BigQuery Graph with Nodes and Edges: Which Melbourne Cafes Are Neighbours?](./references/articles.md), and [Introducing Looker Data Apps](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -213,6 +219,7 @@ client.load_table_from_dataframe(dataframe, table_id, job_config=job_config).res
 ---
 
 ## ⏱️ Chronological Evolution (2024–2026)
+- **[10.26]**: Agentic data governance & 1M-record remediation with Gemini 4 Argon; Deterministic incremental backfill & Dataflow late-arriving data architectures; Domain-driven column security tags; Looker Data Apps.
 - **[08.26]**: BigQuery Data Transfer Service (DTS) zero-code low-cost ingestion capabilities launched.
 - **[07.26]**: Conversational Analytics in BigQuery reaches General Availability with agentic reasoning.
 - **[06.26]**: A2A Protocol BigQuery Data Engineering Agent; Open Knowledge Format semantic sharing.

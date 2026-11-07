@@ -9,6 +9,8 @@
 
 ### 🌟 2026 Releases & Architectural Baselines (Chronological)
 
+- [[10.26 Blogpost]: Pub/Sub AI Bytes: Part 6 — Building a real-time streaming RAG pipeline](https://medium.com/google-cloud/pub-sub-ai-bytes-part-6-building-a-real-time-streaming-rag-pipeline-3ead7e3a092a)
+
 - [[10.26 Blogpost]: Pub/Sub AI Bytes: Part 5 — Zero-ETL streaming direct to database with Bigtable subscriptions](https://medium.com/google-cloud/pub-sub-ai-bytes-part-5-zero-etl-streaming-direct-to-database-with-bigtable-subscriptions-e1e96f770666)
 
 ### 📅 2025 Releases & Deep Dives (Chronological)

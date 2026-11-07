@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-databases`.
 
-Total indexed resources: **11**
+Total indexed resources: **12**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Building Agents to Analyze Structured and Unstructured Data](https://medium.com/@srobtweets/building-agents-to-analyze-structured-and-unstructured-data-006068b5032b)
 - [[04.26 Blogpost]: Firestore levels up: Bringing the power of search and JOINs to NoSQL](https://firebase.blog/posts/2026/04/firestore-pipelines-ga)
 - [[04.26 Blogpost]: MCP Toolbox v1.0: The Open-Source Framework for Secure Agentic Data Access](https://medium.com/google-cloud/mcp-toolbox-v1-0-the-open-source-framework-for-secure-agentic-data-access-3c2199546ba8)
 - [[04.26 Blogpost]: Building a Scalable RAG Backend with Cloud Run Jobs and AlloyDB](https://medium.com/google-cloud/building-a-scalable-rag-backend-with-cloud-run-jobs-and-alloydb-6ead93ca4aec)

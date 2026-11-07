@@ -63,6 +63,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Truncate EmbeddingGemma 2 output vectors (`truncate_dim=256`) and apply L2 normalization to cut vector index memory by 66% with negligible recall loss.
 > *Cites: [EmbeddingGemma 2: The Developer Guide](./references/articles.md)*
 
+> [!CAUTION]
+> **Anti-Pattern 8: Running Planet-Scale Stateful Agent Swarms or GPU Biotech Simulations on Stateless Request-Bound Primitives [10.26]**
+> Deploying long-horizon, self-evolving agent harnesses or multi-hour GPU biotech folding/docking agents on stateless HTTP-bound compute causes mid-trajectory eviction, lost execution checkpoints, and ungoverned tool execution.
+> - **Mandatory Standard**: Run long-lived stateful agent harnesses on **Agent Compute Engine** with expanded agent governance (sandboxed microVM state persistence, identity-bound policy enforcement, and managed GPU/TPU tool orchestration).
+> *Cites: [Introducing Agent Compute Engine and expanding agent governance](./references/articles.md), [Agent Compute Engine deep dive](./references/articles.md), and [Architecting scalable, agentic biotech workloads](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -262,7 +268,7 @@ print(f"Generated normalized MRL embedding vector of shape: {embeddings.shape}")
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
-- **[10.26]**: EmbeddingGemma 2 launched with native multimodal (text, image, audio) encoders, 32K context window, and Matryoshka Representation Learning (MRL).
+- **[10.26]**: Agent Compute Engine and expanded agent governance for planet-scale stateful agents; Scalable agentic biotech workloads on GCP; EmbeddingGemma 2 launched with native multimodal encoders, 32K context window, and Matryoshka Representation Learning (MRL).
 - **[08.26]**: Gemma in the Cloud guide; Fine-tuning Gemma 4 at scale on GEAP and Cloud Run.
 - **[07.26]**: Gemini Managed Agents run background asynchronous workflows.
 - **[06.26]**: Gemma 4 12B developer guide; Vertex AI transitions to Gemini Enterprise Agent Platform (GEAP).

@@ -51,6 +51,12 @@ Activate this skill whenever:
 > - **Solution**: Enforce strict **Cloud Run IAM Authentication** requiring caller agents to present signed Google OIDC bearer tokens (`roles/run.invoker`) and bind MCP tool execution to explicit service account scopes.
 > *Cites: [Securing AI agents with MCP Authorization](./references/articles.md) and [Managing BigQuery with Google ADK, MCP, Cloud Run, Streamlit, and OIDC Authentication](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Building External Python ETL Pipelines to Pre-Parse Unstructured GCS Files Before BigQuery Analysis [10.26]**
+> Standing up separate external OCR/document-parsing worker clusters to extract JSON fields from GCS PDFs, audio, or images before loading into BigQuery creates brittle dual-storage synchronization lag and strips object-level governance.
+> - **Solution**: Reference unstructured Cloud Storage blobs directly inside standard tables using **`ObjectRef` (`OBJECT_REF`)** for inline AI-native ELT (`AI.GENERATE`), enrich agent context automatically with **Dataplex Knowledge Catalog**, and scale Python dataframe LLM prompting with **BigFrames (`bigframes.ml.llm`)**.
+> *Cites: [Analyze unstructured data in BigQuery with ObjectRef](./references/articles.md), [From Cloud Storage to Structured Data: Building an AI-Native ELT Pipeline in BigQuery](./references/articles.md), [Knowledge Catalog: self-learning context enrichment for AI agents](./references/articles.md), and [Prompting LLMs over your data at scale in Python with bigframes and BigQuery AI](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -252,7 +258,34 @@ CLUSTER BY agent_name, execution_status;
 
 ---
 
+### Blueprint 7: Multivariate Time-Series Forecasting with BigQuery `TimesFM 3.0` (`AI.FORECAST`) [10.26]
+Forecast target metrics in BigQuery SQL while incorporating dynamic exogenous covariates (`TimesFM 3.0`) and unstructured `ObjectRef` columns:
+```sql
+SELECT
+  store_id,
+  forecast_timestamp,
+  forecast_value,
+  prediction_interval_lower_bound,
+  prediction_interval_upper_bound
+FROM
+  AI.FORECAST(
+    MODEL `bigquery-public-data.ml_models.timesfm_3_0`,
+    TABLE `my_project.retail.daily_demand_with_covariates`,
+    STRUCT(
+      'daily_units_sold' AS data_col,
+      'sale_date' AS timestamp_col,
+      ['store_id'] AS id_cols,
+      ['promo_discount_pct', 'avg_temperature_c', 'is_holiday'] AS covariate_cols,
+      30 AS horizon
+    )
+  );
+```
+*Cites: [BigQuery TimesFM 3.0 with multivariate time-series forecasting](./references/articles.md) and [Analyze unstructured data in BigQuery with ObjectRef](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: BigQuery `ObjectRef` GA for inline unstructured multimodal SQL & AI-native ELT; `TimesFM 3.0` multivariate time-series forecasting; Dataplex Knowledge Catalog self-learning context enrichment for AI agents; BigFrames Python LLM prompting at scale.
 - **[09.26]**: TriLink enterprise analytics architecture combining BigQuery AI with agentic service networks.
 - **[08.26]**: Adaptive feedback loops and evaluation telemetry for AI Agents querying BigQuery.
 - **[07.26]**: Conversational Analytics in BigQuery GA with agentic reasoning and semantic layer integration.

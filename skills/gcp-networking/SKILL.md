@@ -50,6 +50,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Automate CIDR block reservations using **Network Connectivity Internal Ranges (`google_network_connectivity_internal_range`)** in Terraform to enforce dynamic, collision-free IP Address Management (IPAM) across Shared VPC topologies.
 > *Cites: [IP Address Management on Google Cloud: Implementing IPAM in a Shared VPC with Terraform](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Deploying Third-Party Packet-Capture DaemonSets on GKE Instead of Native VPC Flow Logs Attribution [10.26]**
+> Running privileged `tcpdump` or third-party packet-sniffing DaemonSets on every GKE node to debug L3/L4 pod traffic consumes node CPU/RAM and expands the cluster attack surface, while polling REST endpoints instead of using streaming gateways breaks real-time AI responses.
+> - **Standard Protocol**: Enable **VPC Flow Logs with GKE Workload Attribution** for zero-sidecar pod/service L3/L4 visibility, use **API Gateway Streaming** (SSE, WebSockets, gRPC) for real-time AI APIs, and expose on-cluster Kubernetes APIs to agents via **Apigee Hybrid 1.17 MCP support**.
+> *Cites: [Using VPC Flow Logs to troubleshoot GKE workloads](./references/articles.md), [Streaming comes to API Gateway: real-time and AI-ready APIs, without changing your spec](./references/articles.md), and [Announcing MCP support in Apigee hybrid: agentic tools that run in your own cluster](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -224,7 +230,7 @@ resource "google_network_connectivity_internal_range" "shared_vpc_gke_pods_ipam"
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
-- **[10.26]**: Automated Shared VPC IP Address Management (IPAM) using Network Connectivity Internal Ranges in Terraform.
+- **[10.26]**: Automated Shared VPC IP Address Management (IPAM) using Network Connectivity Internal Ranges in Terraform; GKE workload troubleshooting with Pod-attributed VPC Flow Logs; API Gateway real-time SSE/bidirectional streaming for AI APIs; Apigee hybrid 1.17 with expanded MCP server governance.
 - **[07.26]**: Cloud CDN launches native Private Bucket Access, eliminating public storage buckets.
 - **[04.26]**: Virgo scale-out network fabric for megascale AI clusters; Envoy AI networking integrations.
 - **[03.26]**: Private API Gateway deployment architectures on GCP.

@@ -2,9 +2,14 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-bigquery-ai`.
 
-Total indexed resources: **34**
+Total indexed resources: **39**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: From Cloud Storage to Structured Data: Building an AI-Native ELT Pipeline in BigQuery](https://medium.com/@sendoamoronta/from-cloud-storage-to-structured-data-building-an-ai-native-elt-pipeline-in-bigquery-1bbe368eaf7b)
+- [[10.26 Blogpost]: Knowledge Catalog: self-learning context enrichment for AI agents](https://cloud.google.com/blog/products/data-analytics/knowledge-catalog-self-learning-context-enrichment-for-ai-agents/)
+- [[10.26 Blogpost]: Analyze unstructured data in BigQuery with ObjectRef](https://cloud.google.com/blog/products/data-analytics/analyze-unstructured-data-in-bigquery-with-objectref/)
+- [[10.26 Blogpost]: Prompting LLMs over your data at scale in Python with bigframes and BigQuery AI](https://medium.com/google-cloud/prompting-llms-over-your-data-at-scale-in-python-with-bigframes-and-bigquery-ai-c45502f686d7)
+- [[10.26 Blogpost]: BigQuery TimesFM 3.0 with multivariate time-series forecasting](https://cloud.google.com/blog/products/data-analytics/bigquery-timesfm-3-0-with-multivariate-time-series-forecasting/)
 - [[09.26 Blogpost]: TriLink: A BigQuery AI powered Enterprise Analytics Solution](https://www.kaggle.com/competitions/bigquery-ai-hackathon/writeups/trilink-architecting-the-ai-native-digital-service)
 - [[08.26 Blogpost]: How to Build an Adaptive Feedback Loop for AI Agents in BigQuery](https://medium.com/google-cloud/how-to-build-an-adaptive-feedback-loop-for-ai-agents-in-bigquery-89bf68cb8772)
 - [[07.26 Blogpost]: Conversational analytics in BigQuery brings trusted agentic reasoning to everyone](https://cloud.google.com/blog/products/data-analytics/conversational-analytics-in-bigquery-now-ga/)

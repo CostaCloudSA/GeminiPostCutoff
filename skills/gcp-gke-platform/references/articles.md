@@ -2,9 +2,13 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gke-platform`.
 
-Total indexed resources: **48**
+Total indexed resources: **52**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: GKE networking dataplane for large agentic AI workloads](https://cloud.google.com/blog/products/networking/gke-networking-dataplane-for-large-agentic-ai-workloads/)
+- [[10.26 Blogpost]: GKE Fleet Scopes: Unifying Multi-Cluster RBAC and Logging](https://medium.com/google-cloud/gke-fleet-scopes-unifying-multi-cluster-rbac-and-logging-cea20efdb2a0)
+- [[10.26 Blogpost]: Kubernetes Ingress vs Gateway API on Google Cloud](https://medium.com/google-cloud/kubernetes-ingress-vs-gateway-api-on-google-cloud-560d0db5e904)
+- [[10.26 Blogpost]: Architecting for 99.99%: Multi-Regional Disaster Recovery for GKE and Cloud AI Workloads](https://medium.com/google-cloud/architecting-for-99-99-multi-regional-disaster-recovery-for-gke-and-cloud-ai-workloads-8f99ee9e3ccf)
 - [[09.26 Blogpost]: Re-Architecting GKE: From Rigid Node Pools to Workload-Driven ComputeClasses](https://medium.com/@rathin91/re-architecting-gke-from-rigid-node-pools-to-workload-driven-computeclasses-c91a45665da8)
 - [[08.26 Blogpost]: Cloud Run vs GKE Autopilot: A Comparison for ADK Agents](https://medium.com/google-cloud/cloud-run-vs-gke-autopilot-a-comparison-for-adk-agents-2295c2061571)
 - [[08.26 Blogpost]: Securing Kubernetes: How to Build a Private GKE Cluster on Google Cloud](https://medium.com/@douglasfrancis054/ecuring-kubernetes-how-to-build-a-private-gke-cluster-on-google-cloud-c5e63f3e9dcd)

@@ -64,6 +64,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Replace rigid node-pool pinning with workload-driven **`ComputeClass`** custom resources defining ordered machine-family fallback priorities (e.g., Spot C4 $\to$ Spot C3 $\to$ On-Demand C3) with `autoscalingPolicy.consolidation`.
 > *Cites: [Re-Architecting GKE: From Rigid Node Pools to Workload-Driven ComputeClasses](./references/articles.md) and [Using Autopilot ComputeClasses on GKE Standard Clusters](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 8: Per-Cluster Manual RBAC & Single-Region AI Cluster Topologies [10.26]**
+> Managing RBAC role bindings and log sinks individually per GKE cluster, or deploying large agentic AI workloads without Dataplane V2 network identity optimization and multi-regional disaster recovery, causes identity-scaling bottlenecks and regional outage exposure.
+> - **Standard Protocol**: Enable **GKE Dataplane V2** for sub-second agentic pod network provisioning, unify multi-cluster access and observability via **GKE Fleet Scopes**, migrate legacy Kubernetes `Ingress` to **GKE Gateway API**, and architect active-active multi-regional failover for 99.99% availability.
+> *Cites: [GKE networking dataplane for large agentic AI workloads](./references/articles.md), [GKE Fleet Scopes: Unifying Multi-Cluster RBAC and Logging](./references/articles.md), [Kubernetes Ingress vs Gateway API on Google Cloud](./references/articles.md), and [Architecting for 99.99%: Multi-Regional Disaster Recovery for GKE and Cloud AI Workloads](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -321,6 +327,7 @@ spec:
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: GKE Dataplane V2 network identity scaling for large agentic AI workloads; GKE Fleet Scopes for unified multi-cluster RBAC and logging; 99.99% multi-regional GKE disaster recovery blueprints.
 - **[09.26]**: Workload-driven GKE `ComputeClass` priority fallback chains replacing rigid manual node-pool architectures.
 - **[08.26]**: Cloud Run vs GKE Autopilot comparison for ADK Agent hosting; Private GKE cluster blueprints.
 - **[07.26]**: Kubernetes Networking 101 on GKE; k8s-aibom launched for automated AI Bills of Materials.

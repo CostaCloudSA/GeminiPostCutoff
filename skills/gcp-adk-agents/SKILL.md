@@ -80,6 +80,12 @@ Activate this skill whenever:
 > - **Solution**: Decompose monolithic agents into domain-scoped specialist sub-agents (`<= 8` tools per agent), enforce strict input/output schema contracts, and gate deployments on automated trajectory evaluation suites.
 > *Cites: [9 Mistakes to Avoid When Building Gemini Enterprise Agents](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 10: Hardcoding Static MCP Server Endpoints & Shipping Agents on "Vibe-Check" Evals [10.26]**
+> Hardcoding MCP tool URLs inside agent definitions, deploying without Terraform CI/CD pipelines, or shipping agent updates based on subjective "vibe checks" instead of boolean-judge Critical User Journey (CUJ) suites causes silent production tool drift and multi-turn orchestration failures.
+> - **Solution**: Use **Dynamic MCP Server Discovery via Agent Registry**, standardize across ADK's 5 language runtimes (Python, Go, TypeScript, Java, Kotlin) and reference recipes (`google/adk-recipes`), stream structured UI via **A2UI Express**, and enforce governed Terraform CI/CD and CUJ trajectory evaluation gates on Agent Runtime.
+> *Cites: [Dynamic MCP Server Discovery on Google Cloud](./references/articles.md), [Evaluating AI agents: moving past the vibe check](./references/articles.md), [One Agent Development Kit, five languages](./references/articles.md), [Fast, reliable A2UI, with swappable inference formats](./references/articles.md), [Architecting Governed, Self-Evolving AI Agents on Google Cloud](./references/articles.md), [From single agents to complex multi-agent systems: addressing deployment in GCP](./references/articles.md), [Deploying an ADK agent on Agent Runtime with Terraform and CI/CD](./references/articles.md), and [Three layers, one repo: a tour of google/adk-recipes](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -369,7 +375,7 @@ runner = Runner(
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
-- **[10.26]**: Production anti-patterns and architectural guardrails for Gemini Enterprise Agents (avoiding monolithic tool registries and unscoped agent loops).
+- **[10.26]**: ADK 5-language ecosystem (Python, Go, TypeScript, Java, Kotlin) and `google/adk-recipes`; Dynamic MCP Server Discovery via Agent Registry; A2UI Express swappable inference formats; CUJ boolean-judge evaluation framework; Terraform CI/CD for Agent Runtime and governed self-evolving enterprise agents.
 - **[09.26]**: Securing Agent Platform with Agent Gateway and Model Armor.
 - **[08.26]**: Zero-Trust AI agents with SPIFFE workload identity; MCP Toolbox security patterns.
 - **[07.26]**: Gemini Managed Agents run background asynchronous workflows.

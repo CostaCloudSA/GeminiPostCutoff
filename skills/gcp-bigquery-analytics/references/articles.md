@@ -2,9 +2,15 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-bigquery-analytics`.
 
-Total indexed resources: **29**
+Total indexed resources: **35**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Data Governance at Scale with Gemini 4 Argon & BigQuery](https://medium.com/google-cloud/data-governance-at-scale-with-gemini-4-argon-bigquery-583009ad999d)
+- [[10.26 Blogpost]: Reprocessing BigQuery at Scale: The Hidden Failure Modes of Incremental dbt Pipelines](https://medium.com/dbt-for-analytics/reprocessing-bigquery-at-scale-the-hidden-failure-modes-of-incremental-dbt-pipelines-b913cf3fd847)
+- [[10.26 Blogpost]: Handling Late-Arriving Data in Google Cloud Dataflow: A Production Architecture for 100% Eventual Consistency](https://medium.com/@swapnil29071999/handling-late-arriving-data-in-google-cloud-dataflow-a-production-architecture-for-100-eventual-4723a49782b5)
+- [[10.26 Blogpost]: Learning BigQuery Graph with Nodes and Edges: Which Melbourne Cafes Are Neighbours?](https://medium.com/@harshini.gnanasekar3/learning-bigquery-graph-with-nodes-and-edges-which-melbourne-cafes-are-neighbours-1e852b490643)
+- [[10.26 Blogpost]: Domain-Driven BigQuery Column Security: Moving to Data Governance Tags](https://medium.astrafy.io/domain-driven-bigquery-column-security-moving-to-data-governance-tags-d4ca3d4dbf2e)
+- [[10.26 Blogpost]: Introducing Looker Data Apps](https://cloud.google.com/blog/products/business-intelligence/introducing-looker-data-apps/)
 - [[08.26 Blogpost]: Zero-code, low-cost data ingestion: New BigQuery DTS capabilities](https://cloud.google.com/blog/products/data-analytics/new-bigquery-data-transfer-service-capabilities)
 - [[07.26 Blogpost]: Conversational analytics in BigQuery brings trusted agentic reasoning to everyone](https://cloud.google.com/blog/products/data-analytics/conversational-analytics-in-bigquery-now-ga/)
 - [[06.26 Blogpost]: A2A ecosystem: BigQuery Data Engineering Agent](https://medium.com/google-cloud/a2a-ecosystem-bigquery-data-engineering-agent-725aaac88a63)

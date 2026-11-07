@@ -49,6 +49,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Provision **Cloud Firestore Enterprise Edition with MongoDB Compatibility**, enabling zero-code driver connection switching while gaining serverless multi-region 99.999% availability.
 > *Cites: [Migrating from MongoDB to Firestore Without Changing a Single Line of Code](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Manual Macro-by-Macro Rewrites During Snowflake-to-BigQuery dbt Migrations [10.26]**
+> Manually translating hundreds of Snowflake-specific SQL dialects (`QUALIFY`, `FLATTEN`, date math, and custom dbt macros) to BigQuery SQL without automated AI migration skills introduces subtle metric drift across historical marts.
+> - **Standard Protocol**: Automate dialect transpilation and parity validation using **AI Migration Skills for Snowflake-to-BigQuery dbt** during cutover, or bridge live coexistence queries via **Google ADK and Snowflake Cortex MCP** during phased migrations.
+> *Cites: [Automating Snowflake-to-BigQuery dbt Migrations with AI Skills](./references/articles.md) and [Bridge Gemini Enterprise and Snowflake with Google ADK](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -215,7 +221,7 @@ resource "google_firestore_database" "mongodb_compatible_db" {
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
-- **[10.26]**: Zero-code MongoDB-to-Firestore migrations using Cloud Firestore Enterprise wire-protocol compatibility.
+- **[10.26]**: Zero-code MongoDB-to-Firestore migrations using Cloud Firestore Enterprise wire-protocol compatibility; Automated Snowflake-to-BigQuery dbt migrations with AI skills; Bridging Gemini Enterprise and Snowflake via ADK & MCP.
 - **[06.26]**: Vertex AI Agent Builder migration mapping to Gemini Enterprise Agent Platform (GEAP).
 - **[12.25]**: Passwordless Workload Identity Federation for Azure AKS; Database Migration Service directives.
 - **[10.25]**: Migrating Databricks Delta Lake tables to Cloud Storage using Storage Transfer Service.

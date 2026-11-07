@@ -2,9 +2,11 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-migrations`.
 
-Total indexed resources: **10**
+Total indexed resources: **12**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Bridge Gemini Enterprise and Snowflake with Google ADK](https://cloud.google.com/blog/products/data-analytics/bridge-gemini-enterprise-and-snowflake-with-google-adk/)
+- [[10.26 Blogpost]: Automating Snowflake-to-BigQuery dbt Migrations with AI Skills](https://medium.com/google-cloud/automating-snowflake-to-bigquery-dbt-migrations-with-ai-skills-698586704570)
 - [[10.26 Blogpost]: Migrating from MongoDB to Firestore Without Changing a Single Line of Code](https://medium.com/google-cloud/migrating-from-mongodb-to-firestore-without-changing-a-single-line-of-code-eb5970f592d1)
 - [[06.26 Blogpost]: Vertex AI is now Gemini Enterprise Agent Platform: A migration map for Agent Builders](https://blog.gazzurelli.com/vertex-ai-is-now-gemini-enterprise-agent-platform-a-migration-map-for-agent-builders-c7807b1901cf)
 

@@ -45,6 +45,11 @@ Activate this skill whenever:
 > - **Solution**: Implement automated Dialogflow CX testing suites that execute golden conversation traces in CI/CD pipelines prior to publishing environment tags.
 > *Cites: [Building a Dialogflow CX Testing Suite: From Concept to Production](./references/articles.md)*
 
+**Anti-Pattern 5: Blocking Gemini Live Audio Streams on Synchronous Tool Execution ("Dead Air" Trap) [10.26]**
+- **Symptom**: Voice agents using the Gemini Live API freeze or go completely silent for 3–10 seconds whenever they invoke external backend APIs, database queries, or multi-agent commerce swarms, causing callers to repeat themselves or hang up.
+- **Remediation**: Configure non-blocking asynchronous function declarations (`behavior="NON_BLOCKING"`) in ADK and use response scheduling (`WHEN_IDLE` or `INTERRUPT`) so the voice agent continues natural conversational turn-taking while background tools or multi-agent commerce workflows complete.
+> *Cites: [Step by Step guide: Build a Voice Agent That Never Goes Silent using ADK](./references/articles.md) and [Building Conversational Commerce with Multi-Agent Swarms on GCP: A Working Prototype](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -237,7 +242,36 @@ def run_automated_cx_test(project_id: str, agent_id: str, test_case_id: str) -> 
 
 ---
 
+### Blueprint 5: Non-Blocking Asynchronous Voice Agent Tool with ADK Response Scheduling [10.26]
+Prevent "dead air" during slow backend lookups in Gemini Live voice agents by yielding an immediate acknowledgement and streaming the final result with `WHEN_IDLE` scheduling:
+```python
+from google.adk.agents import Agent
+from google.genai import types
+
+async def check_order_inventory(order_id: str):
+    """Non-blocking generator tool that prevents voice dead-air during slow lookups."""
+    yield {"status": "PENDING", "message": f"Checking live warehouse inventory for {order_id}..."}
+    inventory_result = await fetch_erp_inventory_async(order_id)
+    yield {
+        "status": "COMPLETED",
+        "order_id": order_id,
+        "inventory": inventory_result,
+        "scheduling": types.FunctionResponseScheduling.WHEN_IDLE,
+    }
+
+voice_agent = Agent(
+    name="never_silent_commerce_voice_agent",
+    model="gemini-3.8-flash",
+    instruction="Acknowledge requests immediately while background tools run, then weave results naturally once idle.",
+    tools=[check_order_inventory],
+)
+```
+*Cites: [Step by Step guide: Build a Voice Agent That Never Goes Silent using ADK](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Never-silent Gemini Live voice agents with ADK non-blocking streaming tools; Conversational commerce with multi-agent swarms on GCP.
 - **[08.26]**: Voice and Live agent evaluation framework released in ADK.
 - **[07.26]**: Conversational Analytics in BigQuery reaches General Availability (GA).
 - **[04.26]**: Gemini 3.1 Flash TTS guide for expressive speech prompting.

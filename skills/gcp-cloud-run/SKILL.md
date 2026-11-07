@@ -249,8 +249,24 @@ gcloud run jobs execute vector-batch-sync --region us-central1
 
 ---
 
+### Blueprint 7: Native Cloud Run Worker Pools for Temporal Serverless Workers [10.26]
+Deploy pull-based Temporal workers on dedicated Cloud Run Worker Pools (no inbound HTTP port required) with queue-driven autoscaling:
+```bash
+gcloud beta run worker-pools deploy temporal-order-workers \
+    --image us-central1-docker.pkg.dev/my-project/workers/temporal-worker:v2 \
+    --region us-central1 \
+    --min-instances 2 \
+    --max-instances 25 \
+    --cpu 2 \
+    --memory 4Gi \
+    --set-env-vars="TEMPORAL_NAMESPACE=prod.a1b2c,TEMPORAL_TASK_QUEUE=orders-queue"
+```
+*Cites: [Temporal Serverless Workers on Cloud Run worker pools](./references/articles.md), [Shipping an MCP server on Google Cloud](./references/articles.md), and [PHP on Cloud Run: Cut Your Latency with PHP 8.5 and Persistent Sockets](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
-- **[10.26]**: Official Server-Side Cloud Swift SDK launched for building low-memory, container-native Swift services on Cloud Run with Firestore, Pub/Sub, and Cloud Storage.
+- **[10.26]**: Temporal Serverless Workers on native Cloud Run Worker Pools; Shipping access-controlled FastMCP servers to Cloud Run; PHP 8.5 persistent HTTP/2 sockets dropping SDK handshakes to 0ms; Server-Side Cloud Swift SDK.
 - **[08.26]**: Secure Remote MCP Server deployments on Cloud Run with OIDC token validation.
 - **[07.26]**: Cloud Run multi-region services enhanced with automated regional failover.
 - **[06.26]**: ADK and MCP agent backends hosted on Cloud Run with Streamlit and OIDC.

@@ -2,9 +2,17 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-adk-agents`.
 
-Total indexed resources: **84**
+Total indexed resources: **92**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Fast, reliable A2UI, with swappable inference formats](https://developers.googleblog.com/fast-reliable-a2ui/)
+- [[10.26 Blogpost]: From single agents to complex multi-agent systems: addressing deployment in GCP](https://medium.com/google-cloud/from-single-agents-to-complex-multi-agent-systems-addressing-deployment-in-gcp-e7054bba8cc4)
+- [[10.26 Blogpost]: Deploying an ADK agent on Agent Runtime with Terraform and CI/CD](https://medium.com/google-cloud/deploying-an-adk-agent-on-agent-runtime-with-terraform-and-ci-cd-0b81e1358af1)
+- [[10.26 Blogpost]: Architecting Governed, Self-Evolving AI Agents on Google Cloud](https://developers.googleblog.com/architecting-governed-self-evolving-ai-agents-on-gemini-agent-platform/)
+- [[10.26 Blogpost]: Dynamic MCP Server Discovery on Google Cloud](https://medium.com/google-cloud/dynamic-mcp-server-discovery-on-google-cloud-0f32110047c8)
+- [[10.26 Blogpost]: Three layers, one repo: a tour of google/adk-recipes](https://developers.googleblog.com/three-layers-one-repo-a-tour-of-googleadk-recipes/)
+- [[10.26 Blogpost]: Evaluating AI agents: moving past the vibe check](https://developers.googleblog.com/evaluating-ai-agents-moving-past-the-vibe-check/)
+- [[10.26 Blogpost]: One Agent Development Kit, five languages](https://cloud.google.com/blog/topics/developers-practitioners/one-agent-development-kit-five-languages/)
 - [[10.26 Blogpost]: 9 Mistakes to Avoid When Building Gemini Enterprise Agents](https://medium.com/@ernesto.urquijo/9-mistakes-to-avoid-when-building-gemini-enterprise-agents-d774000e3abb)
 - [[09.26 Blogpost]: Securing your agent in Agent Platform with Agent Gateway and Model Armor](https://medium.com/google-cloud/securing-your-agent-in-agent-platform-with-agent-gateway-and-model-armor-9c1e410b9364)
 - [[08.26 Blogpost]: Build Zero-Trust AI Agents with Google's Agent Development Kit](https://developers.googleblog.com/build-zero-trust-ai-agents-with-googles-agent-development-kit/)

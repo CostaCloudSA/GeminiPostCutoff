@@ -53,6 +53,12 @@ Activate this skill whenever:
 > - **Mandatory Standard**: Use EmbeddingGemma 2's modular architecture to disable unused modality towers (`vision_config=None`, `audio_config=None`) and truncate MRL dimensions (`truncate_dim=128`) for sub-300MB on-device semantic search.
 > *Cites: [Bring multimodal semantic search to the edge with EmbeddingGemma 2](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Training Physical AI Policies Without Simulation-to-Real Embodied Reasoning Grounding [10.26]**
+> Training robotic manipulation policies exclusively on real-world teleoperation trajectories without physics-accurate simulation and spatial-temporal reasoning models stalls fleet scaling and fails under novel 3D occlusions.
+> - **Standard Protocol**: Combine **NVIDIA Isaac Sim** and **DeepMind MuJoCo** on Google Cloud Physical AI with **Gemini Robotics Embodied Reasoning 2 (`gemini-robotics-er-2`)** for 3D spatial-temporal task planning and sim-to-real transfer.
+> *Cites: [Gemini Robotics Embodied Reasoning 2 is now available on Google Cloud](./references/articles.md) and [Scale robotics with Google Cloud physical AI and NVIDIA](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -192,7 +198,7 @@ query_vec = edge_model.encode(
 ---
 
 ## ⏱️ Chronological Evolution (2024–2026)
-- **[10.26]**: On-device multimodal semantic search at the edge using modular EmbeddingGemma 2 encoders.
+- **[10.26]**: Gemini Robotics Embodied Reasoning 2 (`gemini-robotics-er-2`) and Google Cloud Physical AI with NVIDIA Isaac Sim & MuJoCo; On-device multimodal semantic search at the edge using modular EmbeddingGemma 2 encoders.
 - **[08.26]**: Gemma 4 fine-tuning and deployment on GEAP and Cloud Run; LiteRT-LM optimized multi-token prediction.
 - **[06.26]**: Gemma 4 12B developer guide; DiffusionGemma image/video foundation models.
 - **[05.26]**: TPU inference pipelines for Gemma 4.

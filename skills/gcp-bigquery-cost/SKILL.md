@@ -69,6 +69,12 @@ Activate this skill whenever:
 > - **Solution**: Segment workloads into isolated reservations by job profile (`PIPELINE`, `QUERY`, `BACKGROUND`), mix On-Demand for spiky low-volume projects with Enterprise Edition baseline commitments for steady high-volume ETL, and enforce continuous FinOps chargeback monitoring.
 > *Cites: [BigQuery Cost Optimization: The Complete FinOps Framework](./references/articles.md) and [Making Sense of BigQuery Pricing Models: On-Demand, Capacity, Editions (2026)](./references/articles.md)*
 
+> [!CAUTION]
+> **Anti-Pattern 8: Running Uncapped `AI.GENERATE` or Open-Source LLM Queries Over Multi-Million-Row Tables [10.26]**
+> Invoking `AI.GENERATE` or managed open-source LLM inference across unpartitioned tables without pre-filtering or daily token quotas can consume hundreds of millions of tokens in a single unguarded SQL query.
+> - **Solution**: Enforce project- and user-level daily generative AI token quotas in BigQuery, pre-filter candidate rows with cheap SQL predicates (`WHERE` / `SEARCH()`) before LLM invocation, and right-size open-weights models (Gemma) for high-volume batch classification.
+> *Cites: [Using BigQuery's generative AI cost management features](./references/articles.md) and [How to manage costs when prompting open source LLMs from BigQuery](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices & Mathematical Models
@@ -301,8 +307,31 @@ FROM
 
 ---
 
+### Blueprint 9: Enforcing Daily Generative AI Token Quotas in BigQuery (`gcloud`) [10.26]
+Cap daily generative AI token consumption per project and per user to prevent runaway `AI.GENERATE` / `ML.GENERATE_TEXT` bills:
+```bash
+# Cap project-wide daily BigQuery Generative AI token usage:
+gcloud alpha services quota update \
+    --service=bigquery.googleapis.com \
+    --consumer=projects/my-prod-project \
+    --metric=bigquery.googleapis.com/quota/ai_generate/daily_tokens \
+    --unit=1/d/{project} \
+    --value=50000000
+
+# Cap per-user daily BigQuery Generative AI token usage:
+gcloud alpha services quota update \
+    --service=bigquery.googleapis.com \
+    --consumer=projects/my-prod-project \
+    --metric=bigquery.googleapis.com/quota/ai_generate/daily_tokens \
+    --unit=1/d/{user} \
+    --value=5000000
+```
+*Cites: [Using BigQuery's generative AI cost management features](./references/articles.md) and [How to manage costs when prompting open source LLMs from BigQuery](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2024–2026)
-- **[10.26]**: 2026 BigQuery pricing model decision framework (On-Demand vs Capacity vs Editions) and end-to-end FinOps optimization lifecycle.
+- **[10.26]**: BigQuery generative AI cost management features (daily token quotas & open-source LLM prompting cost controls); 2026 BigQuery pricing model decision framework (On-Demand vs Capacity vs Editions) and FinOps optimization lifecycle.
 - **[08.26]**: Per-user Antigravity & Agentic developer cost attribution using Cloud Audit Logs and BigQuery Billing Export.
 - **[06.26]**: Native BigQuery `VECTOR_SEARCH` with IVF flat indexes eliminates dedicated external vector database operational costs.
 - **[04.26]**: Google Cloud Asset Inventory continuous feed to BigQuery for organization-wide FinOps infrastructure audits.

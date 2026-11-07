@@ -70,7 +70,7 @@ Activate this skill whenever:
 > - **Trap**: Running always-on Dataflow worker VMs solely to write streaming Pub/Sub events or SMT-enriched AI features into Cloud Bigtable.
 > - **Blast Radius**: Adds unnecessary Dataflow cluster spend and pipeline operational overhead when native Bigtable export subscriptions can write rows and column families directly.
 > - **Mandate**: Configure zero-ETL **Pub/Sub Bigtable Subscriptions** (`bigtable_config`) paired with in-flight SMTs and a `dead_letter_policy`.
-> *Cites: [Pub/Sub AI Bytes: Part 5 — Zero-ETL streaming direct to database with Bigtable subscriptions](./references/articles.md)*
+> *Cites: [Pub/Sub AI Bytes: Part 5 — Zero-ETL streaming direct to database with Bigtable subscriptions](./references/articles.md), [Pub/Sub AI Bytes: Part 6 — Building a real-time streaming RAG pipeline](./references/articles.md)*
 
 ---
 
@@ -443,7 +443,7 @@ resource "google_pubsub_subscription" "zero_etl_bigtable_sink" {
 
 ## ⏱️ Chronological Evolution & Architectural Milestones
 
-- **[10.26]**: **Zero-ETL Streaming Direct to Database with Bigtable Subscriptions** — Native `bigtable_config` export subscriptions stream Pub/Sub messages and SMT-enriched AI signals directly into Cloud Bigtable column families without Dataflow compute.
+- **[10.26]**: **Zero-ETL Bigtable Subscriptions & Real-Time Streaming RAG Pipelines** — Native `bigtable_config` export subscriptions stream Pub/Sub messages directly into Cloud Bigtable column families, while Pub/Sub AI Bytes Part 6 standardizes low-latency streaming RAG ingestion and vector index refresh pipelines.
 
 - **[08.25]**: **Event-Driven AI & Enterprise Streaming Patterns** — Standardized high-throughput Pub/Sub patterns combining schema validation, in-flight SMTs, and zero-code export sinks.
 - **[07.25]**: **Pub/Sub Export Subscriptions to Cloud Storage (GA)** — Native no-code batching of Pub/Sub streams directly into Cloud Storage buckets in **Avro** or **Text** format without Dataflow or Cloud Run workers.

@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-generative-media`.
 
-Total indexed resources: **12**
+Total indexed resources: **13**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Fundamentals to engineer trustworthy gen media](https://cloud.google.com/blog/topics/consulting/fundamentals-to-engineer-trustworthy-gen-media/)
 - [[09.26 Article]: Generate and edit videos with Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni)
 - [[09.26 Article]: Video generation prompt guide](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/video/video-gen-prompt-guide)
 - [[08.26 Article]: Gemini Omni Flash - Model Card](https://deepmind.google/models/model-cards/gemini-omni-flash/)
