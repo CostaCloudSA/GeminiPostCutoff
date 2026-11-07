@@ -49,6 +49,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Deploy **GCP Canary Tokens**—decoy service accounts and mock Cloud Storage buckets configured with high-priority Cloud Audit Log alert sinks—to trigger immediate security response upon unauthorized enumeration.
 > *Cites: [GCP Canary Tokens](./references/articles.md) and [GCP Penetration Testing: A Step-by-Step Attack Guide](./references/articles.md)*
 
+> [!CAUTION]
+> **Anti-Pattern 6: Manual Ticket-Driven SecOps Triage Against Machine-Speed Agentic Threats [09.26, 05.26]**
+> Relying on manual tier-1 SOC alert triage and static perimeter firewalls in public-sector or regulated cloud environments cannot keep pace with automated adversarial reconnaissance and indirect prompt-injection chains.
+> - **Mandatory Standard**: Pair zero-trust sovereign controls and continuous compliance guardrails with machine-speed autonomous SecOps detection, threat intelligence enrichment, and Model Armor runtime interception.
+> *Cites: [Defending at Machine Speed: Securing the Public Sector in the Agentic Era](./references/articles.md) and [Cloud CISO Perspectives: How to build an AI-ready security program for the public sector](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -264,7 +270,7 @@ resource "google_cloud_asset_organization_feed" "iam_asset_feed" {
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
-- **[09.26]**: Agent Gateway and Model Armor integration for multi-agent platform security.
+- **[09.26]**: Agent Gateway and Model Armor integration for multi-agent platform security; Machine-speed agentic cyber defense for public sector workloads.
 - **[08.26]**: Zero-trust AI agent architectures with ADK; Autonomous agent security governance frameworks.
 - **[07.26]**: k8s-aibom launched for automated AI supply chain Bill of Materials verification on GKE.
 - **[06.26]**: SPIFFE identity standards adopted for cryptographic AI agent authentication.

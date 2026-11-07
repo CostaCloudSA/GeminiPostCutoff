@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gke-platform`.
 
-Total indexed resources: **47**
+Total indexed resources: **48**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[09.26 Blogpost]: Re-Architecting GKE: From Rigid Node Pools to Workload-Driven ComputeClasses](https://medium.com/@rathin91/re-architecting-gke-from-rigid-node-pools-to-workload-driven-computeclasses-c91a45665da8)
 - [[08.26 Blogpost]: Cloud Run vs GKE Autopilot: A Comparison for ADK Agents](https://medium.com/google-cloud/cloud-run-vs-gke-autopilot-a-comparison-for-adk-agents-2295c2061571)
 - [[08.26 Blogpost]: Securing Kubernetes: How to Build a Private GKE Cluster on Google Cloud](https://medium.com/@douglasfrancis054/ecuring-kubernetes-how-to-build-a-private-gke-cluster-on-google-cloud-c5e63f3e9dcd)
 - [[07.26 Blogpost]: Kubernetes Networking 101 on GKE: Quick Reference Guide](https://medium.com/google-cloud/kubernetes-networking-101-on-gke-quick-reference-guide-27f0de84039e)

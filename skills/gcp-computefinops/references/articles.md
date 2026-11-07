@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-computefinops`.
 
-Total indexed resources: **17**
+Total indexed resources: **18**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Ultra Low Latency Solution with U4 enables high-velocity trading](https://cloud.google.com/blog/topics/financial-services/ultra-low-latency-solution-with-u4-enables-high-velocity-trading/)
 - [[07.26 Blogpost]: New early anomalies and spend caps on Google Cloud Budgets](https://cloud.google.com/blog/topics/cost-management/new-early-anomalies-and-spend-caps-on-google-cloud-budgets/)
 - [[07.26 Blogpost]: Finally — Hard Caps to Limit Your Google Cloud Spend](https://medium.com/google-cloud/finally-hard-caps-to-limit-your-google-cloud-spend-29b2e658ed73)
 - [[04.26 Blogpost]: How to find the sweet spot between cost and performance](https://cloud.google.com/blog/products/ai-machine-learning/build-a-robust-and-cost-effective-gen-ai-strategy/)

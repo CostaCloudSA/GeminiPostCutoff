@@ -51,6 +51,12 @@ Activate this skill whenever:
 > - **Solution**: Deploy **GKE Inference Gateway with Utilization-Based Balancing (UBB)** and prefix-aware KV-cache routing to direct repeated prompts to warm model replicas.
 > *Cites: [How we cut Vertex AI latency by 35% with GKE Inference Gateway](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Cold-Provisioning Sandboxes Inside Synchronous Agentic RL Rollout Loops [09.26]**
+> Cold-starting isolated container or VM sandboxes (45–85s provisioning latency) between reinforcement learning rollout steps stalls parallel environment evaluation and leaves expensive H100/TPU v6e accelerators idle.
+> - **Solution**: Pre-warm gVisor-isolated environments using a GKE Agent Sandbox **`SandboxWarmPool`** combined with Pod Snapshot restore to achieve sub-2-second time-to-first-command across thousands of concurrent RL rollouts.
+> *Cites: [Accelerate agentic RL with GKE Agent Sandbox](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -279,7 +285,33 @@ spec:
 
 ---
 
+### Blueprint 6: Agentic RL Warm Pool with GKE Agent Sandbox (`SandboxWarmPool`) [09.26]
+Pre-warm 64 gVisor-isolated RL evaluation sandboxes for sub-2-second rollout environment assignment:
+```yaml
+apiVersion: agents.gke.io/v1alpha1
+kind: SandboxWarmPool
+metadata:
+  name: rl-eval-warm-pool
+  namespace: rl-training
+spec:
+  replicas: 64
+  runtimeClassName: gvisor
+  template:
+    spec:
+      containers:
+        - name: code-exec-env
+          image: us-central1-docker.pkg.dev/prod-ai/rl-envs/gym-sandbox:v1
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+```
+*Cites: [Accelerate agentic RL with GKE Agent Sandbox](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[09.26]**: GKE Agent Sandbox `SandboxWarmPool` and Pod Snapshot restore accelerate agentic reinforcement learning (RL) rollouts to sub-2s startup.
 - **[07.26]**: k8s-aibom launched for automated AI supply chain verification; GKE Agent Sandbox cuts agent costs by 75%.
 - **[06.26]**: Gemma 4 12B developer guide and optimized serving topologies.
 - **[05.26]**: Gemma 4 inference on Cloud TPUs; Agent Sandbox and Agent Substrate GA on GKE.

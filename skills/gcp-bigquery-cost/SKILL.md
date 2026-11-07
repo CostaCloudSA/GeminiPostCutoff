@@ -63,6 +63,12 @@ Activate this skill whenever:
 > - **Solution**: Use Dataform to build daily incremental flattened rollups clustered on `event_name` and `user_pseudo_id`.
 > *Cites: [How I optimized 70tb of GA4 Data in BQ using Dataform](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 7: Unsegmented Mixed Workloads Sharing a Single BigQuery Reservation [10.26]**
+> Placing ad-hoc exploratory queries, BI dashboards, and mission-critical SLA ETL pipelines inside a single shared Editions reservation allows rogue analyst queries to starve production pipeline slots or trigger continuous autoscaler ceiling bills.
+> - **Solution**: Segment workloads into isolated reservations by job profile (`PIPELINE`, `QUERY`, `BACKGROUND`), mix On-Demand for spiky low-volume projects with Enterprise Edition baseline commitments for steady high-volume ETL, and enforce continuous FinOps chargeback monitoring.
+> *Cites: [BigQuery Cost Optimization: The Complete FinOps Framework](./references/articles.md) and [Making Sense of BigQuery Pricing Models: On-Demand, Capacity, Editions (2026)](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices & Mathematical Models
@@ -296,6 +302,7 @@ FROM
 ---
 
 ## ⏱️ Chronological Evolution (2024–2026)
+- **[10.26]**: 2026 BigQuery pricing model decision framework (On-Demand vs Capacity vs Editions) and end-to-end FinOps optimization lifecycle.
 - **[08.26]**: Per-user Antigravity & Agentic developer cost attribution using Cloud Audit Logs and BigQuery Billing Export.
 - **[06.26]**: Native BigQuery `VECTOR_SEARCH` with IVF flat indexes eliminates dedicated external vector database operational costs.
 - **[04.26]**: Google Cloud Asset Inventory continuous feed to BigQuery for organization-wide FinOps infrastructure audits.

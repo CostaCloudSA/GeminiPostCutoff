@@ -2,9 +2,11 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gemini-tooling`.
 
-Total indexed resources: **68**
+Total indexed resources: **70**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[09.26 Blogpost]: Google Cloud CLI remote MCP server in preview](https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-cli-remote-mcp-server-in-preview/)
+- [[09.26 Blogpost]: Data Agent Kit is now GA: Bring Google Data Cloud to any coding agent](https://cloud.google.com/blog/topics/developers-practitioners/data-agent-kit-is-now-ga-bring-google-data-cloud-to-any-coding-agent/)
 - [[08.26 Blogpost]: Eval-Driven Development for Agent Skills (Firebase Blog)](https://firebase.blog/posts/2026/08/eval-driven-development-agent-skills)
 - [[08.26 Blogpost]: I Turned Three Weeks of gcloud Commands Into Terraform](https://medium.com/@immanuelx589/i-turned-three-weeks-of-gcloud-commands-into-terraform-4895caad9a6f)
 - [[06.26 Blogpost]: Deep Dive: Antigravity Agent Skills](https://medium.com/google-cloud/deep-dive-antigravity-agent-skills-b303bf05085b)

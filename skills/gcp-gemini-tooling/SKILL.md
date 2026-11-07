@@ -63,6 +63,12 @@ Activate this skill whenever:
 > - **Mandatory Standard**: Always pass `response_mime_type="application/json"` and a typed `response_schema` (Pydantic / JSON Schema) in `GenerateContentConfig`.
 > *Cites: [Structured Output with Gemini Models: Begging, Threatening, and JSON-ing](./references/articles.md) and [Eval-Driven Development for Agent Skills (Firebase Blog)](./references/articles.md)*
 
+> [!CAUTION]
+> **Anti-Pattern 8: Executing Unconstrained Local `gcloud`/`bq` Shell Commands in Coding Agents Without MCP Sandbox Guardrails [09.26]**
+> Allowing autonomous coding agents to run raw local shell commands against production GCP projects or BigQuery datasets without `accidental-data-loss-prevention` skills or network-isolated MCP sandboxing risks destructive dataset drops and unintended IAM mutations.
+> - **Mandatory Standard**: Connect coding agents to the **Google Cloud CLI Remote MCP Server** (`https://cloudcli.googleapis.com/mcp`, running inside an isolated network-disabled sandbox) and install the **Data Agent Kit** (`accidental-data-loss-prevention` + `data-lineage` skills) before executing data cloud operations.
+> *Cites: [Google Cloud CLI remote MCP server in preview](./references/articles.md) and [Data Agent Kit is now GA: Bring Google Data Cloud to any coding agent](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -341,7 +347,26 @@ deployment "staging" {
 
 ---
 
+### Blueprint 9: Google Cloud CLI Remote MCP Server & Data Agent Kit Configuration [09.26]
+Mount the hosted Google Cloud CLI remote MCP server (`cloudcli.googleapis.com/mcp`) and install the GA Data Agent Kit skills:
+```json
+{
+  "mcpServers": {
+    "google-cloud-cli-remote": {
+      "serverUrl": "https://cloudcli.googleapis.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GCLOUD_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+*Cites: [Google Cloud CLI remote MCP server in preview](./references/articles.md) and [Data Agent Kit is now GA: Bring Google Data Cloud to any coding agent](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[09.26]**: Google Cloud CLI remote MCP server (`cloudcli.googleapis.com/mcp`) launched in preview; Data Agent Kit reaches GA with 26 skills for BigQuery, AlloyDB, Spanner, and Dataform.
 - **[08.26]**: Eval-Driven Development (EDD) framework for agent skills; Turning 3 weeks of gcloud CLI scripts into modular Terraform Stacks.
 - **[06.26]**: Antigravity Agent Skills deep dive; Building with Developer Knowledge API and Antigravity CLI.
 - **[05.26]**: Gemini CLI DevOps Extension; Terraform trench lessons on production GCP.

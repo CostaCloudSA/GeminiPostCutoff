@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-security-compliance`.
 
-Total indexed resources: **30**
+Total indexed resources: **31**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[09.26 Blogpost]: Defending at Machine Speed: Securing the Public Sector in the Agentic Era](https://cloud.google.com/blog/topics/public-sector/defending-at-machine-speed-securing-the-public-sector-in-the-agentic-era/)
 - [[09.26 Blogpost]: Securing your agent in Agent Platform with Agent Gateway and Model Armor](https://medium.com/google-cloud/securing-your-agent-in-agent-platform-with-agent-gateway-and-model-armor-9c1e410b9364)
 - [[08.26 Blogpost]: Build Zero-Trust AI Agents with Google's Agent Development Kit](https://developers.googleblog.com/build-zero-trust-ai-agents-with-googles-agent-development-kit/)
 - [[08.26 Blogpost]: Empowering autonomous agents with advanced security governance](https://cloud.google.com/blog/topics/ai-infrastructure/state-of-ai-infrastructure-report-agent-governance-and-security)

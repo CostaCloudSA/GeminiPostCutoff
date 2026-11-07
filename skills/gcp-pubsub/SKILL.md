@@ -65,6 +65,13 @@ Activate this skill whenever:
 > - **Mandate**: Configure **Eventarc Triggers** (`google_eventarc_trigger`) backed by Pub/Sub transport topics to declaratively route 130+ Google Cloud event sources with sub-second push/pull delivery.
 > *Cites: [Eventarc and Pub/Sub: Routing 130+ Google Cloud Event Sources](./references/archive.md)*
 
+> [!WARNING]
+> **Anti-Pattern 7: Deploying Custom Dataflow/Beam Jobs for Simple Pub/Sub-to-Bigtable Ingestion [10.26]**
+> - **Trap**: Running always-on Dataflow worker VMs solely to write streaming Pub/Sub events or SMT-enriched AI features into Cloud Bigtable.
+> - **Blast Radius**: Adds unnecessary Dataflow cluster spend and pipeline operational overhead when native Bigtable export subscriptions can write rows and column families directly.
+> - **Mandate**: Configure zero-ETL **Pub/Sub Bigtable Subscriptions** (`bigtable_config`) paired with in-flight SMTs and a `dead_letter_policy`.
+> *Cites: [Pub/Sub AI Bytes: Part 5 — Zero-ETL streaming direct to database with Bigtable subscriptions](./references/articles.md)*
+
 ---
 
 ## 🧭 Architecture Decision Matrices
@@ -404,7 +411,39 @@ resource "google_eventarc_trigger" "gcs_document_ingest" {
 
 ---
 
+### Blueprint 6: Terraform — Zero-ETL Streaming Direct to Cloud Bigtable Subscription [10.26]
+Streams real-time Pub/Sub messages directly into Cloud Bigtable column families without intermediate Dataflow workers.
+*Cites: [Pub/Sub AI Bytes: Part 5 — Zero-ETL streaming direct to database with Bigtable subscriptions](./references/articles.md)*
+
+```hcl
+resource "google_pubsub_subscription" "zero_etl_bigtable_sink" {
+  name  = "realtime-feature-store-bigtable-sub"
+  topic = google_pubsub_topic.agent_telemetry.id
+
+  bigtable_config {
+    table                 = "projects/${var.project_id}/instances/realtime-fs/tables/user-signals"
+    service_account_email = google_service_account.pubsub_push_invoker.email
+    write_metadata        = true
+  }
+
+  dead_letter_policy {
+    dead_letter_topic     = google_pubsub_topic.agent_telemetry_dlq.id
+    max_delivery_attempts = 5
+  }
+
+  labels = {
+    environment = "production"
+    team        = "platform-data"
+    managed_by  = "terraform"
+  }
+}
+```
+
+---
+
 ## ⏱️ Chronological Evolution & Architectural Milestones
+
+- **[10.26]**: **Zero-ETL Streaming Direct to Database with Bigtable Subscriptions** — Native `bigtable_config` export subscriptions stream Pub/Sub messages and SMT-enriched AI signals directly into Cloud Bigtable column families without Dataflow compute.
 
 - **[08.25]**: **Event-Driven AI & Enterprise Streaming Patterns** — Standardized high-throughput Pub/Sub patterns combining schema validation, in-flight SMTs, and zero-code export sinks.
 - **[07.25]**: **Pub/Sub Export Subscriptions to Cloud Storage (GA)** — Native no-code batching of Pub/Sub streams directly into Cloud Storage buckets in **Avro** or **Text** format without Dataflow or Cloud Run workers.

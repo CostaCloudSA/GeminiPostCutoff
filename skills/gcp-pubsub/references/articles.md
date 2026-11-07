@@ -7,6 +7,10 @@
 
 ---
 
+### 🌟 2026 Releases & Architectural Baselines (Chronological)
+
+- [[10.26 Blogpost]: Pub/Sub AI Bytes: Part 5 — Zero-ETL streaming direct to database with Bigtable subscriptions](https://medium.com/google-cloud/pub-sub-ai-bytes-part-5-zero-etl-streaming-direct-to-database-with-bigtable-subscriptions-e1e96f770666)
+
 ### 📅 2025 Releases & Deep Dives (Chronological)
 
 - [[08.25 Blogpost]: Powering event-driven architectures with Google Cloud Pub/Sub](https://cloud.google.com/blog/products/data-analytics/powering-event-driven-architectures-with-google-cloud-pub-sub)

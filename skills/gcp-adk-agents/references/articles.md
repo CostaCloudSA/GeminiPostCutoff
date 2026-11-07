@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-adk-agents`.
 
-Total indexed resources: **83**
+Total indexed resources: **84**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: 9 Mistakes to Avoid When Building Gemini Enterprise Agents](https://medium.com/@ernesto.urquijo/9-mistakes-to-avoid-when-building-gemini-enterprise-agents-d774000e3abb)
 - [[09.26 Blogpost]: Securing your agent in Agent Platform with Agent Gateway and Model Armor](https://medium.com/google-cloud/securing-your-agent-in-agent-platform-with-agent-gateway-and-model-armor-9c1e410b9364)
 - [[08.26 Blogpost]: Build Zero-Trust AI Agents with Google's Agent Development Kit](https://developers.googleblog.com/build-zero-trust-ai-agents-with-googles-agent-development-kit/)
 - [[08.26 Blogpost]: Architecting Secure Enterprise AI Agents with MCP Toolbox](https://medium.com/google-cloud/architecting-secure-enterprise-ai-agents-with-mcp-toolbox-f70b07aa1efa)

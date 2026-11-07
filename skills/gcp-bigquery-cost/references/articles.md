@@ -2,9 +2,11 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-bigquery-cost`.
 
-Total indexed resources: **31**
+Total indexed resources: **33**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Making Sense of BigQuery Pricing Models: On-Demand, Capacity, Editions (2026)](https://medium.com/alvin-ai/making-sense-of-bigquery-pricing-models-on-demand-capacity-editions-2026-6ade847695e6)
+- [[10.26 Blogpost]: BigQuery Cost Optimization: The Complete FinOps Framework](https://medium.com/alvin-ai/bigquery-cost-optimization-the-complete-finops-framework-6c741de5d76c)
 - [[08.26 Blogpost]: Tracking Antigravity developer costs with BigQuery](https://medium.com/google-cloud/per-user-cost-attribution-for-antigravity-with-bigquery-3e98fd997c58)
 - [[06.26 Blogpost]: You Probably Don't Need a Vector Database - If Your Data Already Lives in BigQuery](https://medium.com/@ahmed-tammam/you-probably-dont-need-a-vector-database-if-your-data-already-lives-in-bigquery-95d1d3071200)
 - [[04.26 Blogpost]: Reading a Google Cloud Organization Like a Database: Asset Inventory to BigQuery](https://medium.astrafy.io/reading-a-google-cloud-organization-like-a-database-asset-inventory-to-bigquery-3dd13e870b63)

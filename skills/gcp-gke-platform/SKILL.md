@@ -58,6 +58,12 @@ Activate this skill whenever:
 > - **Mandatory Standard**: Deploy **Private GKE Clusters** with `--enable-private-nodes` and `--enable-private-endpoint`, restricting control plane access strictly to authorized VPC admin subnets or an internal IAP bastion.
 > *Cites: [Securing Kubernetes: How to Build a Private GKE Cluster on Google Cloud](./references/articles.md) and [Building a PCI-DSS Compliant GKE Framework for Financial Institutions](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 7: Managing Brittle Per-Machine-Type Node Pools Instead of Declarative `ComputeClass` Fallback Priorities [09.26, 04.26]**
+> Hardcoding workloads to rigid, manually sized GKE Standard node pools with static `nodeSelector` labels causes scheduling deadlocks during regional Spot/accelerator stockouts and fragments cluster capacity.
+> - **Standard Protocol**: Replace rigid node-pool pinning with workload-driven **`ComputeClass`** custom resources defining ordered machine-family fallback priorities (e.g., Spot C4 $\to$ Spot C3 $\to$ On-Demand C3) with `autoscalingPolicy.consolidation`.
+> *Cites: [Re-Architecting GKE: From Rigid Node Pools to Workload-Driven ComputeClasses](./references/articles.md) and [Using Autopilot ComputeClasses on GKE Standard Clusters](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -315,6 +321,7 @@ spec:
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[09.26]**: Workload-driven GKE `ComputeClass` priority fallback chains replacing rigid manual node-pool architectures.
 - **[08.26]**: Cloud Run vs GKE Autopilot comparison for ADK Agent hosting; Private GKE cluster blueprints.
 - **[07.26]**: Kubernetes Networking 101 on GKE; k8s-aibom launched for automated AI Bills of Materials.
 - **[06.26]**: Deploying Remote MCP Servers on GKE in 30 minutes.

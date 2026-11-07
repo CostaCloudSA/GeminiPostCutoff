@@ -250,6 +250,7 @@ gcloud run jobs execute vector-batch-sync --region us-central1
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Official Server-Side Cloud Swift SDK launched for building low-memory, container-native Swift services on Cloud Run with Firestore, Pub/Sub, and Cloud Storage.
 - **[08.26]**: Secure Remote MCP Server deployments on Cloud Run with OIDC token validation.
 - **[07.26]**: Cloud Run multi-region services enhanced with automated regional failover.
 - **[06.26]**: ADK and MCP agent backends hosted on Cloud Run with Streamlit and OIDC.

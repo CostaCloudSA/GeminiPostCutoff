@@ -42,6 +42,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Leverage **AlphaEarth Foundations Satellite Embeddings**. AlphaEarth encodes satellite image tiles into high-dimensional visual embeddings stored directly in BigQuery, enabling `VECTOR_SEARCH` to find visually and environmentally similar terrain instantly.
 > *Cites: [Embedding Vector Search and Beyond with Big Query, Earth Engine, and AlphaEarth Foundations Satellite Embeddings](./references/articles.md) and [AlphaEarth Foundations Satellite Embeddings: Now Available on Google Cloud Storage](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 5: Authoring Complex Earth Engine Scripts Without Grounded Catalog & Docs MCP Context [09.26]**
+> Generating Earth Engine Python or JavaScript code with ungrounded coding assistants frequently hallucinates band names, deprecated dataset asset IDs, or client-side `for`-loops over server-side `ee.ImageCollection` objects.
+> - **Standard Protocol**: Ground AI coding assistants in the official Earth Engine dataset catalog and server-side functional mapping patterns (`collection.map()`) using the integrated Earth Engine Code Editor AI assistant or Developer Knowledge MCP tools.
+> *Cites: [Accelerate geospatial coding with AI in Google Earth Engine](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -178,6 +184,7 @@ WHERE ST_DWITHIN(v.current_point, p.boundary_geom, 500)
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[09.26]**: AI-assisted geospatial coding and grounded dataset discovery integrated directly into Google Earth Engine.
 - **[04.26]**: Google Earth AI models and datasets natively accessible inside BigQuery.
 - **[03.26]**: AlphaEarth Foundations satellite embeddings integrated with BigQuery Vector Search.
 - **[12.25]**: AlphaEarth Foundations satellite embeddings released on Cloud Storage.

@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gke-cost`.
 
-Total indexed resources: **7**
+Total indexed resources: **8**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: GKE CPU startup boost: Faster pod starts, lower costs](https://cloud.google.com/blog/products/containers-kubernetes/gke-cpu-startup-boost-faster-pod-starts-lower-costs/)
 - [[08.26 Blogpost]: How We Reduced GKE Costs by 33% Through Smarter Scheduling and Resource Governance: A DevOps Case Study](https://erroratnight.medium.com/how-we-reduced-gke-costs-by-33-through-smarter-scheduling-and-resource-governance-a-devops-case-08e6358367ce)
 - [[07.26 Blogpost]: Reduce your agent's costs by 75% with GKE Agent Sandbox](https://cloud.google.com/blog/products/containers-kubernetes/reduce-your-agents-costs-with-gke-agent-sandbox)
 - [[05.26 Blogpost]: How a Rails and K8s Newcomer Cut GKE Costs by 60% by Looking Across the Stack](https://medium.com/@ksakai/how-a-rails-and-k8s-newcomer-cut-gke-costs-by-60-by-looking-across-the-stack-99e53a925ee7)

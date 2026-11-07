@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-geospatial`.
 
-Total indexed resources: **5**
+Total indexed resources: **6**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[09.26 Blogpost]: Accelerate geospatial coding with AI in Google Earth Engine](https://cloud.google.com/blog/products/data-analytics/accelerate-geospatial-coding-with-ai-in-google-earth-engine/)
 - [[04.26 Blogpost]: Mapping a smarter future with BigQuery and Google Earth AI models and datasets](https://cloud.google.com/blog/products/data-analytics/google-earth-ai-models-and-datasets-in-bigquery)
 - [[03.26 Blogpost]: Embedding Vector Search and Beyond with Big Query, Earth Engine, and AlphaEarth Foundations Satellite Embeddings](https://medium.com/google-earth/embedding-vector-search-and-beyond-with-big-query-earth-engine-and-alphaearth-foundations-147135d1eeab)
 

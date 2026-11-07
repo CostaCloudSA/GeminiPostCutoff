@@ -57,6 +57,12 @@ Activate this skill whenever:
 > - **Mandatory Standard**: Pad all input token batches to fixed power-of-two sequence buckets (e.g., 512, 1024, 2048, 4096) and enable persistent XLA compilation caching (`jax.config.update("jax_compilation_cache_dir", "gs://...")`).
 > *Cites: [A Developer's Guide to Debugging JAX on Cloud TPUs: Essential Tools and Techniques](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 7: Storing Untruncated 768-Dim Embeddings When Matryoshka 256-Dim Retains Equivalent Recall [10.26]**
+> Indexing full 768-dimensional float32 embeddings across hundred-million-vector corpora triples HBM/RAM index footprint and vector distance compute when **EmbeddingGemma 2** supports native Matryoshka Representation Learning (MRL) truncation down to 256 or 128 dimensions.
+> - **Standard Protocol**: Truncate EmbeddingGemma 2 output vectors (`truncate_dim=256`) and apply L2 normalization to cut vector index memory by 66% with negligible recall loss.
+> *Cites: [EmbeddingGemma 2: The Developer Guide](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -237,7 +243,26 @@ with jax.profiler.trace("gs://my-tpu-artifacts/profiler_traces"):
 
 ---
 
+### Blueprint 7: Multimodal Semantic Indexing with EmbeddingGemma 2 & Matryoshka Truncation [10.26]
+Generate task-prefixed multimodal embeddings with EmbeddingGemma 2 and truncate MRL output from 768 to 256 dimensions:
+```python
+from sentence_transformers import SentenceTransformer
+
+# Load EmbeddingGemma 2 and truncate Matryoshka Representation Learning (MRL) output to 256 dims
+model = SentenceTransformer("google/embeddinggemma-2", truncate_dim=256)
+
+embeddings = model.encode(
+    ["task: search result | query: distributed JAX sharding on Cloud TPU v6e"],
+    normalize_embeddings=True,
+)
+print(f"Generated normalized MRL embedding vector of shape: {embeddings.shape}")
+```
+*Cites: [EmbeddingGemma 2: The Developer Guide](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: EmbeddingGemma 2 launched with native multimodal (text, image, audio) encoders, 32K context window, and Matryoshka Representation Learning (MRL).
 - **[08.26]**: Gemma in the Cloud guide; Fine-tuning Gemma 4 at scale on GEAP and Cloud Run.
 - **[07.26]**: Gemini Managed Agents run background asynchronous workflows.
 - **[06.26]**: Gemma 4 12B developer guide; Vertex AI transitions to Gemini Enterprise Agent Platform (GEAP).

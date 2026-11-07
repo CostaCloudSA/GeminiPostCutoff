@@ -43,6 +43,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Utilize Google Cloud **Database Migration Service (DMS)** with continuous Change Data Capture (CDC) replication. Apply custom migration directives for schema rules and switch DNS records only during the sub-second final cutover window.
 > *Cites: [Your Schema, Your Rules: Control Database Migrations with New Directives](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 5: Rewriting Application Data Access Layers During MongoDB-to-Firestore Migrations [10.26]**
+> Refactoring thousands of lines of `pymongo`, Mongoose, or Java MongoDB driver code into native Firestore SDK calls before migrating off self-managed MongoDB or Atlas delays cloud cutover by months and introduces regression bugs.
+> - **Standard Protocol**: Provision **Cloud Firestore Enterprise Edition with MongoDB Compatibility**, enabling zero-code driver connection switching while gaining serverless multi-region 99.999% availability.
+> *Cites: [Migrating from MongoDB to Firestore Without Changing a Single Line of Code](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -191,7 +197,25 @@ OPTIONS (
 
 ---
 
+### Blueprint 5: Zero-Code MongoDB to Cloud Firestore Enterprise Migration (Terraform) [10.26]
+Provision a Firestore Enterprise database supporting wire-protocol MongoDB driver connections without application code changes:
+```hcl
+resource "google_firestore_database" "mongodb_compatible_db" {
+  project                           = var.project_id
+  name                              = "mongo-compat-prod"
+  location_id                       = "nam5"
+  type                              = "FIRESTORE_NATIVE"
+  database_edition                  = "ENTERPRISE"
+  delete_protection_state           = "DELETE_PROTECTION_ENABLED"
+  point_in_time_recovery_enablement = "POINT_IN_TIME_RECOVERY_ENABLED"
+}
+```
+*Cites: [Migrating from MongoDB to Firestore Without Changing a Single Line of Code](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Zero-code MongoDB-to-Firestore migrations using Cloud Firestore Enterprise wire-protocol compatibility.
 - **[06.26]**: Vertex AI Agent Builder migration mapping to Gemini Enterprise Agent Platform (GEAP).
 - **[12.25]**: Passwordless Workload Identity Federation for Azure AKS; Database Migration Service directives.
 - **[10.25]**: Migrating Databricks Delta Lake tables to Cloud Storage using Storage Transfer Service.

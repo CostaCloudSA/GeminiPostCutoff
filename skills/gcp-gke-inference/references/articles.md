@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-gke-inference`.
 
-Total indexed resources: **20**
+Total indexed resources: **21**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[09.26 Blogpost]: Accelerate agentic RL with GKE Agent Sandbox](https://cloud.google.com/blog/products/containers-kubernetes/accelerate-agentic-rl-with-gke-agent-sandbox/)
 - [[07.26 Blogpost]: Securing the AI supply chain on GKE: Introducing k8s-aibom for automated AI BOMs](https://cloud.google.com/blog/products/identity-security/introducing-k8s-aibom-on-gke-for-automated-ai-bills-of-materials/)
 - [[07.26 Blogpost]: Reduce your agent's costs by 75% with GKE Agent Sandbox](https://cloud.google.com/blog/products/containers-kubernetes/reduce-your-agents-costs-with-gke-agent-sandbox)
 - [[06.26 Blogpost]: Gemma 4 12B: The Developer Guide](https://developers.googleblog.com/gemma-4-12b-the-developer-guide/)

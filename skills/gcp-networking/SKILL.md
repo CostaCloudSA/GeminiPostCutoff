@@ -44,6 +44,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Configure Cloud CDN with native **Private Bucket Access**, using Google Cloud IAM origin authentication so only the CDN load balancer can read bucket contents while keeping the bucket strictly private.
 > *Cites: [Cloud CDN Now Supports Private Bucket Access — No More Public Buckets or Signed URLs](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 5: Spreadsheet-Managed Subnet CIDRs in Enterprise Shared VPCs [10.26]**
+> Manually assigning primary and GKE secondary subnet CIDRs across Shared VPC service projects via static spreadsheets or hardcoded Terraform variables causes RFC 1918 overlap collisions during cluster scaling or hybrid Interconnect peering.
+> - **Standard Protocol**: Automate CIDR block reservations using **Network Connectivity Internal Ranges (`google_network_connectivity_internal_range`)** in Terraform to enforce dynamic, collision-free IP Address Management (IPAM) across Shared VPC topologies.
+> *Cites: [IP Address Management on Google Cloud: Implementing IPAM in a Shared VPC with Terraform](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -200,7 +206,25 @@ resource "google_compute_region_backend_service" "internal_backend" {
 
 ---
 
+### Blueprint 5: Automated Shared VPC IPAM with Network Connectivity Internal Ranges (Terraform) [10.26]
+Dynamically reserve non-overlapping `/18` CIDR blocks from a central `/12` pool for Shared VPC subnets and GKE Autopilot pods:
+```hcl
+resource "google_network_connectivity_internal_range" "shared_vpc_gke_pods_ipam" {
+  name              = "gke-autopilot-pods-ipam-range"
+  project           = var.host_project_id
+  network           = google_compute_network.main_vpc.id
+  usage             = "FOR_VPC"
+  peering           = "FOR_SELF"
+  prefix_length     = 18
+  target_cidr_range = ["10.64.0.0/12"]
+}
+```
+*Cites: [IP Address Management on Google Cloud: Implementing IPAM in a Shared VPC with Terraform](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Automated Shared VPC IP Address Management (IPAM) using Network Connectivity Internal Ranges in Terraform.
 - **[07.26]**: Cloud CDN launches native Private Bucket Access, eliminating public storage buckets.
 - **[04.26]**: Virgo scale-out network fabric for megascale AI clusters; Envoy AI networking integrations.
 - **[03.26]**: Private API Gateway deployment architectures on GCP.

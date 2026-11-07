@@ -74,6 +74,12 @@ Activate this skill whenever:
 > - **Solution**: Enable **Global Endpoint routing** or **Provisioned Throughput** with token-bucket backoff middleware and multi-region fallback across `us-central1`, `us-east5`, and `europe-west4`.
 > *Cites: [Build Resilient LLM Applications on Vertex AI and Reduce 429 Errors](./references/articles.md) and [Five techniques to reach the efficient frontier of LLM inference](./references/articles.md)*
 
+> [!CAUTION]
+> **Anti-Pattern 9: Monolithic God-Agents with Unscoped Tool Registries & Missing Evaluation Gates [10.26]**
+> Stuffing 30+ MCP tools and conflicting domain instructions into a single monolithic Gemini Enterprise agent causes tool-selection hallucination, elevated token latency, and brittle production rollouts.
+> - **Solution**: Decompose monolithic agents into domain-scoped specialist sub-agents (`<= 8` tools per agent), enforce strict input/output schema contracts, and gate deployments on automated trajectory evaluation suites.
+> *Cites: [9 Mistakes to Avoid When Building Gemini Enterprise Agents](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -363,6 +369,7 @@ runner = Runner(
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Production anti-patterns and architectural guardrails for Gemini Enterprise Agents (avoiding monolithic tool registries and unscoped agent loops).
 - **[09.26]**: Securing Agent Platform with Agent Gateway and Model Armor.
 - **[08.26]**: Zero-Trust AI agents with SPIFFE workload identity; MCP Toolbox security patterns.
 - **[07.26]**: Gemini Managed Agents run background asynchronous workflows.

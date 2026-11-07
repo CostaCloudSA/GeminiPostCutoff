@@ -47,6 +47,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Run real-time perception and tactile feedback loops locally on-device using quantized **PaliGemma On-Device** or **LiteRT-LM**, reserving cloud Gemini calls exclusively for high-level tactical mission planning.
 > *Cites: [Gemini Robotics On-Device brings AI to local robotic devices](./references/articles.md) and [PaliGemma On-Device: Multimodal Vision-Language Inference for Embedded Systems](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 5: Loading All Multimodal Encoders in EmbeddingGemma 2 for Text-Only Edge Tasks [10.26]**
+> Instantiating the full 740M-parameter **EmbeddingGemma 2** bundle (270M text + 170M vision + 300M audio encoders) on memory-constrained edge devices when only text or image-text retrieval is required wastes >60% of available device RAM.
+> - **Mandatory Standard**: Use EmbeddingGemma 2's modular architecture to disable unused modality towers (`vision_config=None`, `audio_config=None`) and truncate MRL dimensions (`truncate_dim=128`) for sub-300MB on-device semantic search.
+> *Cites: [Bring multimodal semantic search to the edge with EmbeddingGemma 2](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -164,7 +170,29 @@ gcloud run deploy gemma-4-service \
 
 ---
 
+### Blueprint 5: Edge Multimodal Semantic Search with Modular EmbeddingGemma 2 [10.26]
+Drop unused vision/audio encoders and truncate Matryoshka dimensions to 128 for ultra-low-memory edge retrieval:
+```python
+from sentence_transformers import SentenceTransformer
+
+# Drop 170M vision and 300M audio encoders on edge devices when only text/code (270M) is needed
+edge_model = SentenceTransformer(
+    "google/embeddinggemma-2",
+    truncate_dim=128,
+    model_kwargs={"vision_config": None, "audio_config": None},
+)
+
+query_vec = edge_model.encode(
+    ["task: search result | query: local robotic actuator safety limits"],
+    normalize_embeddings=True,
+)
+```
+*Cites: [Bring multimodal semantic search to the edge with EmbeddingGemma 2](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2024–2026)
+- **[10.26]**: On-device multimodal semantic search at the edge using modular EmbeddingGemma 2 encoders.
 - **[08.26]**: Gemma 4 fine-tuning and deployment on GEAP and Cloud Run; LiteRT-LM optimized multi-token prediction.
 - **[06.26]**: Gemma 4 12B developer guide; DiffusionGemma image/video foundation models.
 - **[05.26]**: TPU inference pipelines for Gemma 4.

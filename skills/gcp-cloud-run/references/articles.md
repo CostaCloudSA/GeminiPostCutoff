@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-cloud-run`.
 
-Total indexed resources: **43**
+Total indexed resources: **44**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Introducing the Server Side Cloud Swift SDK](https://cloud.google.com/blog/topics/developers-practitioners/introducing-the-server-side-cloud-swift-sdk/)
 - [[08.26 Blogpost]: Deploying Secure MCP Servers on Cloud Run](https://medium.com/@fhinkel/deploying-secure-mcp-servers-on-cloud-run-6b5d4b842a70)
 - [[08.26 Blogpost]: Building a Secure, Serverless CI/CD Pipeline on GCP](https://medium.com/google-cloud/building-a-secure-serverless-ci-cd-pipeline-on-gcp-a7c83c66824b)
 - [[07.26 Blogpost]: Cloud Run multi-region services enhanced for high availability](https://cloud.google.com/blog/products/serverless/cloud-run-multi-region-services-enhanced-for-high-availability/)

@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for **Gemini Robotics, Edge AI, Local AI, LiteRT, and the Gemma Model Family**.
 
-Total indexed resources: **12**
+Total indexed resources: **13**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Bring multimodal semantic search to the edge with EmbeddingGemma 2](https://developers.googleblog.com/google-ai-edge-with-embeddinggemma-2)
 - [[08.26 Blogpost]: Mastering Edge AI on Raspberry Pi with LiteRT and Gemma](https://developers.googleblog.com/mastering-edge-ai-on-raspberry-pi-with-litert-and-gemma/)
 - [[08.26 Blogpost]: Gemma in the Cloud](https://medium.com/@amanda.e.fitch/gemma-in-the-cloud-5170f8a2bb40)
 - [[08.26 Blogpost]: Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](https://medium.com/google-cloud/fine-tuning-and-deploying-gemma-4-at-scale-on-gemini-enterprise-agent-platform-geap-and-cloud-run-4216403bb075)

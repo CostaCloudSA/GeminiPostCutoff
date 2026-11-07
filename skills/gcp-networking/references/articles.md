@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-networking`.
 
-Total indexed resources: **9**
+Total indexed resources: **10**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: IP Address Management on Google Cloud: Implementing IPAM in a Shared VPC with Terraform](https://medium.com/google-cloud/ip-address-management-on-google-cloud-implementing-ipam-in-a-shared-vpc-with-terraform-49b183545ae0)
 - [[07.26 Blogpost]: Cloud CDN Now Supports Private Bucket Access — No More Public Buckets or Signed URLs](https://chimbu.medium.com/cloud-cdn-now-supports-private-bucket-access-no-more-public-buckets-or-signed-urls-688beb886be4)
 - [[04.26 Blogpost]: Introducing Virgo Network, Google's scale-out AI data center fabric](https://cloud.google.com/blog/products/networking/introducing-virgo-megascale-data-center-fabric/)
 - [[04.26 Blogpost]: Envoy: A future-ready foundation for agentic AI networking](https://cloud.google.com/blog/products/networking/the-case-for-envoy-networking-in-the-agentic-ai-era/)

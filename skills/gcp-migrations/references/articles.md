@@ -2,9 +2,10 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-migrations`.
 
-Total indexed resources: **9**
+Total indexed resources: **10**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
+- [[10.26 Blogpost]: Migrating from MongoDB to Firestore Without Changing a Single Line of Code](https://medium.com/google-cloud/migrating-from-mongodb-to-firestore-without-changing-a-single-line-of-code-eb5970f592d1)
 - [[06.26 Blogpost]: Vertex AI is now Gemini Enterprise Agent Platform: A migration map for Agent Builders](https://blog.gazzurelli.com/vertex-ai-is-now-gemini-enterprise-agent-platform-a-migration-map-for-agent-builders-c7807b1901cf)
 
 ### 📅 2025 Releases & Deep Dives (Chronological)

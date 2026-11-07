@@ -49,6 +49,12 @@ Activate this skill whenever:
 > - **Standard Protocol**: Standardize on **Flexible Spend-Based CUDs** spanning Compute Engine, GKE, and Cloud Run, committing strictly to 70–80% of historical baseline floor spend.
 > *Cites: [A FinOps guide to updated spend-based CUDs](./references/articles.md) and [A Simple Guide to Google Cloud Committed Use Discounts](./references/archive.md)*
 
+> [!WARNING]
+> **Anti-Pattern 6: Deploying Ultra-Low-Latency Financial Trading Workloads on General-Purpose N2/E2 VMs [10.26]**
+> Running high-velocity algorithmic trading or tick-to-trade matching engines on shared-core E2 or standard N2 instances without compact placement policies introduces tail-latency jitter ($>200\mu\text{s}$) that violates execution SLAs.
+> - **Standard Protocol**: Provision **Compute Engine U4 Ultra-Low-Latency VMs** combined with compact placement policies and Titanium offload networking for deterministic sub-microsecond jitter.
+> *Cites: [Ultra Low Latency Solution with U4 enables high-velocity trading](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -240,6 +246,7 @@ resource "google_logging_project_sink" "archive_cold_audit_logs" {
 ---
 
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: Compute Engine U4 ultra-low-latency instance family for high-velocity financial trading workloads.
 - **[07.26]**: Google Cloud Budgets introduces native hard spend caps and early anomaly notifications.
 - **[04.26]**: Cloud Logging cost governance strategies; balancing AI cost and performance.
 - **[03.26]**: Granular AI cost tracking for Vertex AI and Gemini APIs; Cloud Batch GPU with Flex-start VMs.

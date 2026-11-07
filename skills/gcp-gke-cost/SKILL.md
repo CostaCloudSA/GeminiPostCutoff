@@ -45,6 +45,12 @@ Activate this skill whenever:
 > - **Solution**: Implement scheduled night and weekend scale-down policies to shrink non-production deployments to 0 replicas, instantly saving ~65% on non-prod compute.
 > *Cites: [How We Reduced GKE Costs by 33% Through Smarter Scheduling](./references/articles.md)*
 
+> [!WARNING]
+> **Anti-Pattern 5: Over-Provisioning Steady-State CPU Requests to Survive Cold-Start Initialization Spikes [10.26]**
+> Sizing baseline `resources.requests.cpu` around peak cold-start CPU spikes (JVM JIT compilation, Spring Boot dependency injection, or heavy Python AI module imports) leaves 50–70% of allocated node vCPUs idle during steady-state operation.
+> - **Solution**: Right-size steady-state CPU requests to actual post-warmup consumption and configure a GKE VerticalPodAutoscaler **`startupBoost`** policy (`type: Factor`, `durationSeconds: 60`) with `updateMode: "InPlaceOrRecreate"` to temporarily burst CPU only during pod initialization.
+> *Cites: [GKE CPU startup boost: Faster pod starts, lower costs](./references/articles.md)*
+
 ---
 
 ## ⚖️ Architecture Decision Matrices
@@ -177,7 +183,37 @@ gcloud container clusters update prod-cluster \
 
 ---
 
+### Blueprint 6: Declarative GKE VPA CPU Startup Boost Policy [10.26]
+Temporarily boost container CPU requests/limits by 3x during initialization and scale back in-place without pod restarts:
+```yaml
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: jvm-or-ai-service-startup-boost
+  namespace: production
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: inference-gateway-worker
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+  resourcePolicy:
+    containerPolicies:
+      - containerName: worker
+        controlledResources: ["cpu"]
+        startupBoost:
+          cpu:
+            type: Factor
+            factor: 3
+          durationSeconds: 60
+```
+*Cites: [GKE CPU startup boost: Faster pod starts, lower costs](./references/articles.md)*
+
+---
+
 ## ⏱️ Chronological Evolution (2025–2026)
+- **[10.26]**: GKE CPU startup boost via VerticalPodAutoscaler (`startupBoost`) cuts cold-start latency and eliminates over-provisioned steady-state CPU requests.
 - **[08.26]**: 33% cost reduction case study using priority classes, smarter scheduling, and governance.
 - **[07.26]**: GKE Agent Sandbox cuts AI agent execution spend by 75% compared to dedicated VMs.
 - **[05.26]**: Full-stack GKE optimization cuts 60% compute waste across Rails and K8s runtimes.
