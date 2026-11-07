@@ -1,7 +1,7 @@
 {
   "name": "gemini-post-cutoff",
-  "version": "2.1.1",
-  "description": "Curated Google Cloud Platform (GCP) & AI Agent architectural skill library, dynamic cutoff-relative review engine, and topic-drift skill fission system for Google Antigravity and Gemini CLI (22+ domains, 812+ dated engineering sources).",
+  "version": "2.2.0",
+  "description": "Curated Google Cloud Platform (GCP) & AI Agent architectural skill library, dynamic cutoff-relative review engine, and topic-drift skill fission system for Google Antigravity and Gemini CLI (10 pillars, 23+ domains, 811+ dated engineering sources).",
   "bin": {
     "postcutoff": "./bin/postcutoff.js"
   },

@@ -2,8 +2,8 @@
 name: gcp-frontier-emerging
 description: >-
   Gemma open models (Gemma 4 12B, Gemma 3), Cloud TPUs (v5p/v6e), JAX distributed sharding,
-  Supervised Fine-Tuning (SFT), HBM memory optimization, and Gemini Enterprise Agent Platform (GEAP).
-  Activate when fine-tuning or serving Gemma models, optimizing JAX workloads on TPUs, or scaling enterprise agent platforms.
+  Supervised Fine-Tuning (SFT), HBM memory optimization, and scientific/biotech AI workloads.
+  Activate when fine-tuning or serving Gemma models, optimizing JAX workloads on TPUs, or scaling scientific AI pipelines.
 ---
 
 # Gemma Open Models, Cloud TPUs & Frontier Fine-Tuning Runbook
@@ -31,7 +31,7 @@ Activate this skill whenever:
 > **Anti-Pattern 2: Serving Gemma 4 with CPU-Throttled Serverless Instances [08.26, 06.26]**
 > Deploying Gemma 4 12B on Cloud Run with default serverless configurations causes extreme cold starts and severe inference latency stalls during model weight dequantization.
 > - **Mandatory Solution**: Configure Cloud Run with `--no-cpu-throttling`, attach an NVIDIA L4 GPU (`--gpu 1 --gpu-type nvidia-l4`), and stream weights using GCS FUSE volume mounts.
-> *Cites: [Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](./references/articles.md) and [Gemma 4 12B: The Developer Guide](./references/articles.md)*
+> *Cites: [Gemma in the Cloud](./references/articles.md) and [Gemma 4 12B: The Developer Guide](./references/articles.md)*
 
 > [!WARNING]
 > **Anti-Pattern 3: Fine-Tuning Gemini Foundation Models without Baselines [01.25]**
@@ -67,7 +67,7 @@ Activate this skill whenever:
 > **Anti-Pattern 8: Running Planet-Scale Stateful Agent Swarms or GPU Biotech Simulations on Stateless Request-Bound Primitives [10.26]**
 > Deploying long-horizon, self-evolving agent harnesses or multi-hour GPU biotech folding/docking agents on stateless HTTP-bound compute causes mid-trajectory eviction, lost execution checkpoints, and ungoverned tool execution.
 > - **Mandatory Standard**: Run long-lived stateful agent harnesses on **Agent Compute Engine** with expanded agent governance (sandboxed microVM state persistence, identity-bound policy enforcement, and managed GPU/TPU tool orchestration).
-> *Cites: [Introducing Agent Compute Engine and expanding agent governance](./references/articles.md), [Agent Compute Engine deep dive](./references/articles.md), and [Architecting scalable, agentic biotech workloads](./references/articles.md)*
+> *Cites: [Architecting scalable, agentic biotech workloads](./references/articles.md)*
 
 ---
 
@@ -79,7 +79,7 @@ Activate this skill whenever:
 | **Cloud Run + NVIDIA L4** | Gemma 4 (2B–12B) | Moderate (~20s with FUSE) | Scale-to-zero per-second | Intermittent workloads, webhooks |
 | **GKE Autopilot + A100/H100** | Gemma 4 (12B–27B) | Fast (Warm pod pool) | Provisioned cluster nodes | High-concurrency enterprise microservices |
 | **Cloud TPU v5e / v6e** | Gemma 4 12B / Distributed | Ultra-fast (JAX XLA) | Committed TPU slices | High-throughput batch inference & training |
-*Cites: [Serve and Inference Gemma 4 on TPU](./references/articles.md) and [Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](./references/articles.md)*
+*Cites: [Serve and Inference Gemma 4 on TPU](./references/articles.md) and [Gemma in the Cloud](./references/articles.md)*
 
 ---
 
@@ -226,7 +226,7 @@ gcloud run deploy gemma-4-service \
     --add-volume=name=weights-vol,type=cloud-storage,bucket=gemma-models-bucket \
     --add-volume-mount=volume=weights-vol,mount-path=/mnt/gcs
 ```
-*Cites: [Fine-Tuning and Deploying Gemma 4 at Scale on Gemini Enterprise Agent Platform (GEAP) and Cloud Run](./references/articles.md) and [Gemma 4 12B: The Developer Guide](./references/articles.md)*
+*Cites: [Gemma in the Cloud](./references/articles.md) and [Gemma 4 12B: The Developer Guide](./references/articles.md)*
 
 ---
 

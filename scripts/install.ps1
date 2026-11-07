@@ -51,7 +51,7 @@ if (-not $FlatSkills) {
     }
     
     Write-Host "✓ Installed successfully as Antigravity Plugin!" -ForegroundColor Green
-    Write-Host "Restart Antigravity or Gemini CLI to activate all 22 domain skills (plus Master Router)." -ForegroundColor White
+    Write-Host "Restart Antigravity or Gemini CLI to activate all 23+ domain skills (plus Master Router)." -ForegroundColor White
 } else {
     # Alternative: Direct Skill Symlinks / Sync
     $skillsTargetDir = Join-Path $configDir "skills"
@@ -69,8 +69,13 @@ if (-not $FlatSkills) {
                 Write-Host "  Skipping existing: $($s.Name) (use -Force to overwrite)" -ForegroundColor DarkGray
             }
         } else {
-            New-Item -ItemType SymbolicLink -Path $dest -Target $s.FullName | Out-Null
-            Write-Host "  ✓ Linked $($s.Name)" -ForegroundColor Green
+            try {
+                New-Item -ItemType SymbolicLink -Path $dest -Target $s.FullName -ErrorAction Stop | Out-Null
+                Write-Host "  ✓ Linked $($s.Name)" -ForegroundColor Green
+            } catch {
+                Copy-Item -Path $s.FullName -Destination $dest -Recurse -Force
+                Write-Host "  ✓ Copied $($s.Name)" -ForegroundColor Green
+            }
         }
     }
     Write-Host "✓ All skills synchronized!" -ForegroundColor Green

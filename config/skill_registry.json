@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.1.1",
+  "schema_version": "2.2.0",
   "router_skill": "gcp-skills-index",
   "fission_policy": {
     "min_floor_anti_patterns": 4,
@@ -9,159 +9,166 @@
     "auto_inherit_parent_pillar": true
   },
   "skills": {
+    "gcp-gemini-enterprise": {
+      "pillar": "Pillar 1: Gemini Enterprise",
+      "audit_batch": "Batch C",
+      "pod_id": "pod_13",
+      "split_from": "gcp-frontier-emerging",
+      "topic_keywords": ["gemini-enterprise", "geap", "agent-compute-engine", "gear", "agent-gateway", "managed-agents"]
+    },
     "gcp-adk-agents": {
-      "pillar": "Pillar 1: AI Agents, ADK & Frontier Models",
+      "pillar": "Pillar 2: AI Agents, ADK, Multimodal & Tooling",
       "audit_batch": "Batch C",
       "pod_id": "pod_13",
       "split_from": null,
       "topic_keywords": ["adk", "agent-engine", "a2a", "a2ui", "ag-ui", "memory-bank", "multi-agent"]
     },
-    "gcp-frontier-emerging": {
-      "pillar": "Pillar 1: AI Agents, ADK & Frontier Models",
-      "audit_batch": "Batch C",
-      "pod_id": "pod_9",
-      "split_from": null,
-      "topic_keywords": ["gemma", "tpu", "jax", "sft", "geap", "timesfm", "alphafold"]
-    },
     "gcp-conversational-ai": {
-      "pillar": "Pillar 1: AI Agents, ADK & Frontier Models",
+      "pillar": "Pillar 2: AI Agents, ADK, Multimodal & Tooling",
       "audit_batch": "Batch C",
       "pod_id": "pod_10",
       "split_from": null,
       "topic_keywords": ["live-api", "dialogflow", "ccai", "tts", "freeswitch", "voice"]
     },
     "gcp-generative-media": {
-      "pillar": "Pillar 1: AI Agents, ADK & Frontier Models",
+      "pillar": "Pillar 2: AI Agents, ADK, Multimodal & Tooling",
       "audit_batch": "Batch E",
       "pod_id": "pod_10",
       "split_from": null,
       "topic_keywords": ["veo", "omni-flash", "diffusiongemma", "imagen", "genmedia", "video"]
     },
     "gcp-gemini-tooling": {
-      "pillar": "Pillar 1: AI Agents, ADK & Frontier Models",
+      "pillar": "Pillar 2: AI Agents, ADK, Multimodal & Tooling",
       "audit_batch": "Batch C",
       "pod_id": "pod_13",
       "split_from": null,
       "topic_keywords": ["antigravity", "gemini-cli", "fastmcp", "terraform-stacks", "hooks", "subagents"]
     },
+    "gcp-frontier-emerging": {
+      "pillar": "Pillar 3: Frontier & Edge AI (Gemma & TPUs)",
+      "audit_batch": "Batch C",
+      "pod_id": "pod_9",
+      "split_from": null,
+      "topic_keywords": ["gemma", "embeddinggemma", "tpu", "jax", "sft", "hbm", "biotech"]
+    },
     "gcp-gke-platform": {
-      "pillar": "Pillar 2: Compute, Kubernetes (GKE), Serverless & Event Mesh",
+      "pillar": "Pillar 4: Google Kubernetes Engine (GKE)",
       "audit_batch": "Batch B",
       "pod_id": "pod_1",
       "split_from": null,
       "topic_keywords": ["gke", "autopilot", "gateway-api", "dataplane-v2", "pod-snapshots", "computeclass"]
     },
     "gcp-gke-inference": {
-      "pillar": "Pillar 2: Compute, Kubernetes (GKE), Serverless & Event Mesh",
+      "pillar": "Pillar 4: Google Kubernetes Engine (GKE)",
       "audit_batch": "Batch B",
       "pod_id": "pod_1",
       "split_from": null,
       "topic_keywords": ["inference-gateway", "vllm", "ray", "kueue", "agent-sandbox", "llm-serving"]
     },
+    "gcp-gke-cost": {
+      "pillar": "Pillar 4: Google Kubernetes Engine (GKE)",
+      "audit_batch": "Batch B",
+      "pod_id": "pod_1",
+      "split_from": null,
+      "topic_keywords": ["gke-cost-allocation", "vpa", "unallocated-spend", "cloud-logging-finops", "bin-packing"]
+    },
     "gcp-cloud-run": {
-      "pillar": "Pillar 2: Compute, Kubernetes (GKE), Serverless & Event Mesh",
+      "pillar": "Pillar 5: GCP Classical Compute, Messaging, Networking & Databases",
       "audit_batch": "Batch B",
       "pod_id": "pod_2",
       "split_from": null,
       "topic_keywords": ["cloud-run", "cpu-throttling", "iap", "temporal", "worker-pools", "serverless"]
     },
+    "gcp-computefinops": {
+      "pillar": "Pillar 5: GCP Classical Compute, Messaging, Networking & Databases",
+      "audit_batch": "Batch D",
+      "pod_id": "pod_5",
+      "split_from": null,
+      "topic_keywords": ["cud", "flex-start", "spend-caps", "billing", "right-sizing", "finops"]
+    },
     "gcp-pubsub": {
-      "pillar": "Pillar 2: Compute, Kubernetes (GKE), Serverless & Event Mesh",
+      "pillar": "Pillar 5: GCP Classical Compute, Messaging, Networking & Databases",
       "audit_batch": "Batch F",
       "pod_id": "pod_3",
       "split_from": null,
       "topic_keywords": ["pubsub", "pubsub-lite", "smt", "eventarc", "kafka", "dlq", "export-subscriptions"]
     },
+    "gcp-networking": {
+      "pillar": "Pillar 5: GCP Classical Compute, Messaging, Networking & Databases",
+      "audit_batch": "Batch D",
+      "pod_id": "pod_7",
+      "split_from": null,
+      "topic_keywords": ["direct-vpc-egress", "psc", "interconnect", "private-nat", "envoy", "vpc"]
+    },
+    "gcp-databases": {
+      "pillar": "Pillar 5: GCP Classical Compute, Messaging, Networking & Databases",
+      "audit_batch": "Batch A",
+      "pod_id": "pod_8",
+      "split_from": null,
+      "topic_keywords": ["cloud-sql", "alloydb", "scann", "firestore", "spanner", "hyperdisk"]
+    },
     "gcp-bigquery-ai": {
-      "pillar": "Pillar 3: BigQuery, Operational Databases & Data Mesh",
+      "pillar": "Pillar 6: BigQuery & Looker Analytics",
       "audit_batch": "Batch A",
       "pod_id": "pod_4",
       "split_from": null,
       "topic_keywords": ["bigquery-ai", "vector-search", "remote-mcp", "embeddings", "bqml", "mcp-toolbox"]
     },
     "gcp-bigquery-analytics": {
-      "pillar": "Pillar 3: BigQuery, Operational Databases & Data Mesh",
+      "pillar": "Pillar 6: BigQuery & Looker Analytics",
       "audit_batch": "Batch A",
       "pod_id": "pod_4",
       "split_from": null,
-      "topic_keywords": ["dataform", "continuous-queries", "bigquery-graph", "data-mesh", "dml", "dts"]
-    },
-    "gcp-databases": {
-      "pillar": "Pillar 3: BigQuery, Operational Databases & Data Mesh",
-      "audit_batch": "Batch A",
-      "pod_id": "pod_8",
-      "split_from": null,
-      "topic_keywords": ["cloud-sql", "alloydb", "scann", "firestore", "spanner", "hyperdisk"]
-    },
-    "gcp-migrations": {
-      "pillar": "Pillar 3: BigQuery, Operational Databases & Data Mesh",
-      "audit_batch": "Batch D",
-      "pod_id": "pod_12",
-      "split_from": null,
-      "topic_keywords": ["aws", "azure", "snowflake", "teradata", "databricks", "delta-lake", "sts"]
-    },
-    "gcp-security-compliance": {
-      "pillar": "Pillar 4: Security, Networking & Cloud FinOps",
-      "audit_batch": "Batch D",
-      "pod_id": "pod_6",
-      "split_from": null,
-      "topic_keywords": ["model-armor", "wif", "iam", "secops", "cloud-armor", "zero-trust"]
-    },
-    "gcp-networking": {
-      "pillar": "Pillar 4: Security, Networking & Cloud FinOps",
-      "audit_batch": "Batch D",
-      "pod_id": "pod_7",
-      "split_from": null,
-      "topic_keywords": ["direct-vpc-egress", "psc", "interconnect", "private-nat", "envoy", "vpc"]
-    },
-    "gcp-computefinops": {
-      "pillar": "Pillar 4: Security, Networking & Cloud FinOps",
-      "audit_batch": "Batch D",
-      "pod_id": "pod_5",
-      "split_from": null,
-      "topic_keywords": ["cud", "flex-start", "spend-caps", "billing", "right-sizing", "finops"]
+      "topic_keywords": ["dataform", "continuous-queries", "bigquery-graph", "data-mesh", "dml", "dts", "looker"]
     },
     "gcp-bigquery-cost": {
-      "pillar": "Pillar 4: Security, Networking & Cloud FinOps",
+      "pillar": "Pillar 6: BigQuery & Looker Analytics",
       "audit_batch": "Batch A",
       "pod_id": "pod_4",
       "split_from": null,
       "topic_keywords": ["slots", "editions", "partition-pruning", "690-tb", "long-term-storage", "token-attribution"]
     },
-    "gcp-gke-cost": {
-      "pillar": "Pillar 4: Security, Networking & Cloud FinOps",
-      "audit_batch": "Batch B",
-      "pod_id": "pod_1",
+    "gcp-migrations": {
+      "pillar": "Pillar 7: Cloud & Data Warehouse Migrations",
+      "audit_batch": "Batch D",
+      "pod_id": "pod_12",
       "split_from": null,
-      "topic_keywords": ["gke-cost-allocation", "vpa", "unallocated-spend", "cloud-logging-finops", "bin-packing"]
-    },
-    "gcp-architecture-review": {
-      "pillar": "Pillar 5: Orchestration & Specialized Platforms",
-      "audit_batch": "Batch F",
-      "pod_id": "orchestrator",
-      "split_from": null,
-      "topic_keywords": ["architecture-review", "hub-and-spoke", "preflight", "cutoff-resolver"]
-    },
-    "gcp-gemini-robotics": {
-      "pillar": "Pillar 5: Orchestration & Specialized Platforms",
-      "audit_batch": "Batch E",
-      "pod_id": "pod_9",
-      "split_from": null,
-      "topic_keywords": ["robotics", "aloha-sim", "litert", "mediapipe", "edge-ai", "on-device"]
+      "topic_keywords": ["aws", "azure", "snowflake", "teradata", "databricks", "delta-lake", "sts"]
     },
     "gcp-geospatial": {
-      "pillar": "Pillar 5: Orchestration & Specialized Platforms",
+      "pillar": "Pillar 8: Geospatial & Earth Observation",
       "audit_batch": "Batch E",
       "pod_id": "pod_11",
       "split_from": null,
       "topic_keywords": ["earth-engine", "alphaearth", "bigquery-gis", "maps", "raster", "geospatial"]
     },
+    "gcp-gemini-robotics": {
+      "pillar": "Pillar 9: Emerging Technologies (Robotics & Android XR)",
+      "audit_batch": "Batch E",
+      "pod_id": "pod_9",
+      "split_from": null,
+      "topic_keywords": ["robotics", "aloha-sim", "litert", "mediapipe", "edge-ai", "on-device"]
+    },
     "gcp-android-xr": {
-      "pillar": "Pillar 5: Orchestration & Specialized Platforms",
+      "pillar": "Pillar 9: Emerging Technologies (Robotics & Android XR)",
       "audit_batch": "Batch E",
       "pod_id": "pod_11",
       "split_from": null,
       "topic_keywords": ["android-xr", "jetpack-xr", "spatial-ui", "spatial-audio", "3d"]
+    },
+    "gcp-security-compliance": {
+      "pillar": "Pillar 10: Security, Compliance & Architecture Governance",
+      "audit_batch": "Batch D",
+      "pod_id": "pod_6",
+      "split_from": null,
+      "topic_keywords": ["model-armor", "wif", "iam", "secops", "cloud-armor", "zero-trust"]
+    },
+    "gcp-architecture-review": {
+      "pillar": "Pillar 10: Security, Compliance & Architecture Governance",
+      "audit_batch": "Batch F",
+      "pod_id": "orchestrator",
+      "split_from": null,
+      "topic_keywords": ["architecture-review", "hub-and-spoke", "preflight", "cutoff-resolver"]
     }
   }
 }

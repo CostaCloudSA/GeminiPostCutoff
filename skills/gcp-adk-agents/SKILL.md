@@ -45,10 +45,10 @@ Activate this skill whenever:
 > *Cites: [Build Zero-Trust AI Agents with Google's Agent Development Kit](./references/articles.md) and [SPIFFE: Why Google's New Agent Identity is the Future of AI Security](./references/articles.md)*
 
 > [!WARNING]
-> **Anti-Pattern 4: Synchronous Blocking HTTP Loops for Long-Running Tasks [07.26]**
+> **Anti-Pattern 4: Synchronous Blocking HTTP Loops for Long-Running Tasks [06.26]**
 > Running multi-step planning or external batch pipelines inside synchronous HTTP request threads causes client timeouts and dropped connections.
 > - **Solution**: Use **Gemini Managed Agents Background Execution** or asynchronous Cloud Run jobs with event-driven Webhook callbacks.
-> *Cites: [Gemini Managed Agents Can Now Run in the Background](./references/articles.md)*
+> *Cites: [google-adk 2.0 Is Now Stable: Workflow Runtimes, Breaking Changes, and How to Migrate](./references/articles.md)*
 
 > [!CAUTION]
 > **Anti-Pattern 5: Unvalidated Destructive Tool Execution without Human-in-the-Loop Approval [06.26, 05.26]**
@@ -57,10 +57,10 @@ Activate this skill whenever:
 > *Cites: [Genkit Middleware in Python: Retries, Fallbacks, Tool Approval](./references/articles.md) and [Securing AI agents with MCP Authorization](./references/articles.md)*
 
 > [!CAUTION]
-> **Anti-Pattern 6: Direct Ingress Exposure without Agent Gateway Sanitization [09.26, 08.26]**
+> **Anti-Pattern 6: Direct Ingress Exposure without Agent Gateway Sanitization [08.26]**
 > Exposing internal multi-agent tools directly to public client applications allows adversarial prompt injections to bypass application logic and extract sensitive tool parameters.
 > - **Solution**: Route all external agent requests through **Agent Gateway with Google Model Armor**, applying real-time prompt sanitization and strict token authorization before invoking ADK tools.
-> *Cites: [Securing your agent in Agent Platform with Agent Gateway and Model Armor](./references/articles.md) and [Architecting Secure Enterprise AI Agents with MCP Toolbox](./references/articles.md)*
+> *Cites: [Architecting Secure Enterprise AI Agents with MCP Toolbox](./references/articles.md)*
 
 > [!WARNING]
 > **Anti-Pattern 7: Eager Top-Level SDK Imports Causing 24-Second Serverless Cold Starts [10.25]**
@@ -78,13 +78,13 @@ Activate this skill whenever:
 > **Anti-Pattern 9: Monolithic God-Agents with Unscoped Tool Registries & Missing Evaluation Gates [10.26]**
 > Stuffing 30+ MCP tools and conflicting domain instructions into a single monolithic Gemini Enterprise agent causes tool-selection hallucination, elevated token latency, and brittle production rollouts.
 > - **Solution**: Decompose monolithic agents into domain-scoped specialist sub-agents (`<= 8` tools per agent), enforce strict input/output schema contracts, and gate deployments on automated trajectory evaluation suites.
-> *Cites: [9 Mistakes to Avoid When Building Gemini Enterprise Agents](./references/articles.md)*
+> *Cites: [Deploying an ADK agent on Agent Runtime with Terraform and CI/CD](./references/articles.md)*
 
 > [!WARNING]
 > **Anti-Pattern 10: Hardcoding Static MCP Server Endpoints & Shipping Agents on "Vibe-Check" Evals [10.26]**
 > Hardcoding MCP tool URLs inside agent definitions, deploying without Terraform CI/CD pipelines, or shipping agent updates based on subjective "vibe checks" instead of boolean-judge Critical User Journey (CUJ) suites causes silent production tool drift and multi-turn orchestration failures.
 > - **Solution**: Use **Dynamic MCP Server Discovery via Agent Registry**, standardize across ADK's 5 language runtimes (Python, Go, TypeScript, Java, Kotlin) and reference recipes (`google/adk-recipes`), stream structured UI via **A2UI Express**, and enforce governed Terraform CI/CD and CUJ trajectory evaluation gates on Agent Runtime.
-> *Cites: [Dynamic MCP Server Discovery on Google Cloud](./references/articles.md), [Evaluating AI agents: moving past the vibe check](./references/articles.md), [One Agent Development Kit, five languages](./references/articles.md), [Fast, reliable A2UI, with swappable inference formats](./references/articles.md), [Architecting Governed, Self-Evolving AI Agents on Google Cloud](./references/articles.md), [From single agents to complex multi-agent systems: addressing deployment in GCP](./references/articles.md), [Deploying an ADK agent on Agent Runtime with Terraform and CI/CD](./references/articles.md), and [Three layers, one repo: a tour of google/adk-recipes](./references/articles.md)*
+> *Cites: [Dynamic MCP Server Discovery on Google Cloud](./references/articles.md), [Evaluating AI agents: moving past the vibe check](./references/articles.md), [One Agent Development Kit, five languages](./references/articles.md), [Fast, reliable A2UI, with swappable inference formats](./references/articles.md), [From single agents to complex multi-agent systems: addressing deployment in GCP](./references/articles.md), [Deploying an ADK agent on Agent Runtime with Terraform and CI/CD](./references/articles.md), and [Three layers, one repo: a tour of google/adk-recipes](./references/articles.md)*
 
 ---
 
@@ -191,7 +191,7 @@ if __name__ == "__main__":
 
 ---
 
-### Blueprint 3: A2UI Declarative Dynamic UI Streaming [05.26, 03.26]
+### Blueprint 3: A2UI Declarative Dynamic UI Streaming [10.26, 03.26]
 Stream interactive structured UI components directly to client web applications:
 ```python
 import os
@@ -213,11 +213,11 @@ def render_budget_chart(categories: list[str], amounts: list[float]) -> a2ui.Wid
         action_button=a2ui.Button(label="Download CSV", action_id="export_budget")
     )
 ```
-*Cites: [Developer's guide to Gemini Enterprise and A2UI integration](./references/articles.md) and [Agent to UI Protocol (A2UI) with Agent Development Kit (ADK)](./references/articles.md)*
+*Cites: [Fast, reliable A2UI, with swappable inference formats](./references/articles.md) and [Agent to UI Protocol (A2UI) with Agent Development Kit (ADK)](./references/articles.md)*
 
 ---
 
-### Blueprint 4: Zero-Trust Agent Security with SPIFFE & Model Armor [09.26, 06.26]
+### Blueprint 4: Zero-Trust Agent Security with SPIFFE & Model Armor [08.26, 06.26]
 Wrap agent execution with SPIFFE workload identity and Model Armor prompt validation:
 ```python
 import os
@@ -243,7 +243,7 @@ secure_agent = Agent(
     guardrails=[guardrail]
 )
 ```
-*Cites: [Securing your agent in Agent Platform with Agent Gateway and Model Armor](./references/articles.md) and [SPIFFE: Why Google's New Agent Identity is the Future of AI Security](./references/articles.md)*
+*Cites: [Build Zero-Trust AI Agents with Google's Agent Development Kit](./references/articles.md) and [SPIFFE: Why Google's New Agent Identity is the Future of AI Security](./references/articles.md)*
 
 ---
 
@@ -345,7 +345,7 @@ public class OrderFulfillmentAgent {
 
 ---
 
-### Blueprint 8: Multi-Turn Agent Telemetry & Evaluation with BigQuery Agent Analytics Plugin [01.26, 05.26]
+### Blueprint 8: Multi-Turn Agent Telemetry & Evaluation with BigQuery Agent Analytics Plugin [01.26]
 Stream every turn, tool call latency, and token attribution directly to BigQuery for continuous evaluation:
 ```python
 import os
@@ -370,7 +370,7 @@ runner = Runner(
     plugins=[bq_telemetry]
 )
 ```
-*Cites: [Analyze ADK Agent execution with the BigQuery Agent Analytics Plugin](./references/articles.md) and [Tutorial Series : Gemini Enterprise Agent Platform — Part 5 : Observability and Evaluation](./references/articles.md)*
+*Cites: [Analyze ADK Agent execution with the BigQuery Agent Analytics Plugin](./references/articles.md)*
 
 ---
 

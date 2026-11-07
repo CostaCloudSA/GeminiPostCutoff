@@ -2,38 +2,30 @@
 
 This reference vault contains all chronologically indexed publications, official documentation, codelabs, and repositories for `gcp-adk-agents`.
 
-Total indexed resources: **92**
+Total indexed resources: **84**
 
 ### 🌟 2026 Releases & Deep Dives (Chronological)
 - [[10.26 Blogpost]: Fast, reliable A2UI, with swappable inference formats](https://developers.googleblog.com/fast-reliable-a2ui/)
 - [[10.26 Blogpost]: From single agents to complex multi-agent systems: addressing deployment in GCP](https://medium.com/google-cloud/from-single-agents-to-complex-multi-agent-systems-addressing-deployment-in-gcp-e7054bba8cc4)
 - [[10.26 Blogpost]: Deploying an ADK agent on Agent Runtime with Terraform and CI/CD](https://medium.com/google-cloud/deploying-an-adk-agent-on-agent-runtime-with-terraform-and-ci-cd-0b81e1358af1)
-- [[10.26 Blogpost]: Architecting Governed, Self-Evolving AI Agents on Google Cloud](https://developers.googleblog.com/architecting-governed-self-evolving-ai-agents-on-gemini-agent-platform/)
 - [[10.26 Blogpost]: Dynamic MCP Server Discovery on Google Cloud](https://medium.com/google-cloud/dynamic-mcp-server-discovery-on-google-cloud-0f32110047c8)
 - [[10.26 Blogpost]: Three layers, one repo: a tour of google/adk-recipes](https://developers.googleblog.com/three-layers-one-repo-a-tour-of-googleadk-recipes/)
 - [[10.26 Blogpost]: Evaluating AI agents: moving past the vibe check](https://developers.googleblog.com/evaluating-ai-agents-moving-past-the-vibe-check/)
 - [[10.26 Blogpost]: One Agent Development Kit, five languages](https://cloud.google.com/blog/topics/developers-practitioners/one-agent-development-kit-five-languages/)
-- [[10.26 Blogpost]: 9 Mistakes to Avoid When Building Gemini Enterprise Agents](https://medium.com/@ernesto.urquijo/9-mistakes-to-avoid-when-building-gemini-enterprise-agents-d774000e3abb)
-- [[09.26 Blogpost]: Securing your agent in Agent Platform with Agent Gateway and Model Armor](https://medium.com/google-cloud/securing-your-agent-in-agent-platform-with-agent-gateway-and-model-armor-9c1e410b9364)
 - [[08.26 Blogpost]: Build Zero-Trust AI Agents with Google's Agent Development Kit](https://developers.googleblog.com/build-zero-trust-ai-agents-with-googles-agent-development-kit/)
 - [[08.26 Blogpost]: Architecting Secure Enterprise AI Agents with MCP Toolbox](https://medium.com/google-cloud/architecting-secure-enterprise-ai-agents-with-mcp-toolbox-f70b07aa1efa)
 - [[08.26 Blogpost]: Cloud Run vs GKE Autopilot: A Comparison for ADK Agents](https://medium.com/google-cloud/cloud-run-vs-gke-autopilot-a-comparison-for-adk-agents-2295c2061571)
-- [[07.26 Blogpost]: Gemini Managed Agents Can Now Run in the Background](https://medium.com/google-cloud/gemini-managed-agents-can-now-run-in-the-background-9b224bdca64c)
 - [[06.26 Blogpost]: google-adk 2.0 Is Now Stable: Workflow Runtimes, Breaking Changes, and How to Migrate](https://dev.to/peytongreen_dev/google-adk-20-is-now-stable-workflow-runtimes-breaking-changes-and-how-to-migrate-4ah8)
 - [[06.26 Blogpost]: A2A ecosystem: BigQuery Data Engineering Agent](https://medium.com/google-cloud/a2a-ecosystem-bigquery-data-engineering-agent-725aaac88a63)
 - [[06.26 Blogpost]: Deep Dive: Antigravity Agent Skills](https://medium.com/google-cloud/deep-dive-antigravity-agent-skills-b303bf05085b)
 - [[06.26 Blogpost]: SPIFFE: Why Google's New Agent Identity is the Future of AI Security](https://medium.com/google-cloud/spiffe-why-googles-new-agent-identity-is-the-future-of-ai-security-240b4a94c66f)
-- [[06.26 Blogpost]: Vertex AI is now Gemini Enterprise Agent Platform: A migration map for Agent Builders](https://medium.com/@gazzurelli/vertex-ai-is-now-gemini-enterprise-agent-platform-a-migration-map-for-agent-builders-c7807b1901cf)
 - [[06.26 Blogpost]: Genkit Middleware in Python: Retries, Fallbacks, Tool Approval](https://medium.com/@jeffdh5/genkit-middleware-in-python-retries-fallbacks-tool-approval-f3e0c5f8fa87)
 - [[06.26 Blogpost]: How A2A is Building a World of Collaborative Agents](https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/)
-- [[06.26 Blogpost]: From ADK to Gemini Enterprise: Building Production-Grade AI Agents on Google Cloud](https://medium.com/google-cloud/from-adk-to-gemini-enterprise-building-production-grade-ai-agents-on-google-cloud-e32f4977f05a)
 - [[06.26 Blogpost]: Google ADK Explained: Building Multi-Agent Systems With Google's Agent Development Kit](https://linafaik.medium.com/google-adk-explained-building-multi-agent-systems-with-googles-agent-development-kit-6e09fe01b77f)
 - [[06.26 Blogpost]: Building AI Agents with Google Cloud Managed MCP Servers and ADK](https://medium.com/google-cloud/building-ai-agents-with-google-cloud-managed-mcp-servers-and-adk-e488e97cbd8a)
 - [[06.26 Blogpost]: Manage Your Entire Google Cloud with AI Agents | AgenticOps Demo](https://vishalbulbule.medium.com/manage-your-entire-google-cloud-with-ai-agents-agenticops-demo-60adfaf0e96b)
 - [[05.26 Blogpost]: Securing AI agents with MCP Authorization](https://medium.com/google-cloud/securing-ai-agents-with-mcp-authorization-5cd8a552c45b)
-- [[05.26 Blogpost]: Developer's guide to Gemini Enterprise and A2UI integration](https://cloud.google.com/blog/topics/developers-practitioners/guide-to-gemini-enterprise-and-a2ui-integration)
 - [[05.26 Blogpost]: Installing the official GCP skills in Antigravity and Gemini CLI](https://yaircarreno.medium.com/installing-the-official-gcp-skills-in-antigravity-and-gemini-cli-3cea474e488d)
-- [[05.26 Blogpost]: Tutorial Series : Gemini Enterprise Agent Platform — Part 5 : Observability and Evaluation](https://medium.com/google-cloud/tutorial-series-gemini-enterprise-agent-platform-part-5-observability-and-evaluation-79c110c38028)
 - [[05.26 Blogpost]: Offloading MCP Tool Access to Agent Registry](https://medium.com/@evangseabrook/offloading-mcp-tool-access-to-agent-registry-d474cd41e9bd)
 - [[05.26 Blogpost]: Agent Sandbox on GKE is now available for everyone, and a first look at Agent Substrate](https://cloud.google.com/blog/products/containers-kubernetes/bringing-you-agent-sandbox-on-gke-and-agent-substrate)
 - [[04.26 Blogpost]: Subagents have arrived in Gemini CLI](https://developers.googleblog.com/subagents-have-arrived-in-gemini-cli/)
@@ -108,4 +100,3 @@ Total indexed resources: **92**
 - [[03.25 Blogpost]: Mastering secure AI on Google Cloud, a practical guide for enterprises](https://cloud.google.com/blog/products/identity-security/mastering-secure-ai-on-google-cloud-a-practical-guide-for-enterprises/)
 - [[01.25 Blogpost]: How to build AI Agents with Vertex AI Agent Engine](https://medium.com/google-cloud/ai-agents-8eb2b6edea9b)
 - [[01.25 Blogpost]: What is an agent, and does your data need one?](https://medium.com/google-cloud/what-is-an-agent-and-does-your-data-need-one-928db7cbde81)
-
