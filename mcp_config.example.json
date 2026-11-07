@@ -1,0 +1,11 @@
+{
+  "$comment": "Copy or merge into ~/.gemini/config/mcp_config.json to pair GeminiPostCutoff's proactive FinOps/SRE guardrails with Google's live Developer Knowledge MCP Server (https://developers.google.com/knowledge/api).",
+  "mcpServers": {
+    "google-developer-knowledge": {
+      "serverUrl": "https://developerknowledge.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "${DEVELOPER_KNOWLEDGE_API_KEY}"
+      }
+    }
+  }
+}

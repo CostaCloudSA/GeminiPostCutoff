@@ -1,9 +1,8 @@
 # 🌌 GeminiPostCutoff: Post-Cutoff Google Cloud & AI Agent Runbooks for Antigravity
 
 [![Build Status](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml/badge.svg)](https://github.com/CostaCloudSA/GeminiPostCutoff/actions/workflows/audit.yml)
-[![Automations Gallery](https://img.shields.io/badge/Antigravity_Automations-5_Scheduled_Workflows-teal.svg)](docs/AUTOMATIONS_GALLERY.md)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Architecture_Domains-22_Specializations-green.svg)](skills/gcp-skills-index/SKILL.md)
+[![Skills](https://img.shields.io/badge/Architecture_Domains-22%2B_Dynamic_Registry-green.svg)](config/skill_registry.json)
 [![Resources](https://img.shields.io/badge/Knowledge_Base-739%2B_Resources-orange.svg)](skills/gcp-skills-index/SKILL.md)
 [![Maintainer](https://img.shields.io/badge/Maintained%20By-CostaCloudSA-purple.svg)](https://github.com/CostaCloudSA)
 
@@ -21,7 +20,7 @@ Without post-cutoff grounding, AI coding assistants frequently recommend depreca
 flowchart LR
     U["Developer Prompt or\n/plan Architecture Audit"] --> AGY["Google Antigravity\nProgressive Disclosure"]
     AGY --> MCR["ModelCutoffResolver\n(Computes Delta vs Model Cutoff)"]
-    MCR --> S["Loads Only Relevant\nDomain Runbooks (22 Skills)"]
+    MCR --> S["Loads Only Relevant\nDomain Runbooks (Dynamic Registry)"]
     S --> V["739 Dated Engineering\nSources & Blueprints"]
     V --> P["100% Advisory Plan Artifact\n(Awaits Human Approval)"]
 ```
@@ -38,13 +37,13 @@ Choose the integration pattern that matches how you use **Google Antigravity**:
 
 | Setup Mode | Antigravity Mechanism | Target Path | Best For |
 | :--- | :--- | :--- | :--- |
-| **1. Global Plugin (Recommended)** | Native Plugin Bundle ([`plugin.json`](plugin.json) + `rules/` + `skills/`) | `~/.gemini/config/plugins/GeminiPostCutoff` | Individual architects & engineers across all workspaces |
+| **1. Global Plugin (Recommended)** | Native Plugin Bundle ([`plugin.json`](plugin.json) + `rules/` + `skills/` + `agents/`) | `~/.gemini/config/plugins/GeminiPostCutoff` | Individual architects & engineers across all workspaces |
 | **2. Team Workspace Standard** | Project-Scoped Plugin via Git Submodule | `.agents/plugins/GeminiPostCutoff` | Engineering teams sharing identical rules & skills via Git |
 | **3. Selective Domain Mounting** | Declarative Skill Filter (`skills.json`) | `.agents/skills.json` or `~/.gemini/config/skills.json` | Workspaces that only need specific cloud domains |
 | **4. Flat Skills Symlink** | Cross-Platform Installer (`install.ps1` / `install.sh`) | `~/.gemini/config/skills/` | Contributors editing runbooks locally with live symlinks |
 
 ### Option 1: Global Antigravity Plugin (Recommended — One Command)
-Cloning into your global Antigravity `plugins` directory mounts all 22 domain runbooks, the Master Router, and [`rules/AGENTS.md`](rules/AGENTS.md) as a single toggleable unit:
+Cloning into your global Antigravity `plugins` directory mounts all 22 domain runbooks, the Master Router, the `gcp-architecture-auditor` subagent, and [`rules/AGENTS.md`](rules/AGENTS.md) as a single toggleable unit:
 
 ```bash
 git clone https://github.com/CostaCloudSA/GeminiPostCutoff.git ~/.gemini/config/plugins/GeminiPostCutoff
@@ -97,6 +96,19 @@ bash scripts/install.sh --flat-skills
 
 ---
 
+## 🤝 Pairing with Google's Developer Knowledge MCP Server
+
+`GeminiPostCutoff` is designed to **complement** Google's official **[Developer Knowledge API & MCP Server](https://developers.google.com/knowledge/api)** (`https://developerknowledge.googleapis.com/mcp`):
+
+| Capability Layer | Google Developer Knowledge MCP | `GeminiPostCutoff` |
+| :--- | :--- | :--- |
+| **Primary Role** | **Reactive Pull** — Live search and retrieval over official Google documentation (`developers.google.com`, `cloud.google.com`, `firebase.google.com`, `developer.android.com`) | **Proactive Push** — Architectural guardrails, unknown-unknown retirement alerts, and practitioner FinOps/SRE field intelligence |
+| **Unique Strength** | Exact API method signatures, CLI flags, and live reference pages | Quantitative FinOps crossover math (e.g., BigQuery 690 TB/mo slot threshold, 90-day long-term storage DML resets), SRE outage postmortems, and cross-service arbitration |
+
+See [**`mcp_config.example.json`**](mcp_config.example.json) for a ready-to-use configuration to mount `google-developer-knowledge` alongside `GeminiPostCutoff` in `~/.gemini/config/mcp_config.json`.
+
+---
+
 ## 💬 How to Use Inside Antigravity
 
 Once installed, `GeminiPostCutoff` works seamlessly with your daily Antigravity workflows:
@@ -119,9 +131,9 @@ Once installed, `GeminiPostCutoff` works seamlessly with your daily Antigravity 
 
 ---
 
-## 🗂️ The 5 Architectural Pillars (22 Domains + Master Router)
+## 🗂️ The 5 Architectural Pillars (Dynamic Skill Registry + Master Router)
 
-Instead of a monolithic instruction file, knowledge is organized into **5 Architectural Pillars** backed by **739 dated engineering citations**:
+Instead of a monolithic instruction file, knowledge is organized into **5 Architectural Pillars** backed by **739 dated engineering citations** and managed dynamically via [`config/skill_registry.json`](config/skill_registry.json):
 
 ### 🤖 1. AI Agents, ADK & Frontier Models
 | Domain Skill | Key Capabilities & Post-Cutoff Innovations |
@@ -180,11 +192,11 @@ $$\Delta_m = (\text{Year}_{\text{Article}} - \text{Year}_{\text{Cutoff}}) \times
 | **Newest / Future Generation (Custom)** | `--cutoff YYYY-MM` | **`MM.YY`** (Dynamic) | **`> MM.YY`** ($\Delta_m > 0$) | **`[MM.YY - 12m, MM.YY]`** | **`< MM.YY - 12m`** |
 | **Older Generation (High-Efficiency Flash)** | `gemini-3.8-flash` / `3.7` / `3.6` | **March 2026** (`03.26`) | **`>= 04.26`** (Apr 2026 – Present) | **`03.25 – 03.26`** | **`<= 02.25`** (`archive.md`) |
 | **Older Generation (Legacy Pro)** | `gemini-3.1-pro` | **January 2025** (`01.25`) | **`>= 02.25`** (Feb 2025 – Present) | **`01.24 – 01.25`** | **`<= 12.23`** (`archive.md`) |
-| **Unverified Session (Fail-Safe Fallback)** | *Unconfirmed / Omitted* | **January 2025** (`01.25`) | **`>= 02.25`** (Full 2025–2026 Delta) | **`01.24 – 01.25`** | **`<= 12.23`** (`archive.md`) |
+| **Unverified Session (Fail-Safe Fallback)** | *Unconfirmed / Omitted* | **Oldest Active** (`01.25`) | **`>= 02.25`** (Full 2025–2026 Delta) | **`01.24 – 01.25`** | **`<= 12.23`** (`archive.md`) |
 
 ---
 
-## 🔍 Standalone CLI, CI/CD Gate & Cloud Run A2A Microservice
+## 🔍 Standalone CLI, CI/CD Gate, Cloud Run A2A & Skill Fission
 
 Beyond interactive Antigravity sessions, `GeminiPostCutoff` ships with a **13-pod multi-agent review mesh and deterministic AST auditor** that runs locally in CI/CD or as a centralized **Cloud Run Agent-to-Agent (A2A)** service:
 
@@ -231,18 +243,21 @@ curl -X POST https://architecture-reviewer-a2a-<hash>.a.run.app/rpc \
   }'
 ```
 
-### 3. Antigravity Scheduled Prompt Automations & Incremental Slow Crawler
-Instead of hardcoding brittle batch scrapers or static ingestion scripts, periodic maintenance (Hard/Soft-404 checks, content quality verification against original `SKILL.md` captures, Developer Knowledge API + oldest-active-model absorption checks, and `dev`-to-`prod` drift audits) is offloaded to **Antigravity Scheduled Prompt Automations** documented in [**`docs/AUTOMATIONS_GALLERY.md`**](docs/AUTOMATIONS_GALLERY.md):
+### 3. Dynamic Skill Registry & Topic-Drift Skill Fission (`scripts/split_skill.js`)
+As cloud domains expand and specialize, any large skill in [`config/skill_registry.json`](config/skill_registry.json) can be analyzed for topic drift and cleanly split into separate child skills (inheriting its parent's Review Pod and audit lineage with zero code edits):
 
 ```bash
-# Run all skill chronological audits, internal link checks, rule floor checks, and 7 deep test suites:
+# 1. Analyze a large skill for topic clusters and verify floor safety before splitting:
+npm run split -- --analyze gcp-adk-agents
+
+# 2. Preview splitting a sub-topic into a new skill (dry run):
+npm run split -- --from gcp-adk-agents --into gcp-a2a-protocols --keywords "a2a,a2ui,ag-ui" --dry-run
+
+# 3. Run all chronological audits, internal link checks, rule floor checks, and 7 deep test suites:
 npm test
 
-# Verify bidirectional provenance across all 22 skills, 739 vault links, and 116 AST code blocks:
+# 4. Verify bidirectional provenance across all skills, vault links, and AST code blocks:
 npm run audit:provenance
-
-# Run a 6-link incremental slow-crawler batch (checks Hard/Soft 404s, content quality & DK/model absorption):
-npm run crawl
 ```
 
 ---

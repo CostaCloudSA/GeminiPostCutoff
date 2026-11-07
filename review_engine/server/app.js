@@ -16,6 +16,7 @@ const os = require('os');
 const { ArchitectureReviewSupervisor } = require('../mesh/supervisor');
 const { PromptSanitizer } = require('../security/sanitizer');
 const { ModelCutoffResolver } = require('../mesh/model_resolver');
+const { SkillRegistry } = require('../mesh/skill_registry');
 
 const PORT = parseInt(process.env.PORT || '8080', 10);
 const HOST = process.env.HOST || '0.0.0.0';
@@ -43,7 +44,7 @@ function handleA2ADiscover(params) {
 
   return {
     agent_name: 'GeminiPostCutoff Architecture Reviewer',
-    version: '2.0.0',
+    version: '2.1.1',
     protocol: 'A2A/1.0',
     vendor: 'Google Cloud Platform & Antigravity',
     model_calibration: {
@@ -70,7 +71,7 @@ function handleA2ADiscover(params) {
       'Pillar 4: Observability & Telemetry'
     ],
     pod_catalog_size: 13,
-    runbook_count: 21,
+    runbook_count: SkillRegistry.getOperationalSkillCount(repoRoot),
     status: 'READY'
   };
 }
@@ -166,7 +167,7 @@ function createServer() {
       res.end(JSON.stringify({
         status: 'UP',
         service: 'geminipostcutoff-a2a-service',
-        version: '1.1.0',
+        version: '2.1.1',
         uptime_seconds: Math.round((Date.now() - startTime) / 1000),
         timestamp: new Date().toISOString()
       }));

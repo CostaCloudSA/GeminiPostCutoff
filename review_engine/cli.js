@@ -7,8 +7,10 @@
 const fs = require('fs');
 const path = require('path');
 const { ArchitectureReviewSupervisor } = require('./mesh/supervisor');
+const { SkillRegistry } = require('./mesh/skill_registry');
 
-const VERSION = '1.1.0';
+const VERSION = '2.1.1';
+const RUNBOOK_COUNT = SkillRegistry.getOperationalSkillCount(path.resolve(__dirname, '..'));
 
 // ANSI Colors
 const C = {
@@ -37,7 +39,7 @@ ${C.bold}USAGE:${C.reset}
 ${C.bold}COMMANDS:${C.reset}
   ${C.green}review${C.reset} [path]       Run end-to-end 13-Pod multi-agent review & arbitration mesh
   ${C.green}audit${C.reset} [path]        Run deterministic AST Pre-Flight & 4-Pillar governance audit
-  ${C.green}cache${C.reset}               Inspect Gemini Context Caching manifest across 21 runbooks
+  ${C.green}cache${C.reset}               Inspect Gemini Context Caching manifest across ${RUNBOOK_COUNT} runbooks
   ${C.green}version${C.reset}             Display version and model calibration metadata
   ${C.green}help${C.reset}                Show this help message
 
@@ -137,7 +139,7 @@ async function renderTerminalOutput(review, options) {
 
   console.log(`${C.bold}--- 2. GEMINI CONTEXT CACHING TELEMETRY ---${C.reset}`);
   console.log(`  ${C.green}✓${C.reset} Cache Manifest:       ${C.cyan}${review.context_cache.cache_id}${C.reset}`);
-  console.log(`  ${C.green}✓${C.reset} 21 Runbooks Cached:   ${review.context_cache.cached_runbook_tokens.toLocaleString()} tokens`);
+  console.log(`  ${C.green}✓${C.reset} ${RUNBOOK_COUNT} Runbooks Cached:   ${review.context_cache.cached_runbook_tokens.toLocaleString()} tokens`);
   console.log(`  ${C.green}✓${C.reset} Token Cost Reduction: ${C.bold}${review.context_cache.net_tokens_conserved.toLocaleString()} tokens saved${C.reset} (${review.context_cache.efficiency_gain})\n`);
 
   console.log(`${C.bold}--- 3. DYNAMIC POD MESH DISPATCH ---${C.reset}`);

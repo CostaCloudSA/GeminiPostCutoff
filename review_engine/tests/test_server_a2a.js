@@ -6,6 +6,7 @@
 const http = require('http');
 const assert = require('assert');
 const { startServer } = require('../server/app');
+const { SkillRegistry } = require('../mesh/skill_registry');
 
 function makeHttpRequest(options, postData = null) {
   return new Promise((resolve, reject) => {
@@ -89,7 +90,7 @@ async function testServerA2A() {
       const res = discoverRes.body.result;
       assert.strictEqual(res.protocol, 'A2A/1.0');
       assert.strictEqual(res.pod_catalog_size, 13);
-      assert.strictEqual(res.runbook_count, 21);
+      assert.strictEqual(res.runbook_count, SkillRegistry.getOperationalSkillCount());
       assert(res.capabilities.includes('ast_preflight_governance'));
       assert(res.capabilities.includes('cloud_run_pubsub_arbitration'));
     });

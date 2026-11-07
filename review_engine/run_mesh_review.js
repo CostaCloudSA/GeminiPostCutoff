@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const { ArchitectureReviewSupervisor } = require('./mesh/supervisor');
+const { SkillRegistry } = require('./mesh/skill_registry');
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -67,7 +68,7 @@ async function runReview(targetDir, options, outputFilename) {
 
   console.log('\n--- GEMINI CONTEXT CACHING TELEMETRY ---');
   console.log(`✓ Cache Manifest:       ${review.context_cache.cache_id}`);
-  console.log(`✓ Cached 21 Runbooks:   ${review.context_cache.cached_runbook_tokens.toLocaleString()} tokens`);
+  console.log(`✓ Cached ${SkillRegistry.getOperationalSkillCount(repoRoot)} Runbooks:   ${review.context_cache.cached_runbook_tokens.toLocaleString()} tokens`);
   console.log(`✓ Token Cost Reduction: ${review.context_cache.net_tokens_conserved.toLocaleString()} tokens conserved (${review.context_cache.efficiency_gain})`);
 
   console.log('\n--- DYNAMIC POD MESH DISPATCH ---');

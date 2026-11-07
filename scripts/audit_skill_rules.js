@@ -1,20 +1,16 @@
 const fs = require('fs');
 const path = require('path');
+const { SkillRegistry } = require('../review_engine/mesh/skill_registry');
 
-const skillsDir = process.env.SKILLS_DIR || path.resolve(__dirname, '..', 'skills');
+const repoRoot = path.resolve(__dirname, '..');
+const skillsDir = process.env.SKILLS_DIR || path.join(repoRoot, 'skills');
 if (!fs.existsSync(skillsDir)) {
   console.error(`[ERROR] Skills directory not found at: ${skillsDir}`);
   process.exit(1);
 }
 
-const batches = {
-  'Batch A': ['gcp-bigquery-cost', 'gcp-bigquery-analytics', 'gcp-bigquery-ai', 'gcp-databases'],
-  'Batch B': ['gcp-cloud-run', 'gcp-gke-platform', 'gcp-gke-inference', 'gcp-gke-cost'],
-  'Batch C': ['gcp-adk-agents', 'gcp-conversational-ai', 'gcp-gemini-tooling', 'gcp-frontier-emerging'],
-  'Batch D': ['gcp-computefinops', 'gcp-security-compliance', 'gcp-networking', 'gcp-migrations'],
-  'Batch E': ['gcp-gemini-robotics', 'gcp-geospatial', 'gcp-android-xr', 'gcp-generative-media'],
-  'Batch F': ['gcp-pubsub', 'gcp-architecture-review']
-};
+const batches = SkillRegistry.getAuditBatches(repoRoot);
+const totalOperationalSkills = SkillRegistry.getOperationalSkillCount(repoRoot);
 
 const requiredSections = [
   'Domain Scope & Activation Triggers',
@@ -148,13 +144,14 @@ function auditSkill(skillName) {
 }
 
 console.log('======================================================================');
-console.log('AUDITING GCP SKILLS AGAINST SKILL_STANDARD.MD SPECIFICATION (22 SKILLS)');
+console.log(`AUDITING GCP SKILLS AGAINST SKILL_STANDARD.MD SPECIFICATION (${totalOperationalSkills} SKILLS)`);
 console.log('======================================================================\n');
 
 let totalAudited = 0;
 let totalPassed = 0;
 
 for (const [batchName, skills] of Object.entries(batches)) {
+  if (!skills || skills.length === 0) continue;
   console.log(`### ${batchName}\n`);
   for (const s of skills) {
     totalAudited++;

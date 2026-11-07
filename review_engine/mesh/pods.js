@@ -2,19 +2,20 @@
  * 13 Specialized Architectural Review Pods
  * Part of GeminiPostCutoff Architecture Review Engine (Phase 3)
  * 
- * Maps the 21 GCP & AI Agent runbooks into 13 specialized domain pods
- * with adversarial critique capabilities and post-cutoff knowledge grounding.
+ * Dynamically maps the operational GCP & AI Agent runbooks (and any split child skills)
+ * into 13 specialized domain pods with adversarial critique capabilities.
  */
 
 const fs = require('fs');
 const path = require('path');
+const { SkillRegistry } = require('./skill_registry');
 
 class BasePod {
   constructor(config) {
     this.id = config.id;
     this.name = config.name;
-    this.skills = config.skills || [];
     this.repoRoot = config.repoRoot || path.resolve(__dirname, '../..');
+    this.skills = SkillRegistry.getSkillsForPod(this.id, config.skills || [], this.repoRoot);
   }
 
   loadRunbookKnowledge() {

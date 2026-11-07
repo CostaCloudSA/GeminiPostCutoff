@@ -9,7 +9,7 @@ on:
 
 jobs:
   audit-skills:
-    name: Validate Skills, Links & Standards
+    name: Validate Skills, Links, Provenance & Deep Engine Suites
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +29,9 @@ jobs:
 
       - name: 3. Verify SKILL_STANDARD.md Quotas & Anti-Pattern Compliance
         run: node scripts/audit_skill_rules.js
+
+      - name: 4. Verify Bidirectional Citation Provenance & AST Code Blocks
+        run: node review_engine/grounding/verifier.js
+
+      - name: 5. Run All 7 Deep Architecture Review Engine Test Suites
+        run: node review_engine/tests/run_all_suites.js

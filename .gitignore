@@ -4,3 +4,5 @@ Thumbs.db
 *.log
 .scratch/
 reports/
+docs/AUTOMATIONS_GALLERY.md
+scripts/slow_crawler.js

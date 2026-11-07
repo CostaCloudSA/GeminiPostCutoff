@@ -1,7 +1,7 @@
 # Antigravity Global Knowledge & GCP Article Ingestion Protocol
 
 ## 🎯 Scope & Context
-The repository maintains a 22-domain curated Google Cloud Platform (GCP) & AI Agent knowledge base located in `skills/` (plus the master router `gcp-skills-index`).
+The repository maintains a dynamically registered Google Cloud Platform (GCP) & AI Agent knowledge base located in `skills/` (configured in `config/skill_registry.json`, currently 22 operational domains plus the master router `gcp-skills-index`).
 
 Whenever new links, articles, release notes, or codelabs are ingested into the knowledge base:
 
@@ -30,8 +30,8 @@ Every reference link MUST follow this exact format:
 - For codelabs: `- [Codelab: Title](https://...)`
 - For GitHub repositories: `- [Repo Name: Description](https://github.com/...)`
 
-### 3. Target Domain Routing (22 Operational Domains)
-Match each article to its primary skill vault in `skills/<skill-name>/references/articles.md`:
+### 3. Target Domain Routing (Dynamic Skill Registry)
+Match each article to its primary skill vault in `skills/<skill-name>/references/articles.md` (or any newly split child skill registered in `config/skill_registry.json`):
 - Event-driven messaging, Pub/Sub, Pub/Sub Lite migration, Kafka, SMTs, DLQs, Eventarc $\to$ `gcp-pubsub`
 - Multi-agent orchestration, ADK (Python/Go/Java), A2A/A2UI/AG-UI, Memory Bank $\to$ `gcp-adk-agents`
 - Cloud Run, serverless microservices, CPU throttling, IAP, Temporal worker pools $\to$ `gcp-cloud-run`
@@ -78,17 +78,20 @@ To guarantee that ingested articles provide actionable value and prevent superfi
 
 ---
 
-## 🛠️ 6. Antigravity Scheduled Prompt Automations & Incremental Slow Crawler
+## 🧬 6. Topic-Drift Skill Fission & Automated Verification
 
-Instead of hardcoding static regex ingestion scripts or monolithic batch link checks, periodic discovery, Soft-404 inspection, content quality auditing, and Developer Knowledge API (`developerknowledge.googleapis.com`) absorption checks are offloaded to **Google Antigravity Scheduled Prompt Automations** documented in [`docs/AUTOMATIONS_GALLERY.md`](../../docs/AUTOMATIONS_GALLERY.md).
+When a domain skill expands and drifts into distinct sub-topics, use `scripts/split_skill.js` and `config/skill_registry.json` to evaluate floor safety and split out child skills cleanly:
 
 ```bash
-# Run a 6-link incremental slow-crawler batch (calibrated against the oldest active model via ModelCutoffResolver):
-npm run crawl
+# Analyze a skill for topic clusters and verify SKILL_STANDARD.md minimum floors before splitting:
+npm run split -- --analyze <skill-name>
+
+# Split a sub-topic into a new skill (use --dry-run to preview):
+npm run split -- --from <parent-skill> --into <new-skill> --keywords "<kw1,kw2>" --dry-run
 ```
 
 ### Automated Verification:
-Always verify the entire repository before concluding any ingestion or compaction session:
+Always verify the entire repository before concluding any ingestion, skill split, or compaction session:
 ```bash
 # Rapid local verification on commit (sorting, internal links, minimum floors, grounding)
 npm test
